@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date: 2016-12-04
+  door: 2016-12-04 16:18:48
+  show: 2016-12-04 16:18:48
+  band_id: 1
+  venue_id: MyString
+
+two:
+  date: 2016-12-04
+  door: 2016-12-04 16:18:48
+  show: 2016-12-04 16:18:48
+  band_id: 1
+  venue_id: MyString

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  seller_id: 1
+  concert_id: 1
+  buyer_id: 1
+  compensation: MyString
+  status: MyString
+
+two:
+  seller_id: 1
+  concert_id: 1
+  buyer_id: 1
+  compensation: MyString
+  status: MyString
