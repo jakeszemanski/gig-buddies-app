@@ -80,4 +80,11 @@ end
   bc.save
 end
 
+5.times do
+  uc = UserConcert.new(
+    user_id: @users.sample.id,
+    concert_id: @concerts.sample.id)
+  uc.save
+end
+
 puts 'done!'
