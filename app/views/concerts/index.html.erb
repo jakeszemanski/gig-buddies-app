@@ -1,0 +1,11 @@
+<h1>Concerts</h1>
+  <% @concerts.each do |concert| %>
+    <% concert.bands.each do |band| %>
+      <p> Bands: <%= band.name %> </p>
+      <% end %>
+    <p>Date: <%= concert.date %></p>
+    <p>Doors: <%= concert.doors %></p>
+    <p>Show: <%= concert.show %></p>
+    <p>Venue: <%= concert.venue.name %></p>
+    <p><%= '-' * 50 %>
+      <% end %>
