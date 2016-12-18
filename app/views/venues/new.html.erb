@@ -1,0 +1,45 @@
+<h1>Add a concert</h1>
+
+<%= form_tag '/venue', method: :post do %>
+  <div class="form-group">
+  <%= label_tag :name, 'Enter a venue name: ' %>
+  <%= text_field_tag :name, '', class: 'form-control' %>
+  </div>
+   <div class="form-group">
+  <%= label_tag :doors, 'Enter doors time' %>
+  <%= text_field_tag :doors, @concert.doors, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+  <%= label_tag :show, 'Enter show time: ' %>
+  <%= text_field_tag :show, @concert.show, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+  <%= label_tag :date, 'Enter concert date: ' %>
+  <%= text_field_tag :date, @concert.date, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= label_tag :band_ids, "Select a band:" %>
+    <%= collection_select(:band_ids, :first_band, Band.all, :id, :name) %>
+  </div>
+  <div class="form-group">
+    <%= label_tag :band_ids, "Select another band:" %>
+    <%= collection_select(:band_ids, :second_band, Band.all, :id, :name) %>
+  </div>
+  <div class="form-group">
+    <%= label_tag :band_ids, "Select another band:" %>
+    <%= collection_select(:band_ids, :third_band, Band.all, :id, :name) %>
+  </div>
+
+
+  <div class="form-group">
+  <%= label_tag :band2, 'Enter concert band: ' %>
+  <%= text_field_tag :band2, '', class: 'form-control' %>
+  </div> 
+  <div class="form-group">
+  <%= label_tag :band3, 'Enter concert band: ' %>
+  <%= text_field_tag :band3, '', class: 'form-control' %>
+  </div>
+  <div>
+  <%= submit_tag 'Submit product!' %>
+  </div>
+  <% end %>

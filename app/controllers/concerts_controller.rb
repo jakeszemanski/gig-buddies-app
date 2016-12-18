@@ -41,7 +41,7 @@ class ConcertsController < ApplicationController
   end
 
   def update
-    flash[message] = 'Concert updated!'
+    flash[:message] = 'Concert updated!'
     redirect_to "/concerts/:id"
   end
 

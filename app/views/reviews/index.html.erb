@@ -1,0 +1,7 @@
+<h1>Reviews</h1>
+
+  <% @reviews.each do |review| %>
+    <h3><%= review.rating %></h3>
+    <h4><%= review.description %></h4>
+    <%= User.find_by(id: review.user_id).name %></p>
+  <% end %>

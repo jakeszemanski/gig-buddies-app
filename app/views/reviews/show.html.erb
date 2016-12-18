@@ -1,0 +1,3 @@
+<h1>Rating: <%= @review.rating %></h1>
+  <h3>Description: <%= @review.description %></h3>
+  <p><%= User.find_by(id: @review.user_id).name %></p>

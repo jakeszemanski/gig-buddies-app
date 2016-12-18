@@ -1,0 +1,12 @@
+<h1>Add a band</h1>
+
+<%= form_tag '/bands', method: :post do %>
+  <div class="form-group">
+  <%= label_tag :band_name, 'Enter band name: ' %>
+  <%= text_field_tag :band_name, '', class: 'form-control' %>
+  </div>
+
+  <div>
+  <%= submit_tag 'Submit band!' %>
+  </div>
+  <% end %>
