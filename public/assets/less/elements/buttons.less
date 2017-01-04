@@ -1,0 +1,74 @@
+/**
+ * Buttons
+ */
+
+#button {
+
+  .btn(@color; @border-color; @bg-color; @hover-color; @hover-border-color; @hover-bg-color) {
+    background-color: @bg-color;
+    border-color: @border-color;
+    border-radius: 0;
+    color: @color;
+
+    &:hover {
+      background-color: @hover-bg-color;
+      border-color: @hover-border-color;
+      color: @hover-color;      
+    }
+    &:focus, &.focus,
+    &:active, &:active:hover, &:active:focus,
+    &.active, &.active:hover, &.active:focus {
+      outline: none;
+      box-shadow: none;
+      background-color: @hover-bg-color;
+      border-color: @hover-border-color;
+      color: @hover-color; 
+    }
+  }
+
+}
+
+.btn-default {
+  #button > .btn(
+    @brand-gray; 
+    @brand-gray-lighter; 
+    @brand-gray-lighter; 
+    @brand-gray; 
+    darken(@brand-gray-lighter, 5%); 
+    darken(@brand-gray-lighter, 5%));
+}
+.btn-glass {
+  #button > .btn(
+    white; 
+    white; 
+    transparent; 
+    @brand-gray; 
+    white;
+    white);
+}
+.btn-primary {
+  #button > .btn(
+    white; 
+    @brand-primary; 
+    @brand-primary; 
+    white; 
+    darken(@brand-primary, 5%);
+    darken(@brand-primary, 5%));
+}
+.btn-orange {
+  #button > .btn(
+    white; 
+    @brand-orange; 
+    @brand-orange; 
+    white; 
+    darken(@brand-orange, 5%);
+    darken(@brand-orange, 5%));
+}
+
+
+/*** Buttons sizes ***/
+
+.btn-lg {
+  padding-bottom: (@padding-large-vertical + 1px);
+  font-size: @font-size-base;
+}

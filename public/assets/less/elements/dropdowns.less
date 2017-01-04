@@ -1,0 +1,30 @@
+/**
+ * Dropdowns
+ */
+
+@dropdown-bg:                  @brand-gray-lighter;
+@dropdown-border:              @brand-gray-lighter;
+@dropdown-divider-bg:          fade(black,10%);
+@dropdown-link-color:          @brand-gray;
+@dropdown-link-hover-color:    white;
+@dropdown-link-hover-bg:       @brand-gray;
+@dropdown-link-active-color:   white;
+@dropdown-link-active-bg:      @brand-gray;
+@dropdown-link-disabled-color: fade(black,40%);
+@dropdown-header-color:        @brand-gray;
+@dropdown-caret-color:         @brand-gray;
+
+
+.dropdown-menu {
+  border-radius: 0;
+  box-shadow: 0 1px 3px fade(black,35%);
+
+  > li {
+
+    > a {
+      padding: 8px 15px;
+      text-transform: capitalize;
+      font-size: @font-size-base;
+    }
+  }
+}

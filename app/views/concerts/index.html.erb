@@ -7,5 +7,6 @@
     <p>Doors: <%= concert.doors %></p>
     <p>Show: <%= concert.show %></p>
     <p>Venue: <%= concert.venue.name %></p>
+    <a href="/tickets?concert=<%=concert.id%>">Tickets</a>
     <p><%= '-' * 50 %>
       <% end %>

@@ -1,0 +1,98 @@
+/**
+ * Social Icons
+ */
+
+.social-icons {
+  list-style-type: none;
+  padding-left: 0;
+
+  > li {
+    display: inline-block;
+
+    > a {
+      display: block;
+      margin-bottom: 3px;
+      font-size: (@font-size-base + 2px);
+      line-height: 35px;
+      .square(35px);
+      text-align: center;
+      background-color: @brand-gray;
+      color: white;
+      opacity: .7;
+
+      &:hover, &:focus {
+        color: white;
+        text-decoration: none;
+        opacity: 1;
+      }
+    }
+  }
+  &.social-icons_sm {
+
+    > li {
+
+      > a {
+        font-size: @font-size-base;
+        .square(25px);
+        line-height: 25px;
+      }
+    }
+  }
+}
+.social-icons {
+
+  .facebook > a {
+    background-color: @facebook-color;
+  }
+  .twitter > a {
+    background-color: @twitter-color;
+  }
+  .google-plus > a {
+    background-color: @google-plus-color;
+  }
+  .youtube > a {
+    background-color: @youtube-color;
+  }
+  .linkedin > a {
+    background-color: @linkedin-color;
+  }
+  .instagram > a {
+    background-color: @instagram-color;
+  }
+  .whatsapp > a {
+    background-color: @whatsapp-color;
+  }
+  .pinterest > a {
+    background-color: @pinterest-color;
+  }
+  .vine > a {
+    background-color: @vine-color;
+  }
+  .dropbox > a {
+    background-color: @dropbox-color;
+  }
+  .flickr > a {
+    background-color: @flickr-color;
+  }
+  .vk > a {
+    background-color: @vk-color;
+  }
+  .vimeo > a {
+    background-color: @vimeo-color;
+  }
+  .foursquare > a {
+    background-color: @foursquare-color;
+  }
+  .spotify > a {
+    background-color: @spotify-color;
+  }
+  .behance > a {
+    background-color: @behance-color;
+  }
+  .rss > a {
+    background-color: @rss-color;
+  }
+  .github > a {
+    background-color: @github-color;
+  }
+}

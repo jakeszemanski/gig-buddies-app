@@ -1,0 +1,101 @@
+/**
+ * Navbar
+ */
+
+@navbar-height:                       55px;
+@navbar-border-radius:                0;
+@navbar-default-color:                @brand-gray;
+@navbar-default-bg:                   @brand-gray;
+@navbar-default-link-color:           @brand-gray-lighter;
+@navbar-default-link-hover-color:     white;
+@navbar-default-link-hover-bg:        fade(white,10%);
+@navbar-default-link-active-color:    white;
+@navbar-default-link-active-bg:       fade(white,10%);
+@navbar-default-brand-color:          @brand-gray-lighter;
+@navbar-default-brand-hover-color:    white;
+@navbar-default-toggle-border-color:  transparent;
+@navbar-default-toggle-icon-bar-bg:   @brand-gray-lighter;
+@navbar-default-toggle-hover-bg:      transparent;
+@grid-float-breakpoint:               @screen-md-min;
+
+@navbar-font-size: @font-size-base; 
+
+
+/*** General ***/
+
+.navbar {
+  border-width: 0;
+}
+
+
+/*** Navbar links ***/
+
+.navbar-nav > li > a {
+  text-transform: uppercase;
+  font-size: (@navbar-font-size - 1px);
+  outline: none !important;
+
+  > .fa {
+    margin-right: 5px;
+  }
+}
+
+
+/*** Navbar form ***/
+
+
+.navbar-search {
+  margin-top: 0;
+  margin-bottom: 0;
+    -webkit-transform: translateX(-10px);
+            transform: translateX(-10px);
+
+  input {
+    border: 0;
+    border-radius: 0;
+    background-color: @brand-gray;
+    font-size: @font-size-base;
+    font-family: "Open Sans", "FontAwesome", sans-serif;
+    color: white;
+    box-shadow: none;
+    transition: width .5s;
+
+    &::-moz-placeholder           { color: @brand-gray-lighter; text-transform: uppercase; font-size: @navbar-font-size} // Firefox
+    &:-ms-input-placeholder       { color: @brand-gray-lighter; text-transform: uppercase; font-size: @navbar-font-size} // Internet Explorer 10+
+    &::-webkit-input-placeholder  { color: @brand-gray-lighter; text-transform: uppercase; font-size: @navbar-font-size} // Safari and Chrome
+    
+    &:focus {
+      background-color: @navbar-default-link-hover-bg;
+      outline: none;
+      box-shadow: none;
+      .placeholder(transparent);
+    }
+  }
+  button[type="submit"] {
+    display: none;
+  }
+}
+
+@media(min-width: @grid-float-breakpoint) {
+
+  .navbar-search {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+
+    input {
+      height: @navbar-height;
+      width: 95px !important;
+
+      &:focus {
+        width: 180px !important;
+      }
+    }
+  }
+}
+
+
+/*** Navbar: Fixed top ***/
+
+.body_navbar-fixed-top {
+  padding-top: (@navbar-height + @navbar-margin-bottom);
+}

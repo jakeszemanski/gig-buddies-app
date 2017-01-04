@@ -1,0 +1,76 @@
+/**
+ * Thumbnails
+ */
+
+@thumbnail-padding: 10px;
+@thumbnail-border: @brand-gray-lighter;
+@thumbnail-border-radius: 0;
+
+/*** General styles ***/
+
+a.thumbnail {
+
+  &:hover, &:focus {
+    text-decoration: none;
+  }
+}
+.thumbnail {
+  margin-bottom: 30px;
+
+  .caption {
+
+    .rating {
+      list-style-type: none;
+      padding-left: 0;
+      
+      > li {
+        display: inline-block;
+        color: @brand-orange;
+      }
+    }
+    h3,h4,h5 {
+      text-transform: uppercase;
+      font-size: (@font-size-base + 1px);
+      font-weight: 600;
+    }
+  }
+}
+
+/*** Bubble thumbnails ***/
+
+.thumbnail.alt {
+  position: relative;
+  overflow: hidden;
+
+  > .caption {
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    padding: 20px;
+    background-color: fade(white,90%);
+    opacity: 0;
+    transition: all .3s;
+  }
+  &:hover, &:focus {
+    border-color: @brand-gray-lighter;
+
+    > .caption {
+      opacity: 1;
+    }
+  }
+}
+
+/*** Small thumbnails block ***/
+
+.thumbnails_small {
+  padding-left: 10px;
+  padding-right: 10px;
+
+  [class*="col-"] {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  .thumbnail {
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+}

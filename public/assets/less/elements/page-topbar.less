@@ -1,0 +1,31 @@
+/**
+ * Page header
+ */
+
+@page-topbar-height: 50px;
+
+.page-topbar {
+  height: @page-topbar-height;
+  margin-top: -@navbar-margin-bottom;
+  margin-bottom: (@navbar-margin-bottom * 2);
+  border-bottom: 1px solid fade(black,10%);
+  background-color: @brand-gray-lightest;
+
+  h3 {
+    display: inline-block;
+    margin: 0;
+    line-height: (@page-topbar-height - 3px);
+    font-size: (@font-size-base + 2px);
+    border-bottom: 3px solid @brand-primary;
+    color: #777;
+  }
+  .breadcrumb {
+    padding-top: 0; padding-bottom: 0; margin: 0;
+    background-color: transparent;
+    text-align: right;
+
+    > li > a {
+      line-height: @page-topbar-height;
+    }
+  }
+}

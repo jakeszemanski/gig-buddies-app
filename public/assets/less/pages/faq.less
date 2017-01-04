@@ -1,0 +1,36 @@
+/**
+ * FAQ.html
+ */
+
+.faq__cats {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 20px 0 30px;
+
+  > li {
+
+    > a {
+      display: block;
+      padding: 5px 0;
+
+      &:hover, &:focus {
+        text-decoration: none;
+
+        > .faq-cats__icon {
+          color: @brand-primary;
+        }
+      }
+    }
+  }
+}
+.faq-cats__icon {
+  display: inline-block;
+  .square(45px);
+  line-height: 45px;
+  text-align: center;
+  margin-right: 15px;
+  background-color: white;
+  font-size: 28px;
+  color: @brand-gray-light;
+  vertical-align: middle;
+}

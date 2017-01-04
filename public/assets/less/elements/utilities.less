@@ -1,0 +1,32 @@
+/**
+ * Utilities
+ */
+
+/*** Vertically centered tabled ***/
+
+.table_centered {
+  height: 100%; width: 100%;
+  display: table;
+}
+.table_centered__cell {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+
+/*** Article image ***/
+
+.img-article {
+	padding: 10px;
+	border: 1px solid @brand-gray-lightest;
+
+	&.pull-left {
+		margin: 0 20px 20px 0;
+	}
+	&.pull-right {
+		margin: 0 0 20px 20px;
+	}
+	@media(min-width: @screen-sm-min) {
+		max-width: 40%;
+	}
+}

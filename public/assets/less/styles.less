@@ -1,0 +1,93 @@
+
+// Original
+
+@import "../bootstrap/less/bootstrap";
+
+// Elements
+
+@import "elements/alerts";
+@import "elements/animations";
+@import "elements/buttons";
+@import "elements/carousel";
+@import "elements/colors";
+@import "elements/comments";
+@import "elements/dropdowns";
+@import "elements/footer";
+@import "elements/forms";
+@import "elements/info-boards";
+@import "elements/list-group";
+@import "elements/modals";
+@import "elements/navbar";
+@import "elements/navs";
+@import "elements/page-topbar";
+@import "elements/pagination";
+@import "elements/panels";
+@import "elements/progress-bars";
+@import "elements/social-icons";
+@import "elements/scrolltopcontrol";
+@import "elements/thumbnails";
+@import "elements/type";
+@import "elements/typography";
+@import "elements/utilities";
+@import "elements/wells";
+
+// Pages
+
+@import "pages/about-us";
+@import "pages/blog";
+@import "pages/contact";
+@import "pages/faq";
+@import "pages/gallery";
+@import "pages/index";
+@import "pages/pricing";
+@import "pages/profile";
+@import "pages/team";
+@import "pages/ui-elements";
+@import "pages/error-page";
+
+
+// Setup (for preview only, remove on a production website)
+
+@import "elements/_setup";
+
+
+/**
+ * General styles
+ */
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  padding-bottom: 60px;
+}
+
+
+/*** Boxed layout ***/
+
+html.html_boxed {
+  background: #f0f0f0 url(../img/sos.png) repeat;
+
+  > body {
+    box-shadow: 0 0 30px fade(black,20%);
+    max-width: (@container-lg + @grid-gutter-width);
+    .center-block();
+
+    > .navbar-fixed-top {
+      box-shadow: 0 0 30px fade(black,20%);
+      left: 50%; right: auto;
+      width: 100%;
+      max-width: (@container-lg + @grid-gutter-width);
+      -webkit-transform: translateX(-50%);
+              transform: translateX(-50%);
+    }
+    > footer {
+      box-shadow: 0 0 30px fade(black,20%);
+      max-width: (@container-lg + @grid-gutter-width);
+      left: 50%;
+      -webkit-transform: translateX(-50%);
+              transform: translateX(-50%);
+    }
+  }
+}

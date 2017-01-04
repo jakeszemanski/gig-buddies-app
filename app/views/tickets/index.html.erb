@@ -1,0 +1,21 @@
+<h1>Tickets</h1>
+
+  <% @tickets.each do |ticket| %>
+    <p>Seller: <%= User.find_by(id: ticket.seller_id).name %></p>
+    <p>compensation: <%= ticket.compensation %></p>
+    <h3>Venue: </h3>
+    <p><%= Concert.find_by(id: ticket.concert_id).venue.name %></p>
+    <p>Will call policy: <%= Concert.find_by(id: ticket.concert_id).venue.will_call_policy %></p>
+     <h3>Bands: </h3>
+     <% Concert.find_by(id: ticket.concert_id).bands.each do |band| %>
+       <p><%= band.name %></p>
+     <% end %> 
+     <% if ticket.status == "available" %>
+     <a href="tickets/<%=ticket.id%>">Ticket is <%= ticket.status %></a>
+     <% else %>
+     <p>Ticket is <%= ticket.status %></p> 
+     <% end %>  
+    <p> <%= '-' * 50 %></p>
+  <% end %>
+
+ 

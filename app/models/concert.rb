@@ -6,4 +6,5 @@ class Concert < ApplicationRecord
   belongs_to :calendar
   has_many :user_concerts
   has_many :users, through: :user_concerts
+  belongs_to :tickets
 end

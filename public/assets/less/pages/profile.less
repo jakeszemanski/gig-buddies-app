@@ -1,0 +1,144 @@
+/**
+ * Profile.html
+ */
+
+.profile__aside {
+  margin-bottom: 30px;
+}
+.profile__img {
+  margin-bottom: 20px;
+}
+.profile__name {
+  margin-bottom: 20px;
+}
+.profile__nav {
+  list-style-type: none;
+  padding-left: 0;
+
+  > li {
+    display: block;
+    float: left;
+
+    > a {
+      display: block;
+      width: 90px; height: 80px;
+      padding: 15px 0;
+      border: 1px solid @brand-gray-lighter;
+      border-right-width: 0;
+      background-color: #f9f9f9;
+      text-align: center;
+      font-size: @font-size-small;
+      font-weight: 600;
+      color: @text-muted;
+
+      &:hover, &:focus {
+        background-color: white;
+        text-decoration: none;
+      }
+      > .fa {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 18px;
+        color: #999;
+      }
+    }
+    &:last-child > a {
+      border-right-width: 1px;
+    }
+    &.active > a {
+      background-color: white
+    }
+  }
+}
+@media(max-width: @screen-xs-max) {
+
+  .profile__nav {
+
+    li {
+      width: 25%;
+
+      > a {
+        width: 100%; height: auto;
+      }
+    }
+  }
+}
+.profile__body {
+  border: 1px solid @brand-gray-lighter;
+  margin-top: -1px;
+  padding: 30px 20px;
+
+  > .block-header:first-child {
+    margin-top: 0;
+  }
+  > p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+
+/*** Profile: Inbox ***/
+
+table.profile__inbox {
+  color: @text-muted;
+  border-bottom: 1px solid #ddd;
+
+  tbody {
+
+    > tr {
+
+      > td {
+        vertical-align: middle;
+
+        &:nth-child(2) {
+          width: 20%;
+        }
+        a {
+          color: @text-muted;
+
+          &:hover, &:focus {
+            color: @text-color;
+            text-decoration: none;
+          }
+        }
+
+      }
+    }
+  }
+}
+.profile-inbox__img {
+  width: 70px; height: 70px;
+  overflow: hidden;
+}
+
+
+/*** Profile: Dialog ***/
+
+.profile__dialog {
+
+  .media-left {
+    padding-right: 20px;
+
+    @media(max-width: @screen-xs-max) {
+      display: none;
+    }
+  }
+  .media-object {
+    height: 64px; width: 64px;
+  }
+  .media-heading {
+    margin-bottom: 15px;
+  }
+}
+.profile-dialog__answer {
+  padding-top: 20px;
+}
+
+
+/*** Profile: Sign In ***/
+
+.profile__sign-in,
+.profile__sign-up {
+  border: 1px solid @brand-gray-lighter;
+  padding: 20px 40px 40px;
+}

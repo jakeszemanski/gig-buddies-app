@@ -1,0 +1,49 @@
+/**
+ * Type
+ */
+
+/*** Block header ***/
+
+.block-header:not(.alt) {
+  background-color: @brand-gray-lighter;
+  font-size: (@font-size-base + 6px);
+  font-weight: 400;
+  text-transform: uppercase;
+  margin-top: (@line-height-computed * 1.5);
+  margin-bottom: (@line-height-computed * 1.5);
+  color: #555;
+
+  > span {
+    position: relative;
+    display: inline-block;
+    background-color: white;
+    padding-right: 15px;
+
+    &:after {
+      position: absolute;
+      right: -18px; top: 0;
+      content: "";
+      height: 100%; width: 11px;
+      background-color: white;
+      border-left: 4px solid @brand-gray-lighter;
+      border-right: 4px solid @brand-gray-lighter;
+      outline: 3px solid white;
+    }
+  }
+}
+.block-header.alt {
+  margin-top: (@line-height-computed * 1.5);
+  margin-bottom: (@line-height-computed * 1.5);
+  border-bottom: 1px solid @brand-gray-lightest;
+  font-size: (@font-size-base + 4px);
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #555;
+
+  > span {
+    display: inline-block;
+    border-bottom: 2px solid @brand-primary;
+    padding-bottom: 10px;
+    margin-bottom: -1px;
+  }
+}

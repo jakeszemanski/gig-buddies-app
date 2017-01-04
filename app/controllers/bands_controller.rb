@@ -16,6 +16,7 @@ class BandsController < ApplicationController
 
   def show
     @band = Band.find_by(id: params[:id])
+   # @concert = Concert.find_by(band_id: @band.id)
   end
 
   def edit

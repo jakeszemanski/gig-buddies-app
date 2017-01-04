@@ -1,0 +1,97 @@
+/**
+ * Forms
+ */
+
+@input-border-radius: 0;
+@input-border-radius-large: 0;
+@input-border-radius-small: 0;
+
+.form-control {
+  transition: outline .1s;
+
+  &:focus {
+    box-shadow: none;
+    outline: @brand-primary;
+  } 
+}
+
+/* Checkboxes */
+
+.checkbox {
+  
+  input[type="checkbox"] {
+    display: none;
+  }
+  label {
+    padding-left: 0;
+    
+    &:before {
+      content: "";
+      .square(20px);
+      display: inline-block;
+      vertical-align: bottom;
+      margin-right: 10px;
+      line-height: 20px;
+      text-align: center;
+      border: 1px solid #ccc;
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+      font-family: "FontAwesome";
+    }
+  }
+  input[type="checkbox"]:checked + label::before {
+    content: "\f00c";
+  }
+
+}
+
+
+/* Radios */
+
+.radio {
+
+  input[type="radio"] {
+    display: none;
+  }
+  label {
+    padding-left: 0;
+
+    &:before {
+      content: "";
+      .square(20px);
+      display: inline-block;
+      vertical-align: bottom;
+      margin-right: 10px;
+      border-radius: 50%;
+      border: 10px solid white;
+      background-color: @text-color;
+      box-shadow: 0 0 1px 1px #ccc, inset 0 1px 1px rgba(0, 0, 0, 0.075); 
+    }
+  }
+  input[type="radio"]:checked + label:before {
+    border-width: 7px;
+  }
+}
+
+
+/*** Input Large ***/
+
+@input-height-large: (@line-height-computed + (@padding-large-vertical * 2) + 2);
+
+.input-lg {
+  font-size: @font-size-base;
+}
+
+
+/*** Search form ***/
+
+form.form-search {
+  position: relative;
+
+  input[type="search"] {
+    padding-right: 50px;
+  }
+  button[type="submit"] {
+    position: absolute;
+    top: 0; right: 0;
+  }
+}

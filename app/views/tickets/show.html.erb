@@ -1,0 +1,33 @@
+<h1>Seller: <%= User.find_by(id: @ticket.seller_id).name %></h1>
+<h2>Compensation: <%= @ticket.compensation %></h2>
+<h5>Will call policy: <%= @concert.venue.will_call_policy %></h5>
+  <h3>Venue: <%= @concert.venue.name %> </h3>
+  <h2>Bands:</h2>
+  <% @concert.bands.each do |band| %>
+    <p><%= band.name %></p>
+  <% end %>
+  <p>Ticket is <%= @ticket.status %></p>
+
+<% if @ticket.status == "available" %>
+<%= form_tag "/tickets/#{params[:id]}", method: :patch do %>
+  <div>
+    <%= hidden_field_tag :compensation, @ticket.compensation %>
+  </div>
+  <div>
+    <%= hidden_field_tag :buyer_id, current_user.id %>
+  </div>
+    <div>
+    <%= hidden_field_tag :seller_id, @ticket.seller_id %>
+  </div>
+
+  <div>
+    <%= hidden_field_tag :status, "unavailable" %>
+  </div>
+
+  <div>
+  <%= submit_tag 'Buy Ticket!' %>
+  </div>
+  <% end %>
+  <% end %>
+ 
+    <!-- Maybe just run a patch  and redirect to this page-->

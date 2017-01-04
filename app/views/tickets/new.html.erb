@@ -1,0 +1,17 @@
+<h1>Sell a ticket!</h1>
+
+<%= form_tag '/tickets', method: :post do %>
+  <div class="form-group">
+  <%= label_tag :concert_id, 'Enter concert_id ' %>
+  <%= text_field_tag :concert_id, '', class: 'form-control' %>
+  </div>
+
+   <div class="form-group">
+  <%= label_tag :compensation, 'Enter desired compensation' %>
+  <%= text_field_tag :compensation, '', class: 'form-control' %>
+  </div>
+
+  <div>
+  <%= submit_tag 'Submit band!' %>
+  </div>
+  <% end %>

@@ -1,0 +1,116 @@
+/**
+ * Blog.html
+ */
+
+.blog__item {
+  margin-bottom: 60px;
+}
+.blog__header {
+  padding-bottom: 25px;
+  margin-bottom: 25px;
+  border-bottom: 1px solid @brand-gray-lighter;
+}
+.blog__title {
+  font-size: 24px;
+
+  > a, a:hover, a:focus {
+    text-decoration: none;
+  }
+}
+.blog__info {
+  list-style-type: none;
+  padding-left: 0;
+  margin-bottom: 0;
+
+  > li {
+    display: inline-block;
+    padding-right: 10px;
+    color: @text-muted;
+    
+    > a {
+      color: @text-muted;
+
+      &:hover, &:focus {
+        color: @text-color;
+      }
+    }
+    .fa {
+      margin-right: 5px;
+    }
+  }
+}
+.blog__body {
+  margin-bottom: 25px;
+}
+
+
+/*** Blog tags ***/
+
+.blog__tags {
+  list-style-type: none;
+  padding-left: 0;
+  margin-bottom: 0;
+
+  > li {
+    display: inline-block;
+
+    > a {
+      display: block;
+      padding: 5px 10px;
+      margin-bottom: 5px;
+      font-size: @font-size-small;
+      background-color: @brand-gray-lighter;
+      color: @brand-gray;
+
+      &:before {
+        content: "\f02b";
+        font-family: "FontAwesome";
+        margin-right: 5px;
+        color: fade(black,50%);
+      }
+      &:hover, &:focus {
+        background-color: @brand-primary;
+        color: white;
+        text-decoration: none;
+
+        &:before {
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+
+/*** Blog: Timeline ***/
+
+@media(min-width: @screen-sm-min) {
+
+  .blog__timeline {
+    margin-left: 60px;
+    padding-left: 40px;
+    border-left: 2px solid @brand-gray-lighter;
+  }
+  .blog__timeline .blog__item {
+    position: relative;
+
+    &:before {
+      content: "";
+      position: absolute;
+      left: -51px; top: 20px;
+      .square(20px);
+      border-radius: 50%;
+      border: 2px solid @brand-gray-lighter;
+      background-color: white;
+    }
+    &:after {
+      content: attr(data-date);
+      position: absolute;
+      max-width: 60px;
+      text-align: center;
+      left: -100px; top: 20px;
+      color: @text-muted;
+    }
+  }
+
+}
