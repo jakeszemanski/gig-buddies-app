@@ -1,3 +1,200 @@
+<div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs gallery__nav" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#" role="tab" data-toggle="tab" data-filter="*">
+                  All
+                </a>
+              </li>
+              <li role="presentation">
+                <a href="#" role="tab" data-toggle="tab" data-filter=".category_1">
+                  <span class="hidden-xs">Category</span> #1
+                </a>
+              </li>
+              <li role="presentation">
+                <a href="#" role="tab" data-toggle="tab" data-filter=".category_2">
+                  <span class="hidden-xs">Category</span> #2
+                </a>
+              </li>
+              <li role="presentation">
+                <a href="#" role="tab" data-toggle="tab" data-filter=".category_3">
+                  <span class="hidden-xs">Category</span> #3
+                </a>
+              </li>
+            </ul>
+          
+        </div>
+      </div> <!-- / .row -->
+      
+      <div class="row isotope-container">
+      <% @venues.each do |venue| %>
+        <div class="col-sm-4 col-lg-3 isotope-item category_1">
+          
+          <a href="gallery-item.html" class="thumbnail alt">
+            <img src="assets/img/work_1.jpg" alt="...">
+            <div class="caption">
+              <h5><%=venue.name %> </h5>
+
+              <ul class="rating">
+              <% venue.reviews.first.rating.times do %>
+                <li><i class="fa fa-star"></i></li>
+                <% end %>
+              </ul>
+              <p>
+                Will call exchange policy: <%= venue.will_call_policy %>
+              </p>
+            </div>
+          </a>
+
+        </div>
+        <% end %>
+        <div class="col-sm-4 col-lg-3 isotope-item category_2 category_3">
+          
+          <a href="gallery-item.html" class="thumbnail alt">
+            <img src="assets/img/work_2.jpg" alt="...">
+            <div class="caption">
+              <h5>Project Title</h5>
+              <ul class="rating">
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+              </ul>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              </p>
+            </div>
+          </a>
+
+        </div>
+        <div class="col-sm-4 col-lg-3 isotope-item category_1 category_3">
+          
+          <a href="gallery-item.html" class="thumbnail alt">
+            <img src="assets/img/work_3.jpg" alt="...">
+            <div class="caption">
+              <h5>Project Title</h5>
+              <ul class="rating">
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+              </ul>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              </p>
+            </div>
+          </a>
+
+        </div>
+        <div class="col-sm-4 col-lg-3 isotope-item category_1 category_2">
+          
+          <a href="gallery-item.html" class="thumbnail alt">
+            <img src="assets/img/work_4.jpg" alt="...">
+            <div class="caption">
+              <h5>Project Title</h5>
+              <ul class="rating">
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+              </ul>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              </p>
+            </div>
+          </a>
+
+        </div>
+        <div class="col-sm-4 col-lg-3 isotope-item category_3">
+          
+          <a href="gallery-item.html" class="thumbnail alt">
+            <img src="assets/img/work_1.jpg" alt="...">
+            <div class="caption">
+              <h5>Project Title</h5>
+              <ul class="rating">
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+              </ul>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              </p>
+            </div>
+          </a>
+
+        </div>
+        <div class="col-sm-4 col-lg-3 isotope-item category_2 category_3">
+          
+          <a href="gallery-item.html" class="thumbnail alt">
+            <img src="assets/img/work_2.jpg" alt="...">
+            <div class="caption">
+              <h5>Project Title</h5>
+              <ul class="rating">
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+              </ul>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              </p>
+            </div>
+          </a>
+
+        </div>
+        <div class="col-sm-4 col-lg-3 isotope-item category_1 category_3">
+          
+          <a href="gallery-item.html" class="thumbnail alt">
+            <img src="assets/img/work_3.jpg" alt="...">
+            <div class="caption">
+              <h5>Project Title</h5>
+              <ul class="rating">
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+              </ul>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              </p>
+            </div>
+          </a>
+
+        </div>
+        <div class="col-sm-4 col-lg-3 isotope-item category_2">
+          
+          <a href="gallery-item.html" class="thumbnail alt">
+            <img src="assets/img/work_4.jpg" alt="...">
+            <div class="caption">
+              <h5>Project Title</h5>
+              <ul class="rating">
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
+              </ul>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              </p>
+            </div>
+          </a>
+
+        </div>
+      </div> <!-- / .row -->
+    </div> <!-- / .container -->
+
+
 <h1>Venues</h1>
   <% @venues.each do |venue| %>
     <h2><%= venue.name %></h2>

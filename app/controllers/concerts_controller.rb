@@ -1,6 +1,19 @@
 class ConcertsController < ApplicationController
+  # def homepage
+  #   @concerts = Concert.order("date").all
+  #   @concert1 = @concerts.first
+  #   @concert2 = @concerts.second
+  #   @concert3 = @concerts.third
+  #   @venues = Venue.all
+  #   render 'homepage.html.erb'
+  # end
+
   def index
-    @concerts = Concert.all
+    @concerts = Concert.order("date").all
+    @concert1 = @concerts.first
+    @concert2 = @concerts.second
+    @concert3 = @concerts.third
+    @venues = Venue.all
     render 'index.html.erb'
   end
   

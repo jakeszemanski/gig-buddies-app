@@ -1,4 +1,3 @@
-
 <div class="showcase">
       
       <div id="showcase-carousel" class="carousel slide" data-ride="carousel">
@@ -26,7 +25,7 @@
                      
                       <h1 class="animateDown" data-animation="animateDown">
                         <% @concert1.bands.each do |band| %>
-                        <p><%= band.name %></p>
+                        <%= band.name %>
                         <% end %>
                       </h1>
                       <p class="lead delay_1 animateUp" data-animation="animateUp">
@@ -351,18 +350,3 @@
         </div>
       </div> <!-- / .row -->
     </div> <!-- / .container -->
-
-
-
-<h1>Concerts</h1>
-  <% @concerts.each do |concert| %>
-    <% concert.bands.each do |band| %>
-      <p> Bands: <%= band.name %> </p>
-      <% end %>
-    <p>Date: <%= concert.date %></p>
-    <p>Doors: <%= concert.doors %></p>
-    <p>Show: <%= concert.show %></p>
-    <p>Venue: <%= concert.venue.name %></p>
-    <a href="/tickets?concert=<%=concert.id%>">Tickets</a>
-    <p><%= '-' * 50 %>
-      <% end %>

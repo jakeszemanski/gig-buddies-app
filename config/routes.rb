@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  get '/' => 'concerts#index'
   get '/signup' => 'users#new'
   post '/users' => 'users#create'
 
