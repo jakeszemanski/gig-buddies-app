@@ -47,7 +47,7 @@
             <span class="icon-bar"></span>
           </button>
 
-          <a class="navbar-brand" href="index.html">Gig Buddies</a>
+          <a class="navbar-brand" href="/">Gig Buddies</a>
 
         </div>
 
@@ -81,8 +81,10 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Concerts <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="gallery-text.html">Gallery: Text blocks</a></li>
-                <li><a href="gallery-bubbles.html">Gallery: Bubbles</a></li>
+                <li><a href="/concerts">All concerts</a></li>
+                <% if current_user %>
+                <li><a href="/concerts?calendar=<%= current_user.id %>">My Calendar</a></li>
+                <% end %>
                 <li><a href="gallery-item.html">Gallery Item</a></li>
               </ul>
             </li>
@@ -97,7 +99,7 @@
                 <li><a href="pricing.html">Pricing</a></li>
               </ul>
             </li>
-            <li><a href="ui-elements.html">UI elements</a></li>
+            <li><a href="/reviews">Reviews</a></li>
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
@@ -153,8 +155,9 @@
 
     <!-- CONTENT
     ================================================== -->
-    
-<%= yield %>
+    <div class="container">
+      <%= yield %>
+    </div>
 
     <!-- FOOTER 
     ================================================== -->

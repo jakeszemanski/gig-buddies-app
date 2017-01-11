@@ -1,368 +1,58 @@
+<div class="container">
+        <div class="row">
+          <div class="col-sm-12">
 
-<div class="showcase">
-      
-      <div id="showcase-carousel" class="carousel slide" data-ride="carousel">
-
-      
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-          <li data-target="#showcase-carousel" data-slide-to="0" class="active"></li>
-          <li data-target="#showcase-carousel" data-slide-to="1"></li>
-          <li data-target="#showcase-carousel" data-slide-to="2"></li>
-        </ol>
-      
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner" role="listbox">
-
-          <!-- Item 1 -->
-          <div class="item item_1 active">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-6 col-md-8 col-sm-12">
-                  <div class="table_centered">
-                    <div class="table_centered__cell">
-                      
-                      <!-- Add animation classes to the active slide only -->
-                     
-                      <h1 class="animateDown" data-animation="animateDown">
-                        <% @concert1.bands.each do |band| %>
-                        <p><%= band.name %></p>
-                        <% end %>
-                      </h1>
-                      <p class="lead delay_1 animateUp" data-animation="animateUp">
-                        <%= @concert1.date %> <br /> Doors: <%= @concert1.doors %>
-                      </p>
-                      <a href="/tickets?concert=<%=@concert1.id%>" class="btn btn-lg btn-primary delay_2 animateUp" data-animation="animateUp">
-                        Tickets
-                      </a>
-                      <a href="#" class="btn btn-lg btn-glass delay_2 animateUp" data-animation="animateUp"><%= @concert1.venue.name %>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-    
-
-          <!-- Item 2 -->
-          <div class="item item_2">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-6 col-md-8 col-sm-12">
-                  <div class="table_centered">
-                    <div class="table_centered__cell">
-                      
-                      <h1 data-animation="animateDown">
-                        <% @concert2.bands.each do |band| %>
-                        <ul>
-                          <p><%= band.name %></p>
-                          <% end %>
-                        </ul>
-                      
-                      </h1>
-                      <p class="lead delay_1" data-animation="animateUp">
-                        <%= @concert2.date %> <br /> Doors: <%= @concert2.doors %>
-                      </p>
-                      <a href="/tickets?concert=<%=@concert2.id%>" class="btn btn-lg btn-primary delay_2" data-animation="animateUp">
-                        Tickets
-                      </a>
-                      <a href="#" class="btn btn-lg btn-glass delay_2" data-animation="animateUp">
-                        <%= @concert2.venue.name %>
-                      </a>
-
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Item 3 -->
-          <div class="item item_3">
-            <div class="container">
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="table_centered">
-                    <div class="table_centered__cell">
-                      
-                      <h1 data-animation="animateDown">
-                      <% @concert3.bands.each do |band| %>
-                        <ul>
-                          <p><%= band.name %></p>
-                          <% end %>
-                        </ul>
-                      </h1>
-                      <p class="lead delay_1" data-animation="animateUp">
-                         <%= @concert3.date %> <br /> Doors: <%= @concert3.doors %>
-                      </p>
-                      <a href="/tickets?concert=<%=@concert3.id%>" class="btn btn-lg btn-primary delay_2" data-animation="animateUp">
-                        Tickets
-                      </a>
-                      <a href="#" class="btn btn-lg btn-glass delay_2" data-animation="animateUp">
-                        <%= @concert3.venue.name %>
-                      </a>
-
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div> <!-- / .carousel-inner -->
-      
-        <!-- Controls -->
-        <a class="carousel__control carousel__control_left" href="#showcase-carousel" role="button" data-slide="prev">
-          <img src="assets/img/arrow_left.svg" alt="...">  
-        </a>
-        <a class="carousel__control carousel__control_right" href="#showcase-carousel" role="button" data-slide="next">
-          <img src="assets/img/arrow_right.svg" alt="...">  
-        </a>
-      
-      </div> <!-- / .carousel -->
-
-      
-
-    <!-- RECENT WORKS
-    ================================================== -->
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-12">
+              <!-- Nav tabs -->
+              <ul class="nav nav-tabs gallery__nav" role="tablist">
+                <li role="presentation" class="active">
+                  <a href="#" role="tab" data-toggle="tab" data-filter="*">
+                  All
+                </a>
+              </li>
+              <li role="presentation">
+                <a href="#" role="tab" data-toggle="tab" data-filter=".category_1">
+                  <span class="hidden-xs">Category</span> #1
+                </a>
+              </li>
+              <li role="presentation">
+                <a href="#" role="tab" data-toggle="tab" data-filter=".category_2">
+                  <span class="hidden-xs">Category</span> #2
+                </a>
+              </li>
+              <li role="presentation">
+                <a href="#" role="tab" data-toggle="tab" data-filter=".category_3">
+                  <span class="hidden-xs">Category</span> #3
+                </a>
+              </li>
+            </ul>
           
-          <h1 class="block-header">
-            <span> Venues</span>
-          </h1>
-
         </div>
       </div> <!-- / .row -->
-     <% @venues.first(4).each do |venue| %>
-      <div class="row">
-       
-        <div class="col-sm-3">
 
-         
-          <a href="gallery-item.html" class="thumbnail">
+
+      <div class="row isotope-container">
+      <% @concerts.each do |concert| %>
+       
+        <div class="col-sm-4 col-lg-3 isotope-item category_1">
+          
+          <a href="/concerts/<%= concert.id %>" class="thumbnail">
             <img src="assets/img/work_1.jpg" alt="...">
             <div class="caption">
-              <h5><%= venue.name %></h5>
-
-              <ul class="rating">
-                <% venue.reviews.first.rating.times do %>
-                  <li><i class="fa fa-star"></i></li>
-                <% end %>
-              </ul>
-              <p>
-                <%= venue.reviews.first.description %>
-              </p>
-              
-              
+             <% concert.bands.each do |band| %>
+              <h5><%= band.name %></h5>
+               <% end %>
+             
+              <p>Venue: <%= concert.venue.name %></p>
+              <p><%= concert.friendly_date %></p>
+              <p>Show: <%= concert.show %></p>
             </div>
           </a>
-        </div>
-        <% end %>
-      </div>
 
-    </div> <!-- / .container -->
- 
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-9">
-          <div class="blog__timeline">
-          <% @concerts.each do |concert| %>
- 
-            <div class="blog__item" data-date="<%= concert.date %>">
-      
-              <div class="blog__header">
-                <h1 class="blog__title">
-                  <a href="blog-post.html">
-                  <% concert.bands.each do |band| %>
-                    <%= band.name %>
-                  </a>
-                  <% end %>
-                </h1>
-                <ul class="blog__info">
-                  <li>
-                    <i class="fa fa-user"></i> <a href="#">Admin</a>
-                  </li>
-                  <li>
-                    <i class="fa fa-calendar"></i> <time datetime="2016-03-01">March 01, 2016</time>
-                  </li>
-                  <li>
-                    <i class="fa fa-comments-o"></i> 4 comments
-                  </li>
-                </ul>
-              </div> <!-- / .blog__header -->
-
-              <div class="blog__body">
-                <a href="blog-post.html">
-                  <img src="assets/img/work_1.jpg" alt="" class="img-responsive img-article pull-right">
-                </a>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate voluptates quibusdam possimus alias, explicabo iste doloribus laboriosam debitis, quisquam molestiae delectus temporibus eos quae perferendis qui saepe fuga nihil, labore! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem harum repellat debitis recusandae unde magnam assumenda officia deserunt eveniet vitae accusantium laudantium quidem, ab eos sapiente similique facere, sunt repellendus?
-                </p>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero perspiciatis quo nulla minus est distinctio facere rerum odit pariatur quisquam ab explicabo, soluta, beatae aperiam voluptate. Labore eaque repellat deserunt. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim dolorem assumenda odio distinctio facilis earum, eos suscipit consequuntur esse itaque. Ad facere reiciendis accusamus cum quis beatae repellat delectus optio? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates molestiae enim recusandae praesentium est, reprehenderit odit blanditiis, ad quo deleniti reiciendis velit itaque ipsum rem temporibus ullam voluptate iure veritatis.
-                </p>
-                 <% end %>
-              </div> <!-- / .blog__body -->
-
-              <div class="blog__footer">
-                <ul class="blog__tags">
-                  <li><a href="#">Bootstrap</a></li>
-                  <li><a href="#">HTML5</a></li>
-                  <li><a href="#">CSS3</a></li>
-                  <li><a href="#">jQuery</a></li>
-                </ul>
-              </div> <!-- / .blog__footer -->
-
-            </div> <!-- / .blog__item -->
-  
-            
-          
-          <!-- Keep in touch -->
-          <h1 class="block-header alt">
-            <span>Keep in touch</span>
-          </h1>
-          <ul class="social-icons">
-            <li class="facebook">
-              <a href="#"><i class="fa fa-facebook"></i></a>
-            </li>
-            <li class="twitter">
-              <a href="#"><i class="fa fa-twitter"></i></a>
-            </li>
-            <li class="google-plus">
-              <a href="#"><i class="fa fa-google-plus"></i></a>
-            </li>
-            <li class="linkedin">
-              <a href="#"><i class="fa fa-linkedin"></i></a>
-            </li>
-            <li class="rss">
-              <a href="#"><i class="fa fa-rss"></i></a>
-            </li>
-          </ul>
-
-
-          <!-- Recent works -->
-          <h1 class="block-header alt">
-            <span>Recent works</span>
-          </h1>
-          <div class="thumbnails_small">
-            <div class="row">
-              <div class="col-sm-6">
-                
-                <a href="gallery-item.html" class="thumbnail">
-                  <img src="assets/img/work_1.jpg" alt="...">
-                  <div class="caption hidden">
-                    <h5>Project Title</h5>
-                    <ul class="rating">
-                      <li><i class="fa fa-star"></i></li>
-                      <li><i class="fa fa-star"></i></li>
-                      <li><i class="fa fa-star"></i></li>
-                      <li><i class="fa fa-star"></i></li>
-                      <li><i class="fa fa-star"></i></li>
-                    </ul>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    </p>
-                  </div>
-                </a>
-
-              </div>
-              <div class="col-sm-6">
-                
-                <a href="gallery-item.html" class="thumbnail">
-                  <img src="assets/img/work_2.jpg" alt="...">
-                  <div class="caption hidden">
-                    <h5>Project Title</h5>
-                    <ul class="rating">
-                      <li><i class="fa fa-star"></i></li>
-                      <li><i class="fa fa-star"></i></li>
-                      <li><i class="fa fa-star"></i></li>
-                      <li><i class="fa fa-star"></i></li>
-                      <li><i class="fa fa-star"></i></li>
-                    </ul>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    </p>
-                  </div>
-                </a>
-
-              </div>
-              <div class="col-sm-6">
-                
-                <a href="gallery-item.html" class="thumbnail">
-                  <img src="assets/img/work_3.jpg" alt="...">
-                  <div class="caption hidden">
-                    <h5>Project Title</h5>
-                    <ul class="rating">
-                      <li><i class="fa fa-star"></i></li>
-                      <li><i class="fa fa-star"></i></li>
-                      <li><i class="fa fa-star"></i></li>
-                      <li><i class="fa fa-star"></i></li>
-                      <li><i class="fa fa-star"></i></li>
-                    </ul>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    </p>
-                  </div>
-                </a>
-
-              </div>
-              <div class="col-sm-6">
-                
-                <a href="gallery-item.html" class="thumbnail">
-                  <img src="assets/img/work_4.jpg" alt="...">
-                  <div class="caption hidden">
-                    <h5>Project Title</h5>
-                    <ul class="rating">
-                      <li><i class="fa fa-star"></i></li>
-                      <li><i class="fa fa-star"></i></li>
-                      <li><i class="fa fa-star"></i></li>
-                      <li><i class="fa fa-star"></i></li>
-                      <li><i class="fa fa-star"></i></li>
-                    </ul>
-                    <p>
-                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    </p>
-                  </div>
-                </a>
-
-              </div>
-            </div> <!-- / .row -->
-          </div> <!-- / .thumbnail_small -->
-
-          <!-- Contact info -->
-          <h1 class="block-header alt">
-            <span>Contact info</span>
-          </h1>
-          <p class="text-muted">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi, corrupti debitis.
-          </p>
-          <p class="text-muted">
-            US & CAN: 1-234-56789 <br />
-            Worldwide: 1-234-56789
-          </p>
-          <p class="text-muted">
-            E-mail: info@domain.com <br />
-            Website: <a href="#">https://www.domain.com/</a>
-          </p>
 
         </div>
+       
+          <% end %>
+        
+        
       </div> <!-- / .row -->
     </div> <!-- / .container -->
-
-
-
-<h1>Concerts</h1>
-  <% @concerts.each do |concert| %>
-    <% concert.bands.each do |band| %>
-      <p> Bands: <%= band.name %> </p>
-      <% end %>
-    <p>Date: <%= concert.date %></p>
-    <p>Doors: <%= concert.doors %></p>
-    <p>Show: <%= concert.show %></p>
-    <p>Venue: <%= concert.venue.name %></p>
-    <a href="/tickets?concert=<%=concert.id%>">Tickets</a>
-    <p><%= '-' * 50 %>
-      <% end %>

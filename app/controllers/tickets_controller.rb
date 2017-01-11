@@ -20,13 +20,14 @@ class TicketsController < ApplicationController
   end
 
   def new
+    @concerts = Concert.all
     render 'new.html.erb'
   end
 
   def create
     @ticket = Ticket.new(
       seller_id: current_user.id,
-      concert_id: params[:concert_id],
+      concert_id: params[:concert],
       compensation: params[:compensation]
       )
     @ticket.save

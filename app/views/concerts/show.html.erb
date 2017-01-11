@@ -1,10 +1,300 @@
-<h1>Concert</h1>
- 
-    <% @concert.bands.each do |band| %>
-      <p> Bands: <%= band.name %> </p>
-      <% end %>
-    <p>Date: <%= @concert.date %></p>
-    <p>Doors: <%= @concert.doors %></p>
-    <p>Show: <%= @concert.show %></p>
-    <p>Venue: <%= @concert.venue.name %></p>
+<div class="container">
+      <div class="row">
+        <div class="col-sm-7">
+          
+          <!-- Main image -->
+          <a href="assets/img/work_2_big.jpg" data-lightbox="...">
+            <img src="assets/img/work_2_big.jpg" alt="..." class="img-responsive">
+          </a>
+
+          <!-- Comments section -->
+          <div class="comments">
+
+            <div class="comments__heading">4 comments</div>
+
+            <!-- New comment form -->
+            <form name="comments__new">
+
+              <div class="form-group">
+                <textarea class="form-control" rows="1" placeholder="Write your comment here"></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary" disabled="disabled">Send</button>
+
+            </form>
+
+            <!-- List of comments -->
+            <div class="comments__list">
+              
+              <!-- Comment item -->
+              <div class="comments__item">
+                
+                <div class="comments-item__avatar">
+                  <img src="assets/img/person_1.jpg" class="img-responsive" alt="..." />
+                </div>
+
+                <div class="comments-item__body">
+
+                  <div class="comments-item__info">
+                    <div class="comments-item-info__author">Jane Doe</div>
+                    <div class="comments-item-info__divider">
+                      <i class="fa fa-circle"></i>
+                    </div>
+                    <div class="comment-item-info__timestamp">3 hours ago</div>
+                  </div>
+
+                  <div class="comments-item__content">
+                    Nunc sagittis in est malesuada finibus. Aliquam non metus nec nisi auctor vulputate eget at purus. Morbi mattis nisl elit, id egestas magna viverra ut. Nunc condimentum porttitor tortor a tempus.
+                  </div>
+
+                  <div class="comments-item__actions">
+                    <a href="#" class="comment-item-actions__reply">
+                      Reply
+                    </a>
+                  </div>
+                </div>
+
+              </div> <!-- / .comments__item -->
+
+              <!-- Comment item -->
+              <div class="comments__item">
+                
+                <div class="comments-item__avatar">
+                  <img src="assets/img/person_2.jpg" class="img-responsive" alt="..." />
+                </div>
+
+                <div class="comments-item__body">
+
+                  <div class="comments-item__info">
+                    <div class="comments-item-info__author">John Doe</div>
+                    <div class="comments-item-info__divider">
+                      <i class="fa fa-circle"></i>
+                    </div>
+                    <div class="comment-item-info__timestamp">5 hours ago</div>
+                  </div>
+
+                  <div class="comments-item__content">
+                    In quis tellus tristique, ullamcorper mauris quis, mollis urna. Maecenas cursus auctor vestibulum. Suspendisse eu mi convallis, porttitor leo sit amet, fermentum nulla. Fusce rhoncus ex maximus, condimentum elit tincidunt, venenatis augue.
+                  </div>
+
+                  <div class="comments-item__actions">
+                    <a href="#" class="comment-item-actions__reply">
+                      Reply
+                    </a>
+                  </div>
+                </div>
+
+              </div> <!-- / .comments__item -->
+
+              <!-- Comment item -->
+              <div class="comments__item">
+                
+                <div class="comments-item__avatar">
+                  <img src="assets/img/person_3.jpg" class="img-responsive" alt="..." />
+                </div>
+
+                <div class="comments-item__body">
+
+                  <div class="comments-item__info">
+                    <div class="comments-item-info__author">Jane Doe</div>
+                    <div class="comments-item-info__divider">
+                      <i class="fa fa-circle"></i>
+                    </div>
+                    <div class="comment-item-info__timestamp">1 day ago</div>
+                  </div>
+
+                  <div class="comments-item__content">
+                    Pellentesque leo urna, ornare non pharetra eu, suscipit sit amet magna. Vivamus vel quam vitae massa posuere pellentesque accumsan eu justo. Cras non porttitor leo
+                  </div>
+
+                  <div class="comments-item__actions">
+                    <a href="#" class="comment-item-actions__reply">
+                      Reply
+                    </a>
+                  </div>
+                </div>
+
+              </div> <!-- / .comments__item -->
+
+              <!-- Comment item -->
+              <div class="comments__item">
+                
+                <div class="comments-item__avatar">
+                  <img src="assets/img/person_4.jpg" class="img-responsive" alt="..." />
+                </div>
+
+                <div class="comments-item__body">
+
+                  <div class="comments-item__info">
+                    <div class="comments-item-info__author">John Doe</div>
+                    <div class="comments-item-info__divider">
+                      <i class="fa fa-circle"></i>
+                    </div>
+                    <div class="comment-item-info__timestamp">2 days ago</div>
+                  </div>
+
+                  <div class="comments-item__content">
+                    Sed id vestibulum mauris. Nunc venenatis mauris sit amet accumsan tincidunt. Praesent cursus nulla sed accumsan pulvinar. Donec ipsum justo, pretium at neque eget, imperdiet tristique quam.
+                  </div>
+
+                  <div class="comments-item__actions">
+                    <a href="#" class="comment-item-actions__reply">
+                      Reply
+                    </a>
+                  </div>
+                </div>
+
+              </div> <!-- / .comments__item -->
+
+            </div> <!-- / .comments__list -->
+
+          </div> <!-- / .comments -->
+
+        </div>
+        <div class="col-sm-5">
+          
+          <h1 class="block-header alt">
+            <span>Concert Information</span>
+          </h1>
+          <h3>Venue: <%= @concert.venue.name %> </h3>
+          <h4><%= @concert.friendly_date %></h4>
+          <h4>Bands</h4>
+           <% @concert.bands.each do |band| %>
+           <ul>
+           <li><%= band.name %></li>
+           </ul>
+
+         <% end %>
+          
+          <h1 class="block-header alt">
+            <span>Ticket Information</span>
+          </h1>
+
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <td>Availablility:</td>
+                <td> ticket status</td>
+              </tr>
+              <tr>
+                <td>Seller:</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Desired Compensation:</td>
+                <td> insert</td>
+              </tr>
+              <tr>
+                <td><%= @concert.venue.name %>'s will call policy:</td>
+                <td><%= @concert.venue.will_call_policy %></td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <% if current_user %>
+            <%= form_tag '/user_concerts', method: :post do %>
+              <div class="form-group">
+                <%= hidden_field_tag :concert_id, @concert.id %>
+              </div>
+              <div>
+                <%= submit_tag 'Add to calendar' %>
+              </div>
+            <% end %>
+          <% end %>
+
+          <h1 class="block-header alt">
+            <span>Similar Items</span>
+          </h1>
+
+          <div class="row">
+            <div class="col-sm-6">
+              
+              <a href="#" class="thumbnail">
+                <img src="assets/img/work_1.jpg" alt="...">
+                <div class="caption hidden">
+                  <h5>Project Title</h5>
+                  <ul class="rating">
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                  </ul>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  </p>
+                </div>
+              </a>
+
+            </div>
+            <div class="col-sm-6">
+              
+              <a href="#" class="thumbnail">
+                <img src="assets/img/work_2.jpg" alt="...">
+                <div class="caption hidden">
+                  <h5>Project Title</h5>
+                  <ul class="rating">
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                  </ul>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  </p>
+                </div>
+              </a>
+
+            </div>
+            <div class="col-sm-6">
+              
+              <a href="#" class="thumbnail">
+                <img src="assets/img/work_3.jpg" alt="...">
+                <div class="caption hidden">
+                  <h5>Project Title</h5>
+                  <ul class="rating">
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                  </ul>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  </p>
+                </div>
+              </a>
+
+            </div>
+            <div class="col-sm-6">
+              
+              <a href="#" class="thumbnail">
+                <img src="assets/img/work_4.jpg" alt="...">
+                <div class="caption hidden">
+                  <h5>Project Title</h5>
+                  <ul class="rating">
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                  </ul>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  </p>
+                </div>
+              </a>
+
+            </div>
+          </div> <!-- / .row -->
+
+        </div>
+      </div> <!-- / .row -->
+    </div> <!-- / .container -->
+
+
+
+
+
   

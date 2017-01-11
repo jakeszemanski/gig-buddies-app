@@ -6,6 +6,7 @@ class ReviewsController < ApplicationController
   end
 
   def new
+    @venues =  Venue.all
     render 'new.html.erb'
   end
 
@@ -13,9 +14,11 @@ class ReviewsController < ApplicationController
     @review = Review.new(
       rating: params[:rating],
       description: params[:description],
-      user_id: current_user.id
+      user_id: current_user.id,
+      venue_id: params[:venue]
       )
     @review.save
+    redirect_to "/reviews"
   end
 
   def show

@@ -1,6 +1,6 @@
 <h1>Add a review</h1>
 
-<%= form_tag '/review', method: :patch do %>
+<%= form_tag '/reviews', method: :patch do %>
   <div class="form-group">
   <%= label_tag :rating, 'Enter a rating (1-10): ' %>
   <%= text_field_tag :rating, @review.rating, class: 'form-control' %>

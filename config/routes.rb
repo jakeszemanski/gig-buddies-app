@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  get '/' => 'concerts#index'
+  get '/' => 'homepages#index'
   get '/signup' => 'users#new'
   post '/users' => 'users#create'
 
@@ -47,6 +47,9 @@ Rails.application.routes.draw do
   get '/tickets/:id' => 'tickets#show'
   get '/tickets/:id/edit' => 'tickets#edit'
   patch '/tickets/:id' => 'tickets#update'
-  delete '/tickets/:id' => 'tickets#destroy' 
+  delete '/tickets/:id' => 'tickets#destroy'
+
+  post '/user_concerts' => 'user_concerts#create'
+
 
 end

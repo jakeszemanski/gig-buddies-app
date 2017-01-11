@@ -1,6 +1,11 @@
 <h1>Add a review</h1>
 
-<%= form_tag '/review', method: :post do %>
+<%= form_tag '/reviews', method: :post do %>
+
+  <div>
+    <%= label_tag :venue %>
+    <%= select_tag :venue, options_for_select(@venues.collect{ |u| [u.name, u.id] }), multiple: false, include_blank: true %>
+ </div>
   <div class="form-group">
   <%= label_tag :rating, 'Enter a rating (1-10): ' %>
   <%= text_field_tag :rating, '', class: 'form-control' %>
@@ -9,6 +14,8 @@
   <%= label_tag :description, 'Enter  a description' %>
   <%= text_field_tag :description, '', class: 'form-control' %>
   </div>
+
+  
   
   <div>
   <%= submit_tag 'Submit product!' %>

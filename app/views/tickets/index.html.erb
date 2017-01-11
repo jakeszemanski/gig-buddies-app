@@ -25,7 +25,7 @@
             <div class="pricing__features">
               <ul>
                 <li><%= Concert.find_by(id: ticket.concert_id).venue.name %> </li>
-
+                <li><%= Concert.find_by(id: ticket.concert_id).friendly_date %></li>
                 <li>Seller: <%= User.find_by(id: ticket.seller_id).name %></li>
                 <li>Ask: <%= ticket.compensation %></li>
               </ul>

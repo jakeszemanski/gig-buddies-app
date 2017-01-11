@@ -1,19 +1,11 @@
 class ConcertsController < ApplicationController
-  # def homepage
-  #   @concerts = Concert.order("date").all
-  #   @concert1 = @concerts.first
-  #   @concert2 = @concerts.second
-  #   @concert3 = @concerts.third
-  #   @venues = Venue.all
-  #   render 'homepage.html.erb'
-  # end
-
   def index
-    @concerts = Concert.order("date").all
-    @concert1 = @concerts.first
-    @concert2 = @concerts.second
-    @concert3 = @concerts.third
-    @venues = Venue.all
+    if params[:calendar]
+      @concerts = current_user.concerts.order("date")
+    else  
+      @concerts = Concert.order("date").all
+      @venues = Venue.all
+    end
     render 'index.html.erb'
   end
   
@@ -57,9 +49,20 @@ class ConcertsController < ApplicationController
     flash[:message] = 'Concert updated!'
     redirect_to "/concerts/:id"
   end
-
+  
+  
   def delete
     @concert = Concert.find_by(id: params[:id])
     @concert.destroy
+  end
+
+
+  def add_to_calendar
+    @event = UserConcert.new(user_id: current_user.id, concert_id: params[concert_id])
+  end
+
+  def calendar
+    @events = UserConcert.where(user_id: current_user.id)
+    render 'calendar.html.erb'
   end
 end

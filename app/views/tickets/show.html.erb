@@ -157,6 +157,7 @@
             <span>Concert Information</span>
           </h1>
           <h3>Venue: <%= @concert.venue.name %> </h3>
+          <h4><%= @concert.friendly_date %></h4>
           <h4>Bands</h4>
            <% @concert.bands.each do |band| %>
            <ul>
