@@ -141,8 +141,8 @@
         <div class="col-sm-3">
 
          
-          <a href="gallery-item.html" class="thumbnail">
-            <img src="assets/img/work_1.jpg" alt="...">
+          <a href="/venues/<%=venue.id%>" class="thumbnail">
+            <img src="assets/img/<%=venue.image%>" alt="...">
             <div class="caption">
               <h5><%= venue.name %></h5>
 
@@ -175,10 +175,10 @@
               <div class="blog__header">
                 <h1 class="blog__title">
                   <a href="blog-post.html">
-                  <% concert.bands.each do |band| %>
-                    <%= band.name %>
+                  
+                    <%= concert.bands.first.name %>
                   </a>
-                  <% end %>
+                  
                 </h1>
                 <ul class="blog__info">
                   <li>
@@ -195,7 +195,9 @@
 
               <div class="blog__body">
                 <a href="blog-post.html">
-                  <img src="assets/img/work_1.jpg" alt="" class="img-responsive img-article pull-right">
+                <% if concert.bands.first %>
+                  <img src="assets/img/<%= concert.bands.first.image %>" alt="" class="img-responsive img-article pull-right">
+                <% end %>
                 </a>
                 <p>
                   Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate voluptates quibusdam possimus alias, explicabo iste doloribus laboriosam debitis, quisquam molestiae delectus temporibus eos quae perferendis qui saepe fuga nihil, labore! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem harum repellat debitis recusandae unde magnam assumenda officia deserunt eveniet vitae accusantium laudantium quidem, ab eos sapiente similique facere, sunt repellendus?

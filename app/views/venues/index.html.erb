@@ -34,7 +34,7 @@
         <div class="col-sm-4 col-lg-3 isotope-item category_1">
           
           <a href="/venues/<%= venue.id%>" class="thumbnail alt">
-            <img src="assets/img/work_1.jpg" alt="...">
+            <img src="assets/img/<%= venue.image %>" alt="...">
             <div class="caption">
               <h5><%=venue.name %> </h5>
 
@@ -53,11 +53,3 @@
         <% end %>
       </div> <!-- / .row -->
     </div> <!-- / .container -->
-
-
-<h1>Venues</h1>
-  <% @venues.each do |venue| %>
-    <h2><%= venue.name %></h2>
-    <h1><%= venue.will_call_policy %></h1>
-    <p></p>
-    <% end %>

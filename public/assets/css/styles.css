@@ -8047,14 +8047,14 @@ p {
   /* Typography */
 }
 .showcase .item.item_1 {
-  background-image: url(../img/home_1.jpg);
+  background-image: url(../img/rock_1.jpg);
 }
 .showcase .item.item_2 {
-  background-image: url(../img/home_2.jpg);
+  background-image: url(../img/acoustic_2.jpg);
   background-position: bottom center;
 }
 .showcase .item.item_3 {
-  background-image: url(../img/home_3.jpg);
+  background-image: url(../img/acoustic.jpg);
   text-align: center;
 }
 @media (max-width: 991px) {

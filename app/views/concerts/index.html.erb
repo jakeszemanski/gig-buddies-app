@@ -36,7 +36,9 @@
         <div class="col-sm-4 col-lg-3 isotope-item category_1">
           
           <a href="/concerts/<%= concert.id %>" class="thumbnail">
-            <img src="assets/img/work_1.jpg" alt="...">
+            <% if concert.bands.first %>
+            <img src="assets/img/<%= concert.bands.first.image %>" alt="...">
+            <% end %>
             <div class="caption">
              <% concert.bands.each do |band| %>
               <h5><%= band.name %></h5>
