@@ -174,7 +174,7 @@
       
               <div class="blog__header">
                 <h1 class="blog__title">
-                  <a href="blog-post.html">
+                  <a href="/concerts/<%=concert.id%>">
                   
                     <%= concert.bands.first.name %>
                   </a>
@@ -194,7 +194,7 @@
               </div> <!-- / .blog__header -->
 
               <div class="blog__body">
-                <a href="blog-post.html">
+                <a href="/concerts/<%= concert.id%>">
                 <% if concert.bands.first %>
                   <img src="assets/img/<%= concert.bands.first.image %>" alt="" class="img-responsive img-article pull-right">
                 <% end %>
