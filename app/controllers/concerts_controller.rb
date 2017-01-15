@@ -11,6 +11,14 @@ class ConcertsController < ApplicationController
   
   def show
     @concert = Concert.find_by(id: params[:id])
+    @headliner = @concert.bands.first.name
+    @spotify = Unirest.get("https://api.spotify.com/v1/search",
+      parameters: {
+        q: @headliner,
+        type: "artist"}).body
+    @genres = @spotify['artists']['items'][0]['genres']
+    @uri = @spotify['artists']['items'][0]['uri']
+
     render 'show.html.erb'
   end
 
