@@ -1,5 +1,199 @@
-Venue Show
+<div class="container">
+      <div class="row">
+        <div class="col-sm-7">
+          
+          <!-- Main image -->
+          <a href="/" data-lightbox="...">
+            <img src="../assets/img/<%= @venue.image %>" alt="..." class="img-responsive">
+          </a>
 
-<p><%= @venue.name %> </p>
+          <!-- Comments section -->
 
-<a href="/reviews/new"
+          <div class="comments">
+
+            <div class="comments__heading">4 comments</div>
+
+            <!-- New comment form -->
+            <form name="comments__new">
+
+              <div class="form-group">
+                <textarea class="form-control" rows="1" placeholder="Write your comment here"></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary" disabled="disabled">Send</button>
+
+            </form>
+
+            <!-- List of comments -->
+            <div class="comments__list">
+              
+              <!-- Comment item -->
+              <% @venue.reviews.each do |review| %>
+              <div class="comments__item">
+                
+                <div class="comments-item__avatar">
+                  <img src="../assets/img/person_1.jpg" class="img-responsive" alt="..." />
+                </div>
+
+                <div class="comments-item__body">
+
+                  <div class="comments-item__info">
+                    <div class="comments-item-info__author"><%= User.find_by(id: review.user_id).name %></div>
+                    <div class="comments-item-info__divider">
+                      <i class="fa fa-circle"></i>
+                    </div>
+                    <div class="comment-item-info__timestamp">3 hours ago</div>
+                  </div>
+
+                  <div class="comments-item__content">
+                    <%= review.description %>
+                  </div>
+
+                  <div class="comments-item__actions">
+                    <a href="#" class="comment-item-actions__reply">
+                      Reply
+                    </a>
+                  </div>
+                </div>
+
+              </div> <!-- / .comments__item -->
+              <% end %>
+            </div> <!-- / .comments__list -->
+
+          </div> <!-- / .comments -->
+
+        </div>
+        <div class="col-sm-5">
+          
+          <h1 class="block-header alt">
+            <span><%= @venue.name%></span>
+          </h1>
+          
+          
+          <p>Will call policy: <%=@venue.will_call_policy%></p>
+          
+          <h1 class="block-header alt">
+            <span>Something</span>
+          </h1>
+
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <td>Availablility:</td>
+                <td> ticket status</td>
+              </tr>
+              <tr>
+                <td>Seller:</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td>Desired Compensation:</td>
+                <td> insert</td>
+              </tr>
+              <tr>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <h1 class="block-header alt">
+            <span>Maps</span>
+          </h1>
+
+          <div class="row">
+            <div class="col-sm-6">
+              
+              <a href="#" class="thumbnail">
+                <img src="assets/img/work_1.jpg" alt="...">
+                <div class="caption hidden">
+                  <h5>Project Title</h5>
+                  <ul class="rating">
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                  </ul>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  </p>
+                </div>
+              </a>
+
+            </div>
+            <div class="col-sm-6">
+              
+              <a href="#" class="thumbnail">
+                <img src="assets/img/work_2.jpg" alt="...">
+                <div class="caption hidden">
+                  <h5>Project Title</h5>
+                  <ul class="rating">
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                  </ul>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  </p>
+                </div>
+              </a>
+
+            </div>
+            <div class="col-sm-6">
+              
+              <a href="#" class="thumbnail">
+                <img src="assets/img/work_3.jpg" alt="...">
+                <div class="caption hidden">
+                  <h5>Project Title</h5>
+                  <ul class="rating">
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                  </ul>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  </p>
+                </div>
+              </a>
+
+            </div>
+            <div class="col-sm-6">
+              
+              <a href="#" class="thumbnail">
+                <img src="assets/img/work_4.jpg" alt="...">
+                <div class="caption hidden">
+                  <h5>Project Title</h5>
+                  <ul class="rating">
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                    <li><i class="fa fa-star"></i></li>
+                  </ul>
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  </p>
+                </div>
+              </a>
+
+            </div>
+          </div> <!-- / .row -->
+
+        </div>
+        
+    <iframe
+  width="450"
+  height="450"
+  frameborder="0" style="border:0"
+  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAp05DzIOohtfOzEts1W1eLV_aI95XlJXc
+    &q=<%= @venue.name%>,Chicago+IL" allowfullscreen>
+</iframe>
+      </div> <!-- / .row -->
+    </div> <!-- / .container -->
+
+
+    
