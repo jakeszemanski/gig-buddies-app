@@ -51,5 +51,7 @@ Rails.application.routes.draw do
 
   post '/user_concerts' => 'user_concerts#create'
 
+  post '/google_calendars' => 'google_calendars#create'
+
 
 end

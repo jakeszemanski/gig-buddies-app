@@ -87,8 +87,9 @@
           <table class="table table-bordered">
             <tbody>
               <tr>
-                <td>Availablility:</td>
-                <td> ticket status</td>
+                <td>Genres:</td>
+                <td> <%= @genres.join(', ') %></td>
+               
               </tr>
               <tr>
                 <td>Seller:</td>
@@ -115,9 +116,9 @@
               </div>
             <% end %>
           <% end %>
-
+          
           <h1 class="block-header alt">
-            <span>Spotify/maps</span>
+            <span>Listen</span>
           </h1>
           <iframe src="https://embed.spotify.com/?uri=<%=@uri%>" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
 
@@ -208,8 +209,14 @@
       </div> <!-- / .row -->
     </div> <!-- / .container -->
 
-
-
+  
+<% if current_user %>
+            <%= form_tag '/google_calendars', method: :post do %>
+              <div>
+                <%= submit_tag 'Add to google calendar' %>
+              </div>
+            <% end %>
+          <% end %>
 
 
 
