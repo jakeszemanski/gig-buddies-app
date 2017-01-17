@@ -170,7 +170,7 @@
           <div class="blog__timeline">
           <% @concerts.each do |concert| %>
  
-            <div class="blog__item" data-date="<%= concert.date %>">
+            <div class="blog__item" data-date="<%= concert.friendly_date %>">
       
               <div class="blog__header">
                 <h1 class="blog__title">
@@ -200,10 +200,7 @@
                 <% end %>
                 </a>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate voluptates quibusdam possimus alias, explicabo iste doloribus laboriosam debitis, quisquam molestiae delectus temporibus eos quae perferendis qui saepe fuga nihil, labore! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem harum repellat debitis recusandae unde magnam assumenda officia deserunt eveniet vitae accusantium laudantium quidem, ab eos sapiente similique facere, sunt repellendus?
-                </p>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero perspiciatis quo nulla minus est distinctio facere rerum odit pariatur quisquam ab explicabo, soluta, beatae aperiam voluptate. Labore eaque repellat deserunt. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim dolorem assumenda odio distinctio facilis earum, eos suscipit consequuntur esse itaque. Ad facere reiciendis accusamus cum quis beatae repellat delectus optio? Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates molestiae enim recusandae praesentium est, reprehenderit odit blanditiis, ad quo deleniti reiciendis velit itaque ipsum rem temporibus ullam voluptate iure veritatis.
+                  <%= concert.bands.first.description %>
                 </p>
                  <% end %>
               </div> <!-- / .blog__body -->

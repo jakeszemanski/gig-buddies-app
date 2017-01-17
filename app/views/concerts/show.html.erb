@@ -68,7 +68,7 @@
           <h1 class="block-header alt">
             <span>Concert Information</span>
           </h1>
-          
+          <p><%= @concert.bands.first.description %></p>
           <h2>Lineup:</h4>
            <% @concert.bands.each do |band| %>
            <ul>
