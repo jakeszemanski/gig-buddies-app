@@ -75,12 +75,14 @@
           <h1 class="block-header alt">
             <span>Tickets</span>
           </h1>
-            <a href="/tickets?venue=<%=@venue.id%>"><button>Buy now</button></a>
+            <a href="/tickets?venue=<%=@venue.id%>"><button>See Available</button></a>
          
           <h1 class="block-header alt">
             <span>Upcoming shows</span>
           </h1>
-
+          <div>
+            <a href="/concerts?venue_id=<%=@venue.id%>"><button>See All</button></a>
+          </div>
           <div class="row">
             <% if @concerts.ids %>
               <% @concerts.each do |concert| %>
