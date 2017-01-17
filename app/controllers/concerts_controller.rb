@@ -2,6 +2,8 @@ class ConcertsController < ApplicationController
   def index
     if params[:calendar]
       @concerts = current_user.concerts.order("date")
+    elsif params[:venue_id]
+      @concerts = Concert.where(venue_id: params[:venue_id]).order("date")
     else  
       @concerts = Concert.order("date").all
       @venues = Venue.all
