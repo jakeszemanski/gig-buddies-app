@@ -7,7 +7,12 @@ class TicketsController < ApplicationController
       @tickets = Ticket.where(seller_id: current_user.id) 
     elsif params[:concert]
       @tickets = Ticket.where(concert_id: params[:concert], status: 'available')
-    
+    elsif params[:venue]
+      @concerts = Concert.where(venue_id: params[:venue])
+     
+      @concerts.each do |concert|
+        @tickets = Ticket.where(concert_id: concert.id, status: 'available')
+      end
 
     # elsif params[:artist_id]
     #   @shows = BandConcert.where(band_id: params[:artist_id])

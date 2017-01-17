@@ -11,7 +11,7 @@
 
           <div class="comments">
 
-            <div class="comments__heading">4 comments</div>
+            <div class="comments__heading">Reviews</div>
 
             <!-- New comment form -->
             <form name="comments__new">
@@ -42,7 +42,7 @@
                     <div class="comments-item-info__divider">
                       <i class="fa fa-circle"></i>
                     </div>
-                    <div class="comment-item-info__timestamp">3 hours ago</div>
+                    <div class="comment-item-info__timestamp">Rating: <%= review.rating %></div>
                   </div>
 
                   <div class="comments-item__content">
@@ -73,38 +73,21 @@
           <p>Will call policy: <%=@venue.will_call_policy%></p>
           
           <h1 class="block-header alt">
-            <span>Something</span>
+            <span>Tickets</span>
           </h1>
-
-          <table class="table table-bordered">
-            <tbody>
-              <tr>
-                <td>Availablility:</td>
-                <td> ticket status</td>
-              </tr>
-              <tr>
-                <td>Seller:</td>
-                <td></td>
-              </tr>
-              <tr>
-                <td>Desired Compensation:</td>
-                <td> insert</td>
-              </tr>
-              <tr>
-                <td></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
+            <a href="/tickets?venue=<%=@venue.id%>"><button>Buy now</button></a>
+         
           <h1 class="block-header alt">
-            <span>Maps</span>
+            <span>Upcoming shows</span>
           </h1>
 
           <div class="row">
+            <% if @concerts.ids %>
+              <% @concerts.each do |concert| %>
             <div class="col-sm-6">
-              
+             
               <a href="#" class="thumbnail">
-                <img src="assets/img/work_1.jpg" alt="...">
+                <img src="../assets/img/<%= concert.bands.first.image %>" alt="...">
                 <div class="caption hidden">
                   <h5>Project Title</h5>
                   <ul class="rating">
@@ -119,68 +102,12 @@
                   </p>
                 </div>
               </a>
-
-            </div>
-            <div class="col-sm-6">
               
-              <a href="#" class="thumbnail">
-                <img src="assets/img/work_2.jpg" alt="...">
-                <div class="caption hidden">
-                  <h5>Project Title</h5>
-                  <ul class="rating">
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                  </ul>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  </p>
-                </div>
-              </a>
-
             </div>
-            <div class="col-sm-6">
-              
-              <a href="#" class="thumbnail">
-                <img src="assets/img/work_3.jpg" alt="...">
-                <div class="caption hidden">
-                  <h5>Project Title</h5>
-                  <ul class="rating">
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                  </ul>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  </p>
-                </div>
-              </a>
-
-            </div>
-            <div class="col-sm-6">
-              
-              <a href="#" class="thumbnail">
-                <img src="assets/img/work_4.jpg" alt="...">
-                <div class="caption hidden">
-                  <h5>Project Title</h5>
-                  <ul class="rating">
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                  </ul>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  </p>
-                </div>
-              </a>
-
-            </div>
+            <% end %>
+            <% else %>
+            <p>no upcoming shows</p>
+              <% end %>
           </div> <!-- / .row -->
 
         </div>
@@ -189,11 +116,10 @@
   width="450"
   height="450"
   frameborder="0" style="border:0"
-  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAp05DzIOohtfOzEts1W1eLV_aI95XlJXc
+  src="https://www.google.com/maps/embed/v1/place?key=<%=ENV['GOOGLE_API_KEY']%>
     &q=<%= @venue.name%>,Chicago+IL" allowfullscreen>
 </iframe>
       </div> <!-- / .row -->
     </div> <!-- / .container -->
 
 
-    

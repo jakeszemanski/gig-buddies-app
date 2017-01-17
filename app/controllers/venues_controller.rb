@@ -19,6 +19,7 @@ class VenuesController < ApplicationController
 
   def show
     @venue = Venue.find_by(id: params[:id])
+    @concerts = Concert.where(venue_id: @venue.id).order('date')
   end
 
   def edit
