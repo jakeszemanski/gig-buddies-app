@@ -60,12 +60,33 @@ class TicketsController < ApplicationController
     @ticket.buyer_id = params[:buyer_id]
     @ticket.status = params[:status]
     @ticket.save
+    
+    send_message("+14125277195", "test")
+    
+
     flash[:message] = 'ticket successfully updated!'
     redirect_to '/tickets'
+
   end
 
   def destroy
 
-  end 
+  end
+
+    private
+
+      def send_message(phone_number, alert_message)
+
+        @sid = ENV["TWILIO_ACCOUNT_SID"] 
+        @token = ENV['TWILIO_AUTH_TOKEN']
+        @client = Twilio::REST::Client.new @sid, @token 
+        @twilio_number = "+14123019602"
+        message = @client.messages.create(
+          :from => @twilio_number,
+          :to => phone_number,
+          :body => alert_message
+        )
+        puts message.to
+      end
 
 end
