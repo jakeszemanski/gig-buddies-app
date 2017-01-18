@@ -25,7 +25,11 @@ class TicketsController < ApplicationController
   end
 
   def new
-    @concerts = Concert.all
+    if params[:concert_id]
+      @concerts = Concert.find_by(id: params[:concert_id])
+    else
+      @concerts = Concert.all
+    end
     render 'new.html.erb'
   end
 

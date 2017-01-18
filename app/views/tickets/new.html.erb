@@ -1,10 +1,18 @@
 <h1>Sell a ticket!</h1>
 
 <%= form_tag '/tickets', method: :post do %>
+  <% if params[:concert_id] %>
+  <h2><%= @concerts.bands.first.name %></h2>
+  <h2><%= @concerts.date %> </h2>
+    <div class="form-group">
+    <%= hidden_field_tag :concert, @concerts.id %>
+    </div>
+  <% else %>
   <div>
     <%= label_tag :concert %>
-    <%= select_tag :concert, options_for_select(@concerts.collect{ |u| [u.date  , u.id] }) , multiple: false, include_blank: true %>
+    <%= select_tag :concert, options_for_select(@concerts.collect{ |u| [u.date_and_headliner, u.id] }) , multiple: false, include_blank: true %>
   </div>
+  <% end %>
 
    <div class="form-group">
   <%= label_tag :compensation, 'Enter desired compensation' %>

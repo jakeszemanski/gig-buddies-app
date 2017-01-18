@@ -7,4 +7,5 @@ class Ticket < ApplicationRecord
   has_many :bands, through: :concerts
 
  
+ 
 end
