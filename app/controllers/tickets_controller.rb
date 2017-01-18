@@ -77,10 +77,8 @@ class TicketsController < ApplicationController
 
       def send_message(phone_number, alert_message)
 
-        @sid = ENV["TWILIO_ACCOUNT_SID"] 
-        @token = ENV['TWILIO_AUTH_TOKEN']
-        @client = Twilio::REST::Client.new @sid, @token 
-        @twilio_number = "+14123019602"
+        @client = Twilio::REST::Client.new ENV["TWILIO_ACCOUNT_SID"], ENV['TWILIO_AUTH_TOKEN'] 
+        @twilio_number = ENV['TWILIO_NUMBER']
         message = @client.messages.create(
           :from => @twilio_number,
           :to => phone_number,
