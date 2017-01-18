@@ -12,4 +12,8 @@ class Concert < ApplicationRecord
     friendly_date = date.strftime("%A, %b %d")
     friendly_date
   end
+
+  def date_and_headliner
+    return bands.first.name + ' ' + date.strftime("%A, %b %d") + " at " + Venue.find_by(id: venue_id).name
+  end
 end

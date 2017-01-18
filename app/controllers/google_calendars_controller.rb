@@ -1,7 +1,7 @@
 class GoogleCalendarsController < ApplicationController
 
   def create
-    Unirest.post('https://www.googleapis.com/calendar/v3/calendars/primary/events?key=AIzaSyAp05DzIOohtfOzEts1W1eLV_aI95XlJXc', 
+    Unirest.post("https://www.googleapis.com/calendar/v3/calendars/primary/events?key=#{ENV['GOOGLE_API_KEYd']}", 
       parameters: 
       {     summary: "concert name",
             description: "bands playing",

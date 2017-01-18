@@ -89,15 +89,18 @@
               <tr>
                 <td>Genres:</td>
                 <td> <%= @genres.join(', ') %></td>
-               
               </tr>
               <tr>
-                <td>Seller:</td>
-                <td></td>
+                <td>Available Tickets:</td>
+                <td><%= @concert.tickets %></td>
               </tr>
               <tr>
-                <td>Desired Compensation:</td>
-                <td> insert</td>
+                <td>Buy Tickets:</td>
+                <td><a href="/tickets/?concert=<%= @concert.id%>"><button>Buy ticket</button></a></td>
+              </tr>
+              <tr>
+                <td>Sell Tickets:</td>
+                <td><a href="/tickets/new?concert_id=<%= @concert.id%>"><button>List ticket</button></a></td>
               </tr>
               <tr>
                 <td><%= @concert.venue.name %>'s will call policy:</td>
@@ -217,6 +220,8 @@
               </div>
             <% end %>
           <% end %>
+
+<a href="/tickets/new?concert_id=<%= @concert.id%>"><button>List ticket</button></a>
 
 
 
