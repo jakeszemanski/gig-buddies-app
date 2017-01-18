@@ -53,5 +53,7 @@ Rails.application.routes.draw do
 
   post '/google_calendars' => 'google_calendars#create'
 
+  get '/notifications' => 'notifications#sendmessage'
+
 
 end
