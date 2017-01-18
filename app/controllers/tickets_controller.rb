@@ -61,7 +61,10 @@ class TicketsController < ApplicationController
     @ticket.status = params[:status]
     @ticket.save
     
-    send_message("+14125277195", "test")
+    @seller = User.find_by(id: params[:seller_id])
+    @concert = Concert.find_by(id: @ticket.concert_id)
+
+    send_message(@seller.phone, "A user has bought your ticket to the #{@concert.bands.first.name} show")
     
 
     flash[:message] = 'ticket successfully updated!'
