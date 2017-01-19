@@ -28,7 +28,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'unirest'
-gem 'google-api-client'
+
 
 gem 'faker'
 
@@ -54,3 +54,8 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'dotenv-rails'
 gem 'twilio-ruby'
+gem 'google-api-client', require: 'google/apis/calendar_v3'
+
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem 'googleauth'

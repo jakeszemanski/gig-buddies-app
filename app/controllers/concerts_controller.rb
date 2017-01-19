@@ -1,4 +1,6 @@
 class ConcertsController < ApplicationController
+require 'google/apis/calendar_v3'
+
   def index
     if params[:calendar]
       @concerts = current_user.concerts.order("date")
@@ -68,6 +70,7 @@ class ConcertsController < ApplicationController
 
 
   def add_to_calendar
+    add_to_google_calendar
     @event = UserConcert.new(user_id: current_user.id, concert_id: params[concert_id])
   end
 
@@ -75,4 +78,25 @@ class ConcertsController < ApplicationController
     @events = UserConcert.where(user_id: current_user.id)
     render 'calendar.html.erb'
   end
+
+
+    private
+
+      def add_to_google_calendar
+        event = Google::Apis::CalendarV3::Event.new(
+        summary: 'Google I/O 2015',
+        location: '800 Howard St., San Francisco, CA 94103',
+        description: 'A chance to hear more about Googles developer products.',
+        start: {
+          date_time: '2017-01-28T09:00:00-07:00',
+          time_zone: 'America/Los_Angeles',
+        },
+        end: {
+          date_time: '2015-05-28T17:00:00-07:00',
+          time_zone: 'America/Los_Angeles',
+        },
+      )
+       result = client.insert_event('primary', event)
+       puts "Event created: #{result.html_link}"
+     end
 end
