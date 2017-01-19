@@ -4,7 +4,7 @@
           
           <!-- Main image -->
           <a href="/bands/<%= @concert.bands.first.id%>" data-lightbox="...">
-            <img src="../assets/img/<%= @concert.bands.first.image %>" alt="..." class="img-responsive">
+            <img src="    <%= @picture %>" alt="..." class="img-responsive">
           </a>
 
           <!-- Comments section -->
@@ -92,7 +92,7 @@
               </tr>
               <tr>
                 <td>Available Tickets:</td>
-                <td><%= @concert.tickets %></td>
+                <td><%= Ticket.where(id: @concert.id).count %></td>
               </tr>
               <tr>
                 <td>Buy Tickets:</td>
@@ -189,7 +189,7 @@
             <div class="col-sm-6">
               
               <a href="#" class="thumbnail">
-                <img src="assets/img/work_4.jpg" alt="...">
+                <img src="  " alt="...">
                 <div class="caption hidden">
                   <h5>Project Title</h5>
                   <ul class="rating">
@@ -211,20 +211,6 @@
         </div>
       </div> <!-- / .row -->
     </div> <!-- / .container -->
-
-  
-<% if current_user %>
-            <%= form_tag '/google_calendars', method: :post do %>
-              <div>
-                <%= submit_tag 'Add to google calendar' %>
-              </div>
-            <% end %>
-          <% end %>
-
-<a href="/tickets/new?concert_id=<%= @concert.id%>"><button>List ticket</button></a>
-
-
-
 
 
   

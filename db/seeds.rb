@@ -38,7 +38,6 @@ band_description = {'Twin Peaks' => 'As rewarding as it is to discover young art
 bands.each do |band|
   artist = Band.new(
     name: band,
-    image: band_images.sample,
     description: band_description[band])
   artist.save
 end
@@ -57,11 +56,11 @@ sites.each do |site|
 end
 @venues = Venue.all
 
-dates = ['2017-02-12', '2017-01-21', '2017-02-05', '2017-01-07', '2017-04-20', '2017-03-04', '2017-06-26']
+dates = ['2017-02-12', '2017-02-21', '2017-02-05', '2017-01-30', '2017-04-20', '2017-03-04', '2017-06-26', '2017-03-22', '2017-02-15', '2017-02-17']
 doors = ["5:30pm", "6:00pm", "6:30pm", "7:00pm"]
 
 times = ['7:00pm', "7:30pm", '8:00pm', "8:30pm", '9:00pm']
-7.times do
+20.times do
   show = Concert.new(
     doors: doors.sample,
     show: times.sample,
@@ -74,11 +73,11 @@ end
 
 
 
-compensate = ['a beer', 'free!', 'ticket to another show', 'Venmo me $5', 'A ride to the show']
+compensate = ['a beer', 'free!', 'ticket to another show', 'Venmo me $5', 'A ride to the show', 'future considerations', 'Venmo $30', '$15 or best offer', 'offer something', 'A show poster', 'some merch']
 status = ['available', 'unavailable']
 compensate.each do |comp|
   tix = Ticket.new(
-    status: status.sample,
+    status: 'available',
     seller_id: @users.sample.id,
     concert_id: @concerts.sample.id,
     buyer_id: @users.sample.id,
@@ -99,7 +98,7 @@ rev = [
 
 rating = [3, 5, 4, 2, 4, 5, 1, 3]
 @venues.each do |venue|
-  3.times do
+  20.times do
     review = Review.new(
       rating: rating.sample,
       description: rev.sample,

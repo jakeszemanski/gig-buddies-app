@@ -37,8 +37,16 @@
           
           <a href="/concerts/<%= concert.id %>" class="thumbnail">
             <% if concert.bands.first %>
-            <img src="assets/img/<%= concert.bands.first.image %>" alt="...">
-            <% end %>
+           <% @headliner = concert.bands.first.name %>
+           <% @spotify = Unirest.get("https://api.spotify.com/v1/search",
+             parameters: {
+        q: @headliner,
+        type: "artist"}).body %>
+       <% @picture = @spotify['artists']['items'][0]['images'][0]['url'] %>
+        <% end %>
+            <img src="<%= @picture %>" alt="...">
+            
+
             <div class="caption">
              <% concert.bands.each do |band| %>
               <h5><%= band.name %></h5>

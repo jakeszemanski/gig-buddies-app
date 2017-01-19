@@ -10,6 +10,7 @@ require 'google/apis/calendar_v3'
       @concerts = Concert.order("date").all
       @venues = Venue.all
     end
+
     render 'index.html.erb'
   end
   
@@ -22,6 +23,7 @@ require 'google/apis/calendar_v3'
         type: "artist"}).body
     @genres = @spotify['artists']['items'][0]['genres']
     @uri = @spotify['artists']['items'][0]['uri']
+    @picture = @spotify['artists']['items'][0]['images'][0]['url']
 
     render 'show.html.erb'
   end
