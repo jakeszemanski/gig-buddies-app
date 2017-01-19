@@ -56,11 +56,6 @@ require 'fileutils'
 service = Google::Apis::CalendarV3::CalendarService.new
 service.client_options.application_name = APPLICATION_NAME
 service.authorization = authorize
-
-    # client = Google::Auth::ClientId.from_file('/Users/the_mist13/Actualize/gig-buddies-app/client_secret.json')
-        # client = Google::APIClient.new 
-    # client.authorization.client_id = "263765253371-a8g8582nmjrusj8bgb43cjpadijjqq5o.apps.googleusercontent.com"
-    # client.authorization.client_secret = "VkLZSRyn8j2ufFJbedsuTQpG"
         event = Google::Apis::CalendarV3::Event.new({
                         summary: 'Google I/O 2015',
                         location: '800 Howard St., San Francisco, CA 94103',
