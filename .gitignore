@@ -18,7 +18,7 @@
 !/tmp/.keep
 .env
 
-/Users/the_mist13/Actualize/gig-buddies-app/client_secret.json
+/client_secret.json
 
 # Ignore Byebug command history file.
 .byebug_history
