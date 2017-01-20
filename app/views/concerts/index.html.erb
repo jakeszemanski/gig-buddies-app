@@ -10,13 +10,13 @@
                 </a>
               </li>
               <li role="presentation">
-                <a href="#" role="tab" data-toggle="tab" data-filter=".category_1">
-                  <span class="hidden-xs">Category</span> #1
+                <a href="/concerts?calendar=<%= current_user.id%>" role="tab" data-toggle="tab" data-filter=".category_1">
+                  <span class="hidden-xs">My Calendar</span>
                 </a>
               </li>
               <li role="presentation">
                 <a href="#" role="tab" data-toggle="tab" data-filter=".category_2">
-                  <span class="hidden-xs">Category</span> #2
+                  <span class="hidden-xs">This Week</span>
                 </a>
               </li>
               <li role="presentation">
@@ -28,7 +28,35 @@
           
         </div>
       </div> <!-- / .row -->
+     <div class="row isotope-container" ng-repeat="concert in concerts">           
+            <div class="col-sm-4 col-lg-3 isotope-item category_1">
+                <% @concert = {{}}
+              <a href="/concerts/{{ concert.id }}" class="thumbnail">
+               <% @headliner = concert.bands.first.name %>
+               <% @spotify = Unirest.get("https://api.spotify.com/v1/search",
+                 parameters: {
+            q: @headliner,
+            type: "artist"}).body %>
+           <% @picture = @spotify['artists']['items'][0]['images'][0]['url'] %>
+            <% end %>
+                <img src="<%= @picture %>" alt="...">
+                
 
+                <div class="caption">
+                 <% concert.bands.each do |band| %>
+                  <h5><%= band.name %></h5>
+                   <% end %>
+                 
+                  <p>Venue: <%= concert.venue.name %></p>
+                  <p><%= concert.friendly_date %></p>
+                  <p>Show: <%= concert.show %></p>
+                </div>
+              </a>
+
+
+            </div>
+           
+              <% end %>
 
       <div class="row isotope-container">
       <% @concerts.each do |concert| %>
@@ -66,3 +94,5 @@
         
       </div> <!-- / .row -->
     </div> <!-- / .container -->
+
+    <p><%= @events %></p>
