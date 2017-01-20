@@ -1,7 +1,16 @@
 class ConcertsController < ApplicationController
-require 'google/apis/calendar_v3'
-
+  # require 'google/apis/calendar_v3'
+  # require 'bandsintown'
+ 
   def index
+  # Bandsintown.app_id = 'gig_buddies'
+    # Bandsintown.app_id = 'YOUR_APP_ID'
+    # artist = Bandsintown::Artist.new({
+    #   :name => "The Killers"
+    # })
+    # @events = artist.events
+
+
     if params[:calendar]
       @concerts = current_user.concerts.order("date")
     elsif params[:venue_id]

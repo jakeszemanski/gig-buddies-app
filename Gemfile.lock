@@ -40,6 +40,10 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.3.8)
     arel (7.1.4)
+    bandsintown (0.3.1)
+      activesupport (>= 2.0.2)
+      json (>= 1.1.3)
+      rest-client (>= 1.5.0)
     bcrypt (3.1.11)
     builder (3.2.3)
     byebug (9.0.6)
@@ -228,6 +232,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bandsintown
   bcrypt (~> 3.1.7)
   byebug
   coffee-rails (~> 4.2)

@@ -15,7 +15,7 @@ require 'fileutils'
   def create
     @event = UserConcert.new(user_id: current_user.id, concert_id: params[:concert_id])
     @event.save
-    add_to_google_calendar
+    
     redirect_to "/concerts?calendar=#{current_user.id}"
   end
 

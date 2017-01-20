@@ -55,5 +55,12 @@ Rails.application.routes.draw do
 
   get '/notifications' => 'notifications#sendmessage'
 
+  namespace :api do
+    namespace :v1 do
+      get '/concerts' => 'concerts#index'
+      get 'user_concerts' => 'user_concerts#index'
+    end
+  end
+
 
 end
