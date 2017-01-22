@@ -1,98 +1,48 @@
-<div class="container">
-        <div class="row">
-          <div class="col-sm-12">
-
-              <!-- Nav tabs -->
-              <ul class="nav nav-tabs gallery__nav" role="tablist">
-                <li role="presentation" class="active">
-                  <a href="#" role="tab" data-toggle="tab" data-filter="*">
-                  All
-                </a>
-              </li>
-              <li role="presentation">
-                <a href="/concerts?calendar=<%= current_user.id%>" role="tab" data-toggle="tab" data-filter=".category_1">
-                  <span class="hidden-xs">My Calendar</span>
-                </a>
-              </li>
-              <li role="presentation">
-                <a href="#" role="tab" data-toggle="tab" data-filter=".category_2">
-                  <span class="hidden-xs">This Week</span>
-                </a>
-              </li>
-              <li role="presentation">
-                <a href="#" role="tab" data-toggle="tab" data-filter=".category_3">
-                  <span class="hidden-xs">Category</span> #3
-                </a>
-              </li>
-            </ul>
-          
-        </div>
-      </div> <!-- / .row -->
-     <div class="row isotope-container" ng-repeat="concert in concerts">           
-            <div class="col-sm-4 col-lg-3 isotope-item category_1">
-                <% @concert = {{}}
-              <a href="/concerts/{{ concert.id }}" class="thumbnail">
-               <% @headliner = concert.bands.first.name %>
-               <% @spotify = Unirest.get("https://api.spotify.com/v1/search",
-                 parameters: {
-            q: @headliner,
-            type: "artist"}).body %>
-           <% @picture = @spotify['artists']['items'][0]['images'][0]['url'] %>
-            <% end %>
-                <img src="<%= @picture %>" alt="...">
-                
-
-                <div class="caption">
-                 <% concert.bands.each do |band| %>
-                  <h5><%= band.name %></h5>
-                   <% end %>
-                 
-                  <p>Venue: <%= concert.venue.name %></p>
-                  <p><%= concert.friendly_date %></p>
-                  <p>Show: <%= concert.show %></p>
-                </div>
+<div ng-app="app">
+  <div ng-controller="concertsCtrl" ng-init="setup()">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+                  <!-- Nav tabs -->
+          <ul class="nav nav-tabs gallery__nav" role="tablist">
+            <li role="presentation" class="active">
+              <a href="#" role="tab" data-toggle="tab" data-filter="*">
+              All
               </a>
-
-
-            </div>
-           
-              <% end %>
-
-      <div class="row isotope-container">
-      <% @concerts.each do |concert| %>
-       
-        <div class="col-sm-4 col-lg-3 isotope-item category_1">
-          
-          <a href="/concerts/<%= concert.id %>" class="thumbnail">
-            <% if concert.bands.first %>
-           <% @headliner = concert.bands.first.name %>
-           <% @spotify = Unirest.get("https://api.spotify.com/v1/search",
-             parameters: {
-        q: @headliner,
-        type: "artist"}).body %>
-       <% @picture = @spotify['artists']['items'][0]['images'][0]['url'] %>
-        <% end %>
-            <img src="<%= @picture %>" alt="...">
-            
-
-            <div class="caption">
-             <% concert.bands.each do |band| %>
-              <h5><%= band.name %></h5>
-               <% end %>
-             
-              <p>Venue: <%= concert.venue.name %></p>
-              <p><%= concert.friendly_date %></p>
-              <p>Show: <%= concert.show %></p>
-            </div>
-          </a>
-
-
+            </li>
+            <li role="presentation">
+              <a href="#" role="tab" data-toggle="tab" data-filter=".category_1">
+              <span class="hidden-xs">My Calendar</span>
+              </a>
+            </li>
+            <li role="presentation">
+              <a href="#" role="tab" data-toggle="tab" data-filter=".category_2">
+                <span class="hidden-xs">This Week</span>
+              </a>
+            </li>
+            <li role="presentation">
+              <a href="#" role="tab" data-toggle="tab" data-filter=".category_3">
+              <span class="hidden-xs">Category</span> #3
+              </a>
+            </li>
+          </ul> 
         </div>
-       
-          <% end %>
-        
-        
       </div> <!-- / .row -->
-    </div> <!-- / .container -->
-
-    <p><%= @events %></p>
+        <div class="row isotope-container" >  
+          <div class="col-sm-4 col-lg-3 isotope-item category_1" ng-repeat="concert in concerts |orderBy:orderAttribute:isOrderDescending">
+            <a href="/concerts/{{concert.id}}" class="thumbnail">
+            <img src="{{concert.bands[0].image }}" alt="...">
+            <div class="caption">
+              <h5 ng-repeat="band in concert.bands"> {{ band.name }}</h5>
+              <p>Venue: {{ concert.venue.name }}</p>
+              <p>{{ concert.friendly_date }}</p>
+              <p>Show: {{ concert.show }}</p>
+            </div>
+            </a>
+          </div>
+        </div> 
+      </div>
+    </div> 
+  </div> <!-- / .row -->
+</div> <!-- / .container -->
+  

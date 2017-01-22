@@ -17,5 +17,6 @@
       }
       $scope.orderAttribute = inputAttribute;
     };
-  });
-});
+  }
+  );
+})();
