@@ -6,4 +6,5 @@ json.array! @concerts.each do |concert|
   json.venueId concert.venue_id
   json.bands concert.bands
   json.tickets concert.tickets
+  json.venue concert.venue
 end

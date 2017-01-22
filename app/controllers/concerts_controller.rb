@@ -9,6 +9,15 @@ class ConcertsController < ApplicationController
     #   :name => "The Killers"
     # })
     # @events = artist.events
+    @bands = Band.all
+    @bands.each do |band|
+      new_image = Unirest.get("https://api.spotify.com/v1/search",
+             parameters: {
+               q: band.name,
+               type: "artist"}).body
+      band.update(image: new_image['artists']['items'][0]['images'][0]['url'])
+    end
+
 
 
     if params[:calendar]

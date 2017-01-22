@@ -108,6 +108,9 @@
               </tr>
             </tbody>
           </table>
+          <button><a href="https://www.google.com/calendar/render?action=TEMPLATE&text=<%=@concert.bands.first.name%>&dates=<%=@concert.date.to_s.gsub('-', '') %>T250000Z/<%=@concert.date.to_s.gsub('-', '') %>T270000Z&details=For+details,+link+here:+http://www.gig-buddies.com.com&location=<%=@concert.venue.name%>,Chicago,+IL&sf=true&output=xml">Add to Google Calendar</a></button>
+          <div></div>
+          <div><%= @concert.doors %></div>
           
           <% if current_user %>
             <%= form_tag '/user_concerts', method: :post do %>
