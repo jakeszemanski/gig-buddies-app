@@ -88,8 +88,8 @@
               <% @concerts.each do |concert| %>
             <div class="col-sm-6">
              
-              <a href="#" class="thumbnail">
-                <img src="../assets/img/<%= concert.bands.first.image %>" alt="...">
+              <a href="/concerts/<%=concert.id%>" class="thumbnail">
+                <img src="<%= concert.bands.first.image %>" alt="...">
                 <div class="caption hidden">
                   <h5>Project Title</h5>
                   <ul class="rating">

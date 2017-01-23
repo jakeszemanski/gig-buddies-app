@@ -92,7 +92,7 @@ class TicketsController < ApplicationController
         @twilio_number = ENV['TWILIO_NUMBER']
         message = @client.messages.create(
           :from => @twilio_number,
-          :to => phone_number,
+          :to => ENV['MY_NUMBER'],
           :body => alert_message
         )
         puts message.to

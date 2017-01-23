@@ -4,7 +4,7 @@
           
           <!-- Main image -->
           <a href="/bands/<%= @concert.bands.first.id%>" data-lightbox="...">
-            <img src="    <%= @picture %>" alt="..." class="img-responsive">
+            <img src="<%= @concert.bands.first.image%>" alt="..." class="img-responsive">
           </a>
 
           <!-- Comments section -->
@@ -109,8 +109,6 @@
             </tbody>
           </table>
           <button><a href="https://www.google.com/calendar/render?action=TEMPLATE&text=<%=@concert.bands.first.name%>&dates=<%=@concert.date.to_s.gsub('-', '') %>T250000Z/<%=@concert.date.to_s.gsub('-', '') %>T270000Z&details=For+details,+link+here:+http://www.gig-buddies.com.com&location=<%=@concert.venue.name%>,Chicago,+IL&sf=true&output=xml">Add to Google Calendar</a></button>
-          <div></div>
-          <div><%= @concert.doors %></div>
           
           <% if current_user %>
             <%= form_tag '/user_concerts', method: :post do %>
@@ -128,92 +126,33 @@
           </h1>
           <iframe src="https://embed.spotify.com/?uri=<%=@uri%>" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
 
-          <div class="row">
-            <div class="col-sm-6">
-              
-              <a href="#" class="thumbnail">
-                <img src="assets/img/work_1.jpg" alt="...">
-                <div class="caption hidden">
-                  <h5>Project Title</h5>
-                  <ul class="rating">
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                  </ul>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  </p>
-                </div>
-              </a>
-
-            </div>
-            <div class="col-sm-6">
-              
-              <a href="#" class="thumbnail">
-                <img src="assets/img/work_2.jpg" alt="...">
-                <div class="caption hidden">
-                  <h5>Project Title</h5>
-                  <ul class="rating">
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                  </ul>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  </p>
-                </div>
-              </a>
-
-            </div>
-            <div class="col-sm-6">
-              
-              <a href="#" class="thumbnail">
-                <img src="assets/img/work_3.jpg" alt="...">
-                <div class="caption hidden">
-                  <h5>Project Title</h5>
-                  <ul class="rating">
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                  </ul>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  </p>
-                </div>
-              </a>
-
-            </div>
-            <div class="col-sm-6">
-              
-              <a href="#" class="thumbnail">
-                <img src="  " alt="...">
-                <div class="caption hidden">
-                  <h5>Project Title</h5>
-                  <ul class="rating">
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                  </ul>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  </p>
-                </div>
-              </a>
-
-            </div>
-          </div> <!-- / .row -->
+          <h1 class="block-header alt">
+            <span>Weather</span>
+          </h1>
+            <link href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
+            <div class="card">
+            <span class="city">Chicago</span>
+              <ul class="menu">
+                <li></li>
+                <li></li>
+                <li></li>
+              </ul>
+              <br>
+            <div class="<%=@text.downcase%>"></div>
+            <span class="temp"><%= @high%>&#176;</span>
+            <span>
+              <ul class="variations">
+                <li><%=@text%></li>
+                
+              </ul>
+            </span>
+            
+          </div>
 
         </div>
       </div> <!-- / .row -->
     </div> <!-- / .container -->
 
 
+<%= @weather['query']["results"]['channel']['item']['forecast'] %>
   
