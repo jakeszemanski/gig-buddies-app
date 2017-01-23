@@ -128,6 +128,7 @@
 
           <h1 class="block-header alt">
             <span>Weather</span>
+        <% if @weather['query']["results"]['channel']['item']['forecast'].find { |h| h['date'] == @weather_date } %>
           </h1>
             <link href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
             <div class="card">
@@ -148,6 +149,9 @@
             </span>
             
           </div>
+          <% else %>
+          <h3>Day of show weather currently unavailable</h3>
+          <% end %>
 
         </div>
       </div> <!-- / .row -->
