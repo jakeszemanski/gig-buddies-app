@@ -1,3 +1,91 @@
 // Place all the styles related to the Concerts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.clear {
+  clear:both;
+}
+.card {
+  width:25em;
+  min-height:22.5em;
+  background: #fff;
+  margin:2em auto;
+  border-radius: .2em;
+  padding-top:1em;
+  padding-left: 1em;
+  padding-right:1em;
+}
+.city {
+  font-family: Roboto;
+  font-weight: 300;
+  font-size: 1.8em;
+  color:#5b5b5b;
+}
+.menu {
+  float: right;
+  font-family: Roboto;
+  font-size:.5em;
+  color:#5b5b5b;
+  margin-top:-.09em;
+  margin-right:-2em;
+  list-style:square;
+}
+.clear {
+  width:4em;
+  height:4em;
+  border-radius: 2.5em;
+  background: #FBD80A;
+  margin-top: 1em;
+}
+.temp {
+  float:right;
+  font-family:Roboto;
+  font-weight: 300;
+  font-size: 8.5em;
+  margin-top:-.75em;
+  color:#5b5b5b;
+}
+.variations {
+  font-family:Roboto;
+  font-wight:300;
+  color:#8c8c8c;
+  list-style:none;
+  margin-left:-2em;
+}
+.mph {
+   font-size:.8em;
+}
+.speed:before {
+  content:url('http://i.imgur.com/luN0Jmq.png');
+}
+.forecast {
+  width:100%;
+  margin:0 auto;
+}
+.day {
+  display:block;
+  width: 21.5%;
+  height:9em;
+  float:left;
+  margin: 0 .375em .5em;
+  text-align:center;
+  font-family:Roboto;
+  color: #5b5b5b;
+  border-right:.1em solid #d9d9d9;
+  line-height: 2;
+}
+.fri {
+  border-right:none;
+}
+.highTemp {
+  font-weight:bold;
+}
+.lowTemp {
+  color: #8c8c8c;
+}
+.rain {
+  content: url('http://i.imgur.com/0PIYfV8.png');
+}
+.sunny {
+  content: url('http://i.imgur.com/RdBr2SD.png');
+}

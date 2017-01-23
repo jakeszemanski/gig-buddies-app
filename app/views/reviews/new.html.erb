@@ -2,9 +2,9 @@
 
 <%= form_tag '/reviews', method: :post do %>
 
-  <div>
+  <div class="form-group">
     <%= label_tag :venue %>
-    <%= select_tag :venue, options_for_select(@venues.collect{ |u| [u.name, u.id] }), multiple: false, include_blank: true %>
+    <%= select_tag :venue, options_for_select(@venues.collect{ |u| [u.name, u.id] }), multiple: false, include_blank: true, class: 'form-control' %>
  </div>
   <div class="form-group">
   <%= label_tag :rating, 'Enter a rating (1-10): ' %>

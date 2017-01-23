@@ -10,7 +10,6 @@ class Concert < ApplicationRecord
 
   def friendly_date
     friendly_date = date.strftime("%A, %b %d")
-    friendly_date
   end
 
   def date_and_headliner
