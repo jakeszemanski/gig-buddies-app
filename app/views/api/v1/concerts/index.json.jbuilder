@@ -7,4 +7,6 @@ json.array! @concerts.each do |concert|
   json.bands concert.bands
   json.tickets concert.tickets
   json.venue concert.venue
+  json.friendlyDate concert.friendly_date
+  json.onMyCalendar current_user.concerts.include? concert
 end

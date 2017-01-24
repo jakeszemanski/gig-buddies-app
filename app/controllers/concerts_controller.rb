@@ -43,9 +43,11 @@ class ConcertsController < ApplicationController
     @uri = @spotify['artists']['items'][0]['uri']
     @weather_date = @concert.date.strftime("%e %b %Y")
     @weather = Unirest.get("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22chicago%2C%20il%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys").body
-    if @weather['query']["results"]['channel']['item']['forecast'].find { |h| h['date'] == @weather_date }
-      @high= @weather['query']["results"]['channel']['item']['forecast'].find { |h| h['date'] == @weather_date }['high']
-      @text = @weather['query']["results"]['channel']['item']['forecast'].find { |h| h['date'] == @weather_date }['text']
+    if @weather['query']['results']
+      if @weather['query']['results']['channel']['item']['forecast'].find { |h| h['date'] == @weather_date }
+        @high= @weather['query']["results"]['channel']['item']['forecast'].find { |h| h['date'] == @weather_date }['high']
+        @text = @weather['query']["results"]['channel']['item']['forecast'].find { |h| h['date'] == @weather_date }['text']
+      end
     end
 
     render 'show.html.erb'
