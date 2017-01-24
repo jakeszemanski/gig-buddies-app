@@ -6,4 +6,5 @@ class User < ApplicationRecord
   has_many :sold_tickets, class_name: :Ticket, foreign_key: :seller_id
   has_many :user_concerts
   has_many :concerts, through: :user_concerts
+  has_many :bands, through: :user_bands
 end

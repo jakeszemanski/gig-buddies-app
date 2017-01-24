@@ -19,8 +19,8 @@
     <% hidden_field_tag :venue, @venue.id %>
   </div>
   <div class="form-group">
-    <%= label_tag :rating, 'Enter a rating (1-5): ' %>
-    <%= text_field_tag :rating, '', class: 'form-control' %>
+  <%= label_tag :rating, 'Enter a rating: ' %>
+  <%= select_tag :rating, options_for_select(1..5), multipe: false, class: 'form-control' %>
   </div>
   <div class="form-group">
     <%= label_tag :description, 'Enter  a description' %>
