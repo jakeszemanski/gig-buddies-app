@@ -59,6 +59,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       get '/concerts' => 'concerts#index'
       get 'user_concerts' => 'user_concerts#index'
+      post 'reviews' => 'reviews#create'
     end
   end
 

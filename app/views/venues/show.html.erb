@@ -7,23 +7,33 @@
             <img src="../assets/img/<%= @venue.image %>" alt="..." class="img-responsive">
           </a>
 
-          <!-- Comments section -->
+
+<% if current_user %>
+ <h1 class="block-header alt">
+            <span>Reviews</span>
+          </h1>
+
+  <%= form_tag '/reviews', method: :post do %>
+
+  <div class="form-group">
+    <% hidden_field_tag :venue, @venue.id %>
+  </div>
+  <div class="form-group">
+    <%= label_tag :rating, 'Enter a rating (1-5): ' %>
+    <%= text_field_tag :rating, '', class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= label_tag :description, 'Enter  a description' %>
+    <%= text_field_tag :description, '', class: 'form-control' %>
+  </div>
+  <div>
+    <%= submit_tag 'Submit review!' %>
+  </div>
+    <% end %>
+  <% end %>
 
           <div class="comments">
-
             <div class="comments__heading">Reviews</div>
-
-            <!-- New comment form -->
-            <form name="comments__new">
-
-              <div class="form-group">
-                <textarea class="form-control" rows="1" placeholder="Write your comment here"></textarea>
-              </div>
-
-              <button type="submit" class="btn btn-primary" disabled="disabled">Send</button>
-
-            </form>
-
             <!-- List of comments -->
             <div class="comments__list">
               

@@ -7,7 +7,7 @@
     <%= select_tag :venue, options_for_select(@venues.collect{ |u| [u.name, u.id] }), multiple: false, include_blank: true, class: 'form-control' %>
  </div>
   <div class="form-group">
-  <%= label_tag :rating, 'Enter a rating (1-10): ' %>
+  <%= label_tag :rating, 'Enter a rating (1-5): ' %>
   <%= text_field_tag :rating, '', class: 'form-control' %>
   </div>
    <div class="form-group">
@@ -18,6 +18,6 @@
   
   
   <div>
-  <%= submit_tag 'Submit product!' %>
+  <%= submit_tag 'Submit review!' %>
   </div>
   <% end %>
