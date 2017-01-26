@@ -2,10 +2,11 @@
 band_images = ["acoustic.jpg", "acoustic_1.jpg", "acoustic_2.jpg", "rock_1.jpg", "rock_2.jpg", "rock_3.jpg", "xenia_1.jpg", "xenia_2.jpg", "trumpet.jpg"]
 venue_images = {"Thalia Hall" => 'thalia_1.jpg', "Schubas" => 'schubas_1.jpg', "Empty Bottle" => 'empty_bottle_1.jpg', "Double Door" => 'double_door_1.jpg', "Lincoln Hall" => 'lincoln_hall_1.jpg', "House of Blues" => 'house_of_blues_1.jpg'}
 
-names = ['Joe', 'Sam', 'Bobby', 'Trevor', 'Jake', 'John', 'Steve']
+names = ['Joe', 'Sam', 'Bobby', 'Trevor', 'Jake', 'John', 'Steve', 'Ryan', 'Isaac']
+prof_pics = {'Joe' => 'prof1.jpg', 'Sam' => 'prof2.jpg', 'Bobby' => 'prof3.jpg', 'Trevor' => 'prof4.png', 'Jake' => 'prof5.png', 'John' => 'prof6.png', 'Steve' => 'prof7.png', 'Isaac' => 'prof8.jpg', 'Ryan' => 'prof9.jpg'}
 
 names.each do |name|
-  user = User.new(name: name, email: "#{name}@gmail.com", password: 'password' )
+  user = User.new(name: name, email: "#{name}@gmail.com", profile_pic: prof_pics[name], password: 'password' )
   user.save
 end
 @users = User.all
@@ -15,11 +16,11 @@ end
 bands = ['Twin Peaks', 'Lady Lamb', 'Ode', 'Dawes', 'Meat Wave', 'Bleach Party', 'Dowsing', 'Delta Spirit', 'Speedy Ortiz', 'Modern Baseball', 'Local Natives', 'Arcade Fire', 'Free Throw', 'Diners', 'Cake', 'Built to Spill', 'Ben Folds', 'Andrew WK', 'AJJ', 'Tacocat']
 
 band_description = {'Twin Peaks' => 'As rewarding as it is to discover young artists that bring fresh ideas to new music, it’s still immensely satisfying to hear young rock bands with rich knowledge of the genre’s history, trying their damnedest to capture the energy of old records from a bygone era. Barely out of their teens, Chicago band Twin Peaks burst onto the scene in the early ’10s with garage rock so energetic and earnest that critics carted out obvious comparisons to the Kinks, the Stones, and even the Replacements.',
- 'Lady Lamb' => "Lady Lamb the Beekeeper. Aly Spaltro isnt a teenager anymore, but she was when she wrote much of her Lady Lamb the Beekeeper debut, 2013's Ripely Pine. ... Full of nerves and breath and blood, Ripely Pine whipped folk tropes into rock'n'roll rambunctiousness, giving her plenty of space to sound precocious",
+ 'Lady Lamb' => "Lady Lamb the Beekeeper. Aly Spaltro isnt a teenager anymore, but she was when she wrote much of her Lady Lamb the Beekeeper debut, 2013's Ripely Pine. ... Full of nerves and breath and blood, Ripely Pine whipped folk tropes into rock'n'roll rambunctiousness, giving her plenty of space to sound precocious On Ripley Pine, her debut studio album as Lady Lamb the Beekeeper, Spaltro gave her growing fan base something to swoon about. Known for her ferocious live performances, the self-taught multi-instrumentalist who began crafting her multi-layered tracks in the basement of the Maine video rental store where she worked fleshed out her powerful solo compositions with a full band. While Spaltro’s voice is a commanding force on its own, the additional players injected more depth into her heady arrangements. Ripley Pine’s added heft was largely a success, but Spaltro’s abrupt transition from bedroom artist to bandleader bubbled through on a couple of disjointed tracks. After skips this unease and goes straight for self-assured rock ‘n’ roll, ditching “the Beekeeper” portion of her stage name in the process.",
  'Ode' => "Ode is a five piece group made out of sticks, strings and memories that stare at them from the past, like sling shots, drawn back, ready to let go any time something goes wrong. But they stick together, bass or no bass, rent or no rent, slowly but surely they are mistaken for a gypsy ensemble that plays rock'n'roll- punk and Bolero ballads, maintaining that yearning and earning just enough so they don't burst in tears when they are exposed to clean cut jib jab joints and late night star dusting. Ode share their dark poems and dreams through an authentic rock vibe, a familiar, yet new wave of melodious tunes that creates a blend of Chicago rock music.",
  'Dawes' => "So far, Dawes has made its name with a sumptuous folk-rock take on classic Americana. You'd barely know it, though, by listening to the band's fifth and latest full-length, We're All Gonna Die. The rolling, pastoral twang that singer-guitarist Taylor Goldsmith has cultivated since Dawes' debut, 2009's North Hills, is evident in bursts and flashes on the new album, but there's something more sprawling here. Through travelogues, story-songs and a literary quality that's been honed to a cutting edge, Goldsmith and his band have crafted their most ambitious record to date.",
  'Meat Wave' => "Meat Wave have snarled their way into hearts and minds across the Chicago punk rock scene in a relatively short period of time, sounding like a more melodic Hot Snakes cross-bred with the amped up vigor of the Marked Men, all while harboring the brooding attitude of Steve Albini-esque noise-punk. On their SideOneDummy debut, Meat Wave live up to the potential they've exhibited to this point, and deliver in Delusion Moon a memorably sinister heaping of punk rock. ",
- 'Bleach Party' => "As befits a showcase of frontwomen, every single act boasted a powerful set of lady pipes, but Bleach Party’s Meghan MacDuff stood out even among that impressive crowd, and the band’s sound was as wild and fun as her mini beehive. In an episode of Scooby Doo set at a haunted luau, Bleach Party would be the band onstage. Half the time, I didn’t know whether to mosh or do the twist, but one way or another, this surf-punk act is gonna make you move.",
+ 'Bleach Party' => "As befits a showcase of frontwomen, every single act boasted a powerful set of lady pipes, but Bleach Party’s Meghan MacDuff stood out even among that impressive crowd, and the band’s sound was as wild and fun as her mini beehive. In an episode of Scooby Doo set at a haunted luau, Bleach Party would be the band onstage. Half the time, I didn’t know whether to mosh or do the twist, but one way or another, this surf-punk act is gonna make you move. Bleach Party want to believe. On their new single Secret Ships, the Chicago-based garage-rock band vanish into the stars during a mysterious alien abduction set in the late 90s. Lead vocalist Meghan MacDuff sings about joining dozens of astronauts on a journey across the cosmos, only to be jettisoned back down to Earth once they realize she's human. Unlike the most famous songs about starmen and space voyages, Secret Ships doesn't worry too much about paving the future with its sound. The song takes on a retro, surfy edge as MacDuff's vocals jolt from steady verses into a wild, swooping chorus. It's a punk-rock rallying cry for those who keep their eyes fixed on the stars even while their boots stay planted in the mosh pit.",
  'Dowsing' => "During this so-called “emo revival,” few bands have been held up as heroes as often as Chicago, IL’s Dowsing, and perhaps for good reason. After all, their previous LP, 2013’s I Don’t Even Care Anymore, featured the kinds of delicate guitars, plodding drums, and intimate lyrics that defined emo in the ‘90s. Even the record’s hardest hitting parts exhibited a quiet aggression, often the outcome of singer Erik Czaja’s straight, deadpan delivery.",
  'Delta Spirit' => "Nearly a year ago, Delta Spirit told Rolling Stone that they were sick of being pigeonholed in the Americana genre. For the Long Beach, CA rockers’ at the time untitled third album, they planned on incorporating their “love of hip-hop, the ‘90s, progressive production,” finding slow jams “closer to Montell Jordan than Neil Young,” according to multi-instrumentalist Kelly Winrich. His off-the-cuff remark belies how seriously the band takes itself on Delta Spirit. Their new sound augments, with some exceptions, the boisterous twang Delta Spirit established on and has been steadily expanding upon since I Think I’ve Found It in 2006. (Incidentally, the band released its first EP for free when they announced they found the sound they had been looking for on Delta Spirit, further driving home the point.)",
  'Speedy Ortiz' => "Speedy Ortiz’s 2013 debut Major Arcana, Sadie Dupuis crafted her barbed-wire wordplay into wounded callouts of those who had hurt her. Now, she's wielding it like a weapon. Foil Deer, the Massachusetts indie rock traditionalists' sophomore full-length, opens with Dupuis noting on 'Good Neck' that she's good with a knife and she knows when to use it. She takes a lap around the block to cool down—like all good bosses should—before coming back with a world-beating declaration of autonomy on 'Raising the Skate': “I'm chief, not the overthrown/ Captain, not a crony/So if you wanna row, you better have an awfully big boat.'",
@@ -44,7 +45,7 @@ end
 @bands = Band.all
 
 sites = ['Schubas', 'Lincoln Hall', 'Thalia Hall', 'Empty Bottle', 'Double Door', 'House of Blues']
-will_call = ['strict', 'loose']
+will_call = ['show copy of Ticket holders ID at door', 'ticket holder must be present at door to transfer', 'no verification required', 'show ID and the last 4 digits of credit card used to purchased', 'Original ticket holder must call venue and give them name of the new party picking up the ticket']
 sites.each do |site|
   venue = Venue.new(
     name: site,
@@ -56,7 +57,7 @@ sites.each do |site|
 end
 @venues = Venue.all
 
-dates = ['2017-01-30', '2017-02-05', '2017-02-04', '2017-01-31', '2017-01-29', '2017-04-20', '2017-06-26', '2017-03-22', '2017-02-01', '2017-02-02', '2017-02-03']
+dates = ['2017-01-30', '2017-02-05', '2017-01-28', '2017-01-31', '2017-01-29', '2017-04-20', '2017-06-26', '2017-03-22', '2017-02-01', '2017-02-02', '2017-01-29']
 doors = ["5:30pm", "6:00pm", "6:30pm", "7:00pm"]
 
 times = ['7:00pm', "7:30pm", '8:00pm', "8:30pm", '9:00pm']
@@ -98,7 +99,7 @@ rev = [
 
 rating = [3, 5, 4, 2, 4, 5, 1, 3]
 @venues.each do |venue|
-  20.times do
+  12.times do
     review = Review.new(
       rating: rating.sample,
       description: rev.sample,

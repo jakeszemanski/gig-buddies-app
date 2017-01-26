@@ -1,47 +1,42 @@
 <div class="showcase">
-      
-      <div id="showcase-carousel" class="carousel slide" data-ride="carousel">
+  <div id="showcase-carousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#showcase-carousel" data-slide-to="0" class="active"></li>
+      <li data-target="#showcase-carousel" data-slide-to="1"></li>
+      <li data-target="#showcase-carousel" data-slide-to="2"></li>
+  </ol>
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner" role="listbox">
+        <!-- Item 1 -->
+        <div class="item item_1 active">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-6 col-md-8 col-sm-12">
+                <div class="table_centered">
+                  <div class="table_centered__cell">
 
-      
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-          <li data-target="#showcase-carousel" data-slide-to="0" class="active"></li>
-          <li data-target="#showcase-carousel" data-slide-to="1"></li>
-          <li data-target="#showcase-carousel" data-slide-to="2"></li>
-        </ol>
-      
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner" role="listbox">
-
-          <!-- Item 1 -->
-          <div class="item item_1 active">
-            <div class="container">
-              <div class="row">
-                <div class="col-lg-6 col-md-8 col-sm-12">
-                  <div class="table_centered">
-                    <div class="table_centered__cell">
-                      
-                      <!-- Add animation classes to the active slide only -->
-                     
-                      <h1 class="animateDown" data-animation="animateDown">
-                        <% @concert1.bands.each do |band| %>
+                    <!-- Add animation classes to the active slide only -->
+                   
+                    <h1 class="animateDown" data-animation="animateDown">
+                      <% @concert1.bands.each do |band| %>
                         <p><%= band.name %></p>
-                        <% end %>
-                      </h1>
-                      <p class="lead delay_1 animateUp" data-animation="animateUp">
-                        <%= @concert1.friendly_date %> <br /> Doors: <%= @concert1.doors %>
-                      </p>
-                      <a href="/tickets?concert=<%=@concert1.id%>" class="btn btn-lg btn-primary delay_2 animateUp" data-animation="animateUp">
-                        Tickets
-                      </a>
-                      <a href="#" class="btn btn-lg btn-glass delay_2 animateUp" data-animation="animateUp"><%= @concert1.venue.name %>
-                      </a>
-                    </div>
+                      <% end %>
+                    </h1>
+                    <p class="lead delay_1 animateUp" data-animation="animateUp">
+                      <%= @concert1.friendly_date %> <br /> Doors: <%= @concert1.doors %>
+                    </p>
+                    <a href="/tickets?concert=<%=@concert1.id%>" class="btn btn-lg btn-primary delay_2 animateUp" data-animation="animateUp">
+                      Tickets
+                    </a>
+                    <a href="/venues/<%= @concert1.venue_id%>" class="btn btn-lg btn-glass delay_2 animateUp" data-animation="animateUp"><%= @concert1.venue.name %>
+                    </a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
     
 
           <!-- Item 2 -->
@@ -66,7 +61,7 @@
                       <a href="/tickets?concert=<%=@concert2.id%>" class="btn btn-lg btn-primary delay_2" data-animation="animateUp">
                         Tickets
                       </a>
-                      <a href="#" class="btn btn-lg btn-glass delay_2" data-animation="animateUp">
+                      <a href="/venues/<%= @concert2.venue_id%>" class="btn btn-lg btn-glass delay_2" data-animation="animateUp">
                         <%= @concert2.venue.name %>
                       </a>
 
@@ -125,71 +120,55 @@
 
     <!-- RECENT WORKS
     ================================================== -->
-    <div class="container">
+    <div class="container courier">
       <div class="row">
         <div class="col-sm-12">
-          
           <h1 class="block-header">
             <span> Venues</span>
           </h1>
-
         </div>
       </div> <!-- / .row -->
-     <% @venues.first(4).each do |venue| %>
+      <% @venues.first(4).each do |venue| %>
       <div class="row">
-       
-        <div class="col-sm-3">
-
-         
+        <div class="col-sm-3">      
           <a href="/venues/<%=venue.id%>" class="thumbnail">
-            <img src="assets/img/<%=venue.image%>" alt="...">
+          <img src="assets/img/<%=venue.image%>" alt="...">
             <div class="caption">
               <h5><%= venue.name %></h5>
-
-              <ul class="rating">
+                <ul class="rating">
                 <% venue.reviews.first.rating.times do %>
                   <li><i class="fa fa-star"></i></li>
                 <% end %>
-              </ul>
-              <p>
-                <%= venue.reviews.first.description %>
-              </p>
-              
-              
+                </ul>
+                <p><%= venue.reviews.first.description %></p>
             </div>
           </a>
         </div>
-        <% end %>
+               <% end %>
       </div>
-
     </div> <!-- / .container -->
- 
+
     <div class="container">
       <div class="row">
         <div class="col-sm-9">
           <div class="blog__timeline">
-          <% @concerts.each do |concert| %>
- 
+            <% @concerts.each do |concert| %>
             <div class="blog__item" data-date="<%= concert.friendly_date %>">
-      
               <div class="blog__header">
                 <h1 class="blog__title">
                   <a href="/concerts/<%=concert.id%>">
-                  
                     <%= concert.bands.first.name %>
                   </a>
-                  
                 </h1>
                 <ul class="blog__info">
                   <li>
-                    <i class="fa fa-user"></i> <a href="#">Admin</a>
-                  </li>
-                  <li>
                     <i class="fa fa-calendar"></i> <time datetime="<%= concert.date %>"><%= concert.friendly_date %></time>
                   </li>
+                  <% if concert.tickets.first %>
                   <li>
-                    <i class="fa fa-comments-o"></i> 4 comments
+                    <i></i> <%= concert.tickets.count %> Tickets available
                   </li>
+                  <% end %>
                 </ul>
               </div> <!-- / .blog__header -->
 
@@ -207,61 +186,15 @@
                 <p>
                   <%= concert.bands.first.description %>
                 </p>
+                </div>
+                 </div>
                  <% end %>
+                 
+
               </div> <!-- / .blog__body -->
 
-              <div class="blog__footer">
-                <ul class="blog__tags">
-                  <li><a href="#">Bootstrap</a></li>
-                  <li><a href="#">HTML5</a></li>
-                  <li><a href="#">CSS3</a></li>
-                  <li><a href="#">jQuery</a></li>
-                </ul>
-              </div> <!-- / .blog__footer -->
 
-            </div> <!-- / .blog__item -->
-  
-            
           
-          <!-- Keep in touch -->
-          <h1 class="block-header alt">
-            <span>Keep in touch</span>
-          </h1>
-          <ul class="social-icons">
-            <li class="facebook">
-              <a href="#"><i class="fa fa-facebook"></i></a>
-            </li>
-            <li class="twitter">
-              <a href="#"><i class="fa fa-twitter"></i></a>
-            </li>
-            <li class="google-plus">
-              <a href="#"><i class="fa fa-google-plus"></i></a>
-            </li>
-            <li class="linkedin">
-              <a href="#"><i class="fa fa-linkedin"></i></a>
-            </li>
-            <li class="rss">
-              <a href="#"><i class="fa fa-rss"></i></a>
-            </li>
-          </ul>
-
-
-          <!-- Contact info -->
-          <h1 class="block-header alt">
-            <span>Contact info</span>
-          </h1>
-          <p class="text-muted">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi, corrupti debitis.
-          </p>
-          <p class="text-muted">
-            US & CAN: 1-234-56789 <br />
-            Worldwide: 1-234-56789
-          </p>
-          <p class="text-muted">
-            E-mail: info@domain.com <br />
-            Website: <a href="#">https://www.domain.com/</a>
-          </p>
-
         </div>
       </div> <!-- / .row -->
     </div> <!-- / .container -->

@@ -89,3 +89,17 @@
 .sunny {
   content: url('http://i.imgur.com/RdBr2SD.png');
 }
+
+.ng-enter, .ng-move{
+  -webkit-animation: bounceInUp 1s;
+  -moz-animation: bounceInUp 1s;
+  -o-animation: bounceInUp 1s;
+  animation: bounceInUp 1s;
+}
+
+.ng-leave{
+  -webkit-animation: bounceOutUp 1s;
+  -moz-animation: bounceOutUp 1s;
+  -o-animation: bounceOutUp 1s;
+  animation: bounceOutUp 1s;
+}

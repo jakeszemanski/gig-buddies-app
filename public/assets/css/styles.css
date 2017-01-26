@@ -8679,3 +8679,11 @@ html.html_boxed > body > footer {
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
 }
+
+.courier {
+  font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;
+  font-size: 14px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 20px;

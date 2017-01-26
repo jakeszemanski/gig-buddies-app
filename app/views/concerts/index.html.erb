@@ -6,32 +6,33 @@
                   <!-- Nav tabs -->
           <ul class="nav nav-tabs gallery__nav" role="tablist">
             <li role="presentation" class="active">
-              <a href="#" role="tab" data-toggle="tab" ng-click="myFilter = {none}">
+              <a href="#" role="tab" data-toggle="tab" ng-enter ng-leave ng-click="myFilter = {none}">
               All
               </a>
             </li>
             <li role="presentation" ng-click="">
-              <a href="" role="tab" data-toggle="tab" ng-click="myFilter = {onMyCalendar:'true'}">
+              <a href="" role="tab" data-toggle="tab" ng-click="myFilter = {onMyCalendar:'true'}" ng-enter ng-leave>
               <span class="hidden-xs">My Calendar</span>
               </a>
             </li>
             <li role="presentation">
-              <a href="#" role="tab" data-toggle="tab" ng-click="myFilter = {thisWeek: 'true'}">
+              <a href="#" role="tab" data-toggle="tab" ng-click="myFilter = {thisWeek: 'true'}" ng-enter ng-leave>
                 <span class="hidden-xs">This Week</span>
               </a>
             </li>
             <li role="presentation">
-              <a href="#" role="tab" data-toggle="tab" ng-click="">
-              <span class="hidden-xs">My Bands</span>
-              </a>
+            </span>
+      <input type="text" class="form-control" ng-enter ng-leave ng-model="myFilter" list="bands" placeholder="Search for bands">
+    </div><!-- /input-group -->
             </li>
           </ul> 
+
         </div>
       </div> <!-- / .row -->
         <div class="row isotope-container" >  
-          <div class="col-sm-4 col-lg-3 isotope-item category_1" ng-repeat="concert in concerts|filter: myFilter|orderBy:orderAttribute:isOrderDescending">
+          <div class="col-sm-4 col-lg-3 isotope-item category_1 courier" ng-repeat="concert in concerts|filter: myFilter|orderBy:orderAttribute:isOrderDescending" ng-enter ng-leave>
             <a href="/concerts/{{concert.id}}" class="thumbnail">
-            <img src="{{concert.bands[0].image }}" alt="...">
+            <img src="{{concert.bands[0].image }}" alt="..." class="img-rounded">
             <div class="caption">
               <h5>{{ concert.bands[0].name }}</h5>
               <p>Venue: {{ concert.venue.name }}</p>

@@ -34,7 +34,7 @@
     ================================================== -->
 
     <!-- Navbar -->
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
 
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -55,7 +55,7 @@
         <div class="collapse navbar-collapse" id="navbar_main">
 
           <ul class="nav navbar-nav navbar-left">
-            <li><a href="/concerts">Home</a></li>
+            <li><a href="/">Home</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reviews <span class="caret"></span></a>
               <ul class="dropdown-menu">
@@ -83,21 +83,10 @@
                 <% if current_user %>
                 <li><a href="/concerts?calendar=<%= current_user.id %>">My Calendar</a></li>
                 <% end %>
-                <li><a href="gallery-item.html">Gallery Item</a></li>
               </ul>
             </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Venues<span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="/venues">All venues</a></li>
-                <li><a href="contact.html">Contact Us</a></li>
-                <li><a href="404.html">Error 404</a></li>
-                <li><a href="faq.html">FAQ</a></li>
-                <li><a href="team.html">Our Team</a></li>
-                <li><a href="pricing.html">Pricing</a></li>
-              </ul>
             </li>
-            <li><a href="/reviews">Reviews</a></li>
+            <li><a href="/venues">Venues</a></li>
           </ul>
 
           <ul class="nav navbar-nav navbar-right">
@@ -115,15 +104,6 @@
             <% end %>
           </ul>
 
-          <form class="navbar-form navbar-search navbar-right">
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="&#xF002; &nbsp; Search">
-            </div>
-            <button type="submit" class="btn btn-default">
-              <i class="fa fa-search"></i> Search
-            </button>
-          </form>
-
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container -->
     </nav>
@@ -132,24 +112,18 @@
     <div class="page-topbar">
       <div class="container">
         <div class="row">
-          <div class="col-sm-4">
-
-            <h3>Inbox</h3>
-            
-          </div>
           <div class="col-sm-8 hidden-xs">
             
-            <ol class="breadcrumb">
-              <li><a href="#">Home</a></li>
-              <li><a href="#">Profile</a></li>
-              <li class="active">Inbox</li>
-            </ol>
 
           </div>
         </div> <!-- / .row -->
       </div> <!-- / .container -->
     </div>
-
+<% flash.each do |name, message| %>
+  <div class="alert alert-<%= name %> alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><p><%= message %></p>
+  </div>
+  <% end %>
 
     <!-- CONTENT
     ================================================== -->
@@ -165,9 +139,9 @@
           <div class="col-xs-12 col-sm-4">
             
             <div class="footer__col">
-              <h3 class="footer__header">Our Company</h3>
+              <h3 class="footer__header">Gig Buddies</h3>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi, corrupti debitis!
+                We are company focused on getting you to the show
               </p>
               <p>
                 US & CAN: 1-234-56789 <br />

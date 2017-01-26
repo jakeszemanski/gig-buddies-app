@@ -11,18 +11,34 @@
 
           <div class="comments">
 
-            <div class="comments__heading">4 comments</div>
+            <div class="comments__heading">Venue Reviews</div>
 
             <!-- New comment form -->
-            <form name="comments__new">
+            <% if current_user %>
+ <h1 class="block-header alt">
+            <span>Reviews</span>
+          </h1>
 
-              <div class="form-group">
-                <textarea class="form-control" rows="1" placeholder="Write your comment here"></textarea>
-              </div>
+  <%= form_tag '/reviews', method: :post do %>
 
-              <button type="submit" class="btn btn-primary" disabled="disabled">Send</button>
-
-            </form>
+  <div class="form-group">
+    <% hidden_field_tag :venue, @concert.venue_id %>
+  </div>
+  <div class="form-group">
+  <%= label_tag :rating, 'Enter a rating: ' %>
+  <%= select_tag :rating, options_for_select(1..5), multipe: false, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= label_tag :description, 'Enter  a description' %>
+    <%= text_field_tag :description, '', class: 'form-control' %>
+  </div>
+   <div>
+  <%= button_tag(type: "submit", class: "btn btn-primary") do %>
+    Submit Review
+  </div>
+  <% end %>  
+    <% end %>
+  <% end %>
 
             <!-- List of comments -->
             <div class="comments__list">
@@ -32,7 +48,7 @@
               <div class="comments__item">
                 
                 <div class="comments-item__avatar">
-                  <img src="../assets/img/person_1.jpg" class="img-responsive" alt="..." />
+                  <img src="../assets/img/<%= User.find_by(id: review.user_id).profile_pic %>" class="img-responsive" alt="..." />
                 </div>
 
                 <div class="comments-item__body">
@@ -42,7 +58,13 @@
                     <div class="comments-item-info__divider">
                       <i class="fa fa-circle"></i>
                     </div>
-                    <div class="comment-item-info__timestamp">3 hours ago</div>
+                    
+                    <ul class="rating">
+                    <% review.rating.times do %>
+                      <i class="fa fa-star"></i>
+                    <% end %>
+                    </ul>
+           
                   </div>
 
                   <div class="comments-item__content">
@@ -68,17 +90,19 @@
           <h1 class="block-header alt">
             <span>Concert Information</span>
           </h1>
-          <p><%= @concert.bands.first.description %></p>
+          <h3>Venue: <%= @concert.venue.name %> </h3>
+          <h4><%= @concert.friendly_date %></h4>
+          <h6>Doors: <%= @concert.doors %></h6>
+          <h6>Show: <%= @concert.show %></h6>
           <h2>Lineup:</h4>
            <% @concert.bands.each do |band| %>
            <ul>
            <li><h3><%= band.name %></h3></li>
            </ul>
          <% end %>
-          <h3>Venue: <%= @concert.venue.name %> </h3>
-          <h4><%= @concert.friendly_date %></h4>
-          <h6>Doors: <%= @concert.doors %></h6>
-          <h6>Show: <%= @concert.show %></h6>
+          <p><%= @concert.bands.first.description %></p>
+          
+          
           
           <h1 class="block-header alt">
             <span>Ticket Information</span>
@@ -86,21 +110,25 @@
 
           <table class="table table-bordered">
             <tbody>
+            <% if @genres.first %>
               <tr>
                 <td>Genres:</td>
                 <td> <%= @genres.join(', ') %></td>
               </tr>
+              <% end %>
               <tr>
                 <td>Available Tickets:</td>
-                <td><%= Ticket.where(id: @concert.id).count %></td>
+                <td><%= @ticket_count %></td>
               </tr>
+                 <% if @ticket_count > 0 %>
               <tr>
                 <td>Buy Tickets:</td>
-                <td><a href="/tickets/?concert=<%= @concert.id%>"><button>Buy ticket</button></a></td>
+                <td><a href="/tickets/?concert=<%= @concert.id%>"><button type="button" class="btn btn-success">Buy ticket</button></a></td>
               </tr>
+              <% end %>
               <tr>
                 <td>Sell Tickets:</td>
-                <td><a href="/tickets/new?concert_id=<%= @concert.id%>"><button>List ticket</button></a></td>
+                <td><a href="/tickets/new?concert_id=<%= @concert.id%>"><button type="button" class="btn btn-info">List ticket</button></a></td>
               </tr>
               <tr>
                 <td><%= @concert.venue.name %>'s will call policy:</td>
@@ -108,16 +136,17 @@
               </tr>
             </tbody>
           </table>
-          <button><a href="https://www.google.com/calendar/render?action=TEMPLATE&text=<%=@concert.bands.first.name%>&dates=<%=@concert.date.to_s.gsub('-', '') %>T250000Z/<%=@concert.date.to_s.gsub('-', '') %>T270000Z&details=For+details,+link+here:+http://www.gig-buddies.com.com&location=<%=@concert.venue.name%>,Chicago,+IL&sf=true&output=xml">Add to Google Calendar</a></button>
+          <a type="button" class="btn btn-primary" href="https://www.google.com/calendar/render?action=TEMPLATE&text=<%=@concert.bands.first.name%>&dates=<%=@concert.date.to_s.gsub('-', '') %>T250000Z/<%=@concert.date.to_s.gsub('-', '') %>T270000Z&details=For+details,+link+here:+http://www.gig-buddies.com.com&location=<%=@concert.venue.name%>,Chicago,+IL&sf=true&output=xml">Add to Google Calendar</a>
           
           <% if current_user %>
             <%= form_tag '/user_concerts', method: :post do %>
               <div class="form-group">
                 <%= hidden_field_tag :concert_id, @concert.id %>
               </div>
-              <div>
-                <%= submit_tag 'Add to calendar' %>
+              <%= button_tag(type: "submit", class: "btn btn-info") do %>
+              Add to calendar
               </div>
+            <% end %>  
             <% end %>
           <% end %>
           

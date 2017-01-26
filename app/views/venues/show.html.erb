@@ -42,7 +42,7 @@
               <div class="comments__item">
                 
                 <div class="comments-item__avatar">
-                  <img src="../assets/img/person_1.jpg" class="img-responsive" alt="..." />
+                  <img src="../assets/img/<%= User.find_by(id: review.user_id).profile_pic %>" class="img-responsive" alt="..." />
                 </div>
 
                 <div class="comments-item__body">
@@ -52,7 +52,11 @@
                     <div class="comments-item-info__divider">
                       <i class="fa fa-circle"></i>
                     </div>
-                    <div class="comment-item-info__timestamp">Rating: <%= review.rating %></div>
+                      <ul class="rating">
+                    <% review.rating.times do %>
+                      <i class="fa fa-star"></i>
+                    <% end %>
+                    </ul>
                   </div>
 
                   <div class="comments-item__content">

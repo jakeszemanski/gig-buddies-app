@@ -10,5 +10,4 @@ json.array! @concerts.each do |concert|
   json.friendlyDate concert.friendly_date
   json.onMyCalendar current_user.concerts.include? concert
   json.thisWeek concert.date < 7.days.from_now
-
 end
