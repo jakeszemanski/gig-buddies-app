@@ -71,11 +71,11 @@ class TicketsController < ApplicationController
     
     @seller = User.find_by(id: params[:seller_id])
     @concert = Concert.find_by(id: @ticket.concert_id)
+    @event = UserConcert.new(user_id: current_user.id, concert_id: @concert.id)
+    @event.save
+    flash[:success] = 'Ticket bought!'
 
     send_message(@seller.phone, "A user has bought your ticket to the #{@concert.bands.first.name} show")
-    
-
-    flash[:message] = 'ticket successfully updated!'
     redirect_to '/tickets'
 
   end

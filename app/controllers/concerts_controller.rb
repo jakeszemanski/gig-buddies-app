@@ -1,14 +1,6 @@
 class ConcertsController < ApplicationController
-  # require 'google/apis/calendar_v3'
-  # require 'bandsintown'
- 
   def index
-  # Bandsintown.app_id = 'gig_buddies'
-    # Bandsintown.app_id = 'YOUR_APP_ID'
-    # artist = Bandsintown::Artist.new({
-    #   :name => "The Killers"
-    # })
-    # @events = artist.events
+ 
     @bands = Band.all
     @bands.each do |band|
       new_image = Unirest.get("https://api.spotify.com/v1/search",
@@ -34,6 +26,7 @@ class ConcertsController < ApplicationController
   
   def show
     @concert = Concert.find_by(id: params[:id])
+    @ticket_count = Ticket.where(concert_id: @concert.id).count
     @headliner = @concert.bands.first.name
     @spotify = Unirest.get("https://api.spotify.com/v1/search",
       parameters: {
