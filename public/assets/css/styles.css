@@ -8687,3 +8687,7 @@ html.html_boxed > body > footer {
   font-variant: normal;
   font-weight: 400;
   line-height: 20px;
+}
+.tickets {
+  font-color: green;
+}
