@@ -15,10 +15,10 @@ class ReviewsController < ApplicationController
       rating: params[:rating],
       description: params[:description],
       user_id: current_user.id,
-      venue_id: params[:venue]
+      venue_id: params[:venue_id]
       )
     @review.save
-    redirect_to "/reviews"
+    redirect_to "/venues/#{params[:venue_id]}"
   end
 
   def show

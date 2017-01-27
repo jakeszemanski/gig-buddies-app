@@ -26,7 +26,7 @@ class ConcertsController < ApplicationController
   
   def show
     @concert = Concert.find_by(id: params[:id])
-    @ticket_count = Ticket.where(concert_id: @concert.id).count
+    @ticket_count = Ticket.where(concert_id: @concert.id, status: 'available').count
     @headliner = @concert.bands.first.name
     @spotify = Unirest.get("https://api.spotify.com/v1/search",
       parameters: {

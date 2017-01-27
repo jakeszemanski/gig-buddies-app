@@ -16,7 +16,7 @@
   <%= form_tag '/reviews', method: :post do %>
 
   <div class="form-group">
-    <% hidden_field_tag :venue, @venue.id %>
+    <%= hidden_field_tag :venue, @venue.id %>
   </div>
   <div class="form-group">
   <%= label_tag :rating, 'Enter a rating: ' %>

@@ -22,7 +22,7 @@
   <%= form_tag '/reviews', method: :post do %>
 
   <div class="form-group">
-    <% hidden_field_tag :venue, @concert.venue_id %>
+    <%= hidden_field_tag :venue_id, @concert.venue_id %>
   </div>
   <div class="form-group">
   <%= label_tag :rating, 'Enter a rating: ' %>
@@ -92,9 +92,9 @@
           </h1>
           <h3>Venue: <%= @concert.venue.name %> </h3>
           <h4><%= @concert.friendly_date %></h4>
-          <h6>Doors: <%= @concert.doors %></h6>
-          <h6>Show: <%= @concert.show %></h6>
-          <h2>Lineup:</h4>
+          <h5>Doors: <%= @concert.doors %></h5>
+          <h5>Show: <%= @concert.show %></h5>
+          <h2>Lineup:</h2>
            <% @concert.bands.each do |band| %>
            <ul>
            <li><h3><%= band.name %></h3></li>
