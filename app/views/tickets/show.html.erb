@@ -1,168 +1,132 @@
-<div class="container">
-      <div class="row">
-        <div class="col-sm-7">
-          
-          <!-- Main image -->
-          <a href="assets/img/work_2_big.jpg" data-lightbox="...">
-            <img src="<%= @picture %>" alt="..." class="img-responsive">
-          </a>
+<div class="row">
+  <div class="col-sm-7">
 
-          <!-- Comments section -->
-          <div class="comments">
+    <!-- Main image -->
+    <a href="assets/img/work_2_big.jpg" data-lightbox="...">
+      <img src="<%= @picture %>" alt="..." class="img-responsive">
+    </a>
 
-            <div class="comments__heading">Venue Reviews</div>
 
-                      <% if current_user %>
- <h1 class="block-header alt">
+
+
+    <!-- Comments section -->
+    <div class="comments">
+      <div class="comments__heading">Venue Reviews</div>
+        <% if current_user %>
+          <h1 class="block-header alt">
             <span>Reviews</span>
           </h1>
+          <%= form_tag '/reviews', method: :post do %>
+            <div class="form-group">
+              <%= hidden_field_tag :venue_id, @concert.venue_id %>
+            </div>
+            <div class="form-group">
+              <%= label_tag :rating, 'Enter a rating: ' %>
+              <%= select_tag :rating, options_for_select(1..5), multipe: false, class: 'form-control' %>
+            </div>
+            <div class="form-group">
+              <%= label_tag :description, 'Enter  a description' %>
+              <%= text_field_tag :description, '', class: 'form-control' %>
+            </div>
+            <div>
+              <%= submit_tag "Submit comment", class: 'btn btn-default' %>
+            </div>
+          <% end %>
+        <% end %>
 
-  <%= form_tag '/reviews', method: :post do %>
 
-  <div class="form-group">
-    <% hidden_field_tag :venue, @concert.venue_id %>
-  </div>
-  <div class="form-group">
-  <%= label_tag :rating, 'Enter a rating: ' %>
-  <%= select_tag :rating, options_for_select(1..5), multipe: false, class: 'form-control' %>
-  </div>
-  <div class="form-group">
-    <%= label_tag :description, 'Enter  a description' %>
-    <%= text_field_tag :description, '', class: 'form-control' %>
-  </div>
-    <div>
-    <%= button_tag(type: "submit", class: "btn btn-primary") do %>
-              Submit Review
-              </div>
-            <% end %>
-    <% end %>
-  <% end %>
 
-            <!-- List of comments -->
-            <div class="comments__list">
-              
-              <!-- Comment item -->
-              <% @concert.venue.reviews.each do |review| %>
-              <div class="comments__item">
-                
-                <div class="comments-item__avatar">
-                  <img src="../assets/img/<%= User.find_by(id: review.user_id).profile_pic %>" class="img-responsive" alt="..." />
-                </div>
 
-                <div class="comments-item__body">
 
-                  <div class="comments-item__info">
-                    <div class="comments-item-info__author"><%= User.find_by(id: review.user_id).name %></div>
-                    <div class="comments-item-info__divider">
-                      <i class="fa fa-circle"></i>
-                    </div>
-                      <ul class="rating">
-                    <% review.rating.times do %>
-                      <i class="fa fa-star"></i>
-                    <% end %>
-                    </ul>
+    </div>
 
-                  <div class="comments-item__content">
-                    <%= review.description %>
-                  </div>
 
-                  <div class="comments-item__actions">
-                    <a href="#" class="comment-item-actions__reply">
-                      Reply
-                    </a>
-                  </div>
-                </div>
 
-              </div> <!-- / .comments__item -->
-              <% end %>
-            </div> <!-- / .comments__list -->
 
-          </div> <!-- / .comments -->
 
-        </div>
-        <div class="col-sm-5">
-          
-          <h1 class="block-header alt">
-            <span>Concert Information</span>
-          </h1>
-          <h3>Venue: <%= @concert.venue.name %> </h3>
-          <h4><%= @concert.friendly_date %></h4>
-          <h4>Bands</h4>
-           <% @concert.bands.each do |band| %>
-           <ul>
-           <li><%= band.name %></li>
-           </ul>
 
-         <% end %>
-          
-          <h1 class="block-header alt">
-            <span>Ticket Information</span>
-          </h1>
+    </div>
+    <div class="col-sm-5">
 
-          <table class="table table-bordered">
-            <tbody>
-              <tr>
-                <td>Availablility:</td>
-                <td><%= @ticket.status %></td>
-              </tr>
-              <tr>
-                <td>Seller:</td>
-                <td><%= User.find_by(id: @ticket.seller_id).name %></td>
-              </tr>
-              <tr>
-                <td>Desired Compensation:</td>
-                <td><%= @ticket.compensation %></td>
-              </tr>
-              <tr>
-                <td><%= @concert.venue.name %>'s will call policy:</td>
-                <td><%= @concert.venue.will_call_policy %></td>
-              </tr>
-              <% if @genres.first %>
-              <tr>
-                <td>Genres:</td>
-                <td> <%= @genres.join(', ') %></td>
-              </tr>
-              <% end %>
-              <tr>
-                <td>Available Tickets:</td>
-                <td><%= Ticket.where(concert_id: @concert.id).count %></td>
-              </tr>
-              <tr>
-            </tbody>
-          </table>
-          <a type="button" class="btn btn-primary" href="https://www.google.com/calendar/render?action=TEMPLATE&text=<%=@concert.bands.first.name%>&dates=<%=@concert.date.to_s.gsub('-', '') %>T250000Z/<%=@concert.date.to_s.gsub('-', '') %>T270000Z&details=For+details,+link+here:+http://www.gig-buddies.com.com&location=<%=@concert.venue.name%>,Chicago,+IL&sf=true&output=xml">Add to Google Calendar</a>
-              <% if current_user %>
-                <% if @ticket.status == "available" %>
-                  <%= form_tag "/tickets/#{params[:id]}", method: :patch do %>
-                    <div>
-                      <%= hidden_field_tag :compensation, @ticket.compensation %>
-                    </div>
-                    <div>
-                      <%= hidden_field_tag :buyer_id, current_user.id %>
-                    </div>
-                    <div>
-                      <%= hidden_field_tag :seller_id, @ticket.seller_id %>
-                    </div>
-                    <div>
-                      <%= hidden_field_tag :status, "unavailable" %>
-                    </div>
-                    <div>
-                      <%= button_tag(type: "submit", class: "btn btn-success btn-lg") do %>
-                    Buy Ticket
-                    </div>
-                    <% end %>
-                  <% end %>
-                <% end %>
-                <% else %>
-                  <button class="btn btn-primary" a href="/login">Login in!</button>
-              <% end %>
-            
+      <h1 class="block-header alt">
+        <span>Concert Information</span>
+      </h1>
+      <h3>Venue: <%= @concert.venue.name %> </h3>
+      <h4><%= @concert.friendly_date %></h4>
+      <h4>Bands</h4>
+      <% @concert.bands.each do |band| %>
+      <ul>
+       <li><%= band.name %></li>
+     </ul>
 
-        </div>
-      </div> <!-- / .row -->
-    </div> <!-- / .container -->
+     <% end %>
 
-    
+     <h1 class="block-header alt">
+      <span>Ticket Information</span>
+    </h1>
+
+    <table class="table table-bordered">
+      <tbody>
+        <tr>
+          <td>Availablility:</td>
+          <td><%= @ticket.status %></td>
+        </tr>
+        <tr>
+          <td>Seller:</td>
+          <td><%= User.find_by(id: @ticket.seller_id).name %></td>
+        </tr>
+        <tr>
+          <td>Desired Compensation:</td>
+          <td><%= @ticket.compensation %></td>
+        </tr>
+        <tr>
+          <td><%= @concert.venue.name %>'s will call policy:</td>
+          <td><%= @concert.venue.will_call_policy %></td>
+        </tr>
+        <% if @genres.first %>
+        <tr>
+          <td>Genres:</td>
+          <td> <%= @genres.join(', ') %></td>
+        </tr>
+        <% end %>
+        <tr>
+          <td>Available Tickets:</td>
+          <td><%= Ticket.where(concert_id: @concert.id).count %></td>
+        </tr>
+        <tr>
+        </tbody>
+      </table>
+      <a type="button" class="btn btn-primary" href="https://www.google.com/calendar/render?action=TEMPLATE&text=<%=@concert.bands.first.name%>&dates=<%=@concert.date.to_s.gsub('-', '') %>T250000Z/<%=@concert.date.to_s.gsub('-', '') %>T270000Z&details=For+details,+link+here:+http://www.gig-buddies.com.com&location=<%=@concert.venue.name%>,Chicago,+IL&sf=true&output=xml">Add to Google Calendar</a>
+      <% if current_user %>
+      <% if @ticket.status == "available" %>
+      <%= form_tag "/tickets/#{params[:id]}", method: :patch do %>
+      <div>
+        <%= hidden_field_tag :compensation, @ticket.compensation %>
+      </div>
+      <div>
+        <%= hidden_field_tag :buyer_id, current_user.id %>
+      </div>
+      <div>
+        <%= hidden_field_tag :seller_id, @ticket.seller_id %>
+      </div>
+      <div>
+        <%= hidden_field_tag :status, "unavailable" %>
+      </div>
+      <div>
+        <%= submit_tag "Buy Ticket" %>
+
+      </div>
+      <% end %>
+      <% end %>
+      <% else %>
+      <button class="btn btn-primary" a href="/login">Login in!</button>
+      <% end %>
+
+
+    </div>
+  </div> <!-- / .row -->
+
+
 
 
   

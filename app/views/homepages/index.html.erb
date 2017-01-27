@@ -164,9 +164,9 @@
                   <li>
                     <i class="fa fa-calendar"></i> <time datetime="<%= concert.date %>"><%= concert.friendly_date %></time>
                   </li>
-                  <% if concert.tickets.first %>
+                  <% if concert.tickets.where(status: 'available').first %>
                   <li>
-                     <%= concert.tickets.count %> Tickets available
+                     <%= concert.tickets.where(status: 'available').count %> Tickets available
                   </li>
                   <% end %>
                 </ul>
