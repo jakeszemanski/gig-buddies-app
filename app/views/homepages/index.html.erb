@@ -159,6 +159,9 @@
                   <a href="/concerts/<%=concert.id%>">
                     <%= concert.bands.first %>
                   </a>
+                  <% concert.bands.drop(1).each do |band| %>
+                  <h3> <%= band %></h3>
+                  <% end %>
                 </h1>
                 <ul class="blog__info">
                   <li>
@@ -174,19 +177,13 @@
 
               <div class="blog__body">
                 <a href="/concerts/<%= concert.id%>">
-                <% if concert.bands.first %>
-                  <% @headliner = concert.bands.first %>
-                  <% @spotify = Unirest.get("https://api.spotify.com/v1/search",
-                   parameters: {
-                   q: @headliner, type: "artist"}).body %>
-                   <% if @spotify['artists']['items'][0] != nil %>
-                   <% @picture = @spotify['artists']['items'][0]['images'][0]['url'] %>
-                  <img src="<%= @picture %>" alt="" class="img-responsive img-article pull-right">
-                  <% end %>
+                <% if concert.picture %>
+                  
+                  <img src="<%= concert.picture %>" alt="" class="img-responsive img-article pull-right">
                 <% end %>
                 </a>
                 <p>
-                 Blahhhhhhhhh
+                 <%= concert.description %>
                 </p>
                 </div>
                  </div>
