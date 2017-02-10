@@ -1,17 +1,5 @@
 class ConcertsController < ApplicationController
   def index
- 
-    @bands = Band.all
-    @bands.each do |band|
-      new_image = Unirest.get("https://api.spotify.com/v1/search",
-             parameters: {
-               q: band.name,
-               type: "artist"}).body
-      band.update(image: new_image['artists']['items'][0]['images'][0]['url'])
-    end
-
-
-
     if params[:calendar]
       @concerts = current_user.concerts.order("date")
     elsif params[:venue_id]
@@ -27,7 +15,7 @@ class ConcertsController < ApplicationController
   def show
     @concert = Concert.find_by(id: params[:id])
     @ticket_count = Ticket.where(concert_id: @concert.id, status: 'available').count
-    @headliner = @concert.bands.first.name
+    @headliner = @concert.bands.first
     @spotify = Unirest.get("https://api.spotify.com/v1/search",
       parameters: {
         q: @headliner,

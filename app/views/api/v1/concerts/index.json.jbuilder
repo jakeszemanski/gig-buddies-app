@@ -5,6 +5,8 @@ json.array! @concerts.each do |concert|
   json.show concert.show
   json.venueId concert.venue_id
   json.bands concert.bands
+  json.picture concert.picture
+  json.description concert.description
   json.tickets concert.tickets
   json.venue concert.venue
   json.friendlyDate concert.friendly_date
