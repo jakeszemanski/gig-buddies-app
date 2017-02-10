@@ -65,12 +65,14 @@ end
 
 doc = Nokogiri::HTML(open('http://www.emptybottle.com/full/'))
 
-show_html = doc.css('div.tw-plugin-full-event-list ul li div.show_full span.show_details')
+show_html = doc.css('div.tw-plugin-full-event-list ul li div.show_full')
 show_details = show_html.map do |link|
   {
-    date: link.css('span.show_date span.tw-event-date-complete span.tw-event-date').text.strip,
-    time: link.css('span.show_date span.tw-event-time-complete span.tw-event-time').text.strip,
-    artists: link.css('span.show_artists ul li').children.map { |el| el.to_s.strip }
+    date: link.css('span.show_details span.show_date span.tw-event-date-complete span.tw-event-date').text.strip,
+    time: link.css('span.show_details span.show_date span.tw-event-time-complete span.tw-event-time').text.strip,
+    artists: link.css('span.show_details span.show_artists ul li').children.map { |el| el.to_s.strip },
+    picture: link.css('span.show_image img @src').text.strip,
+    description: link.css('span.show_description p').text.strip
   }
 end
 
@@ -80,7 +82,9 @@ show_details.each do |show|
     date: Date.parse(show[:date]).to_s,
     show: show[:time],
     bands: show[:artists],
-    venue_id: Venue.find_by(name: "Empty Bottle").id)
+    venue_id: Venue.find_by(name: "Empty Bottle").id,
+    picture: show[:picture],
+    description: show[:description])
   concert.save
 end
 @concerts = Concert.all
