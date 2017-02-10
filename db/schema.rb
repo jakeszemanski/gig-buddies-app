@@ -10,33 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170209205543) do
+ActiveRecord::Schema.define(version: 20170210182422) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "band_concerts", force: :cascade do |t|
-    t.integer  "band_id"
-    t.integer  "concert_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "bands", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.string   "image"
-    t.text     "description"
-  end
 
   create_table "concerts", force: :cascade do |t|
     t.string   "doors"
     t.string   "show"
     t.integer  "venue_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.date     "date"
+    t.string   "bands",      default: [],              array: true
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -53,16 +39,11 @@ ActiveRecord::Schema.define(version: 20170209205543) do
     t.integer  "concert_id"
     t.integer  "buyer_id"
     t.string   "compensation"
-    t.string   "status",       default: "available"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
-  end
-
-  create_table "user_bands", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "user_id"
-    t.string   "band_id"
+    t.string   "status",           default: "available"
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.boolean  "seller_paid",      default: false
+    t.boolean  "ticket_fulfilled", default: false
   end
 
   create_table "user_concerts", force: :cascade do |t|
