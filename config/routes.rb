@@ -17,13 +17,7 @@ Rails.application.routes.draw do
   delete '/concerts/:id' => 'concerts#destroy' 
 
 
-  get '/bands' => 'bands#index'
-  get '/bands/new' => 'bands#new'
-  post '/bands' => 'bands#create'
-  get '/bands/:id' => 'bands#show'
-  get '/bands/:id/edit' => 'bands#edit'
-  patch '/bands/:id' => 'bands#update'
-  delete '/bands/:id' => 'bands#destroy' 
+  
 
   get '/venues' => 'venues#index'
   get '/venues/new' => 'venues#new'

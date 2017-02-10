@@ -1,8 +1,0 @@
-<h1>Bands</h1>
-  <% @bands.each do |band| %>
-    <a href="/bands/<%= band.id %>"><%= band.name %></a>
-    <% band.concerts.each do |concert| %>
-      <p>Shows: <%= concert.venue.name %></p>
-      <% end %>
-        <p> <%= '-' * 50 %></p>
-  <% end %>

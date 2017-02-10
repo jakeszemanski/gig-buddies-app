@@ -1,9 +1,0 @@
-<h1>Band name: <%= @band.name %></h1>
-  <h2>Shows: </h2>
-  <% @band.concerts.each do |concert| %>
-    <h2>Venue: <%= concert.venue.name %></h3>
-    <h3>Date: <%= concert.date %></h3>
-    <p>Doors: <%= concert.doors %></p>
-    <p>Show: <%= concert.show %></p>
-    <a href="/tickets?concert=<%=concert.id%>">Tickets</a>
-    <% end %>
