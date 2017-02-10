@@ -160,8 +160,9 @@
                     <%= concert.bands.first %>
                   </a>
                   <% concert.bands.drop(1).each do |band| %>
-                  <h3> <%= band %></h3>
+                  <h4> <%= band %></h4>
                   <% end %>
+                  <h5><%= concert.venue.name %></h5>
                 </h1>
                 <ul class="blog__info">
                   <li>
@@ -182,9 +183,20 @@
                   <img src="<%= concert.picture %>" alt="" class="img-responsive img-article pull-right">
                 <% end %>
                 </a>
+                <% if concert.description %>
                 <p>
                  <%= concert.description %>
                 </p>
+                <% else %>
+                <p>.</p>
+                <p>.</p>
+                <p>.</p>
+                <p>.</p>
+                <p>.</p>
+                <p>.</p>
+                <p>.</p>
+                <p>.</p>
+                <% end %>
                 </div>
                  </div>
                  <% end %>

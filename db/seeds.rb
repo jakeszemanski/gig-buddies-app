@@ -1,7 +1,7 @@
 require 'open-uri'
 
 
-venue_images = {"Thalia Hall" => 'thalia_1.jpg', "Schubas" => 'schubas_1.jpg', "Empty Bottle" => 'empty_bottle_1.jpg', "Double Door" => 'double_door_1.jpg', "Lincoln Hall" => 'lincoln_hall_1.jpg', "House of Blues" => 'house_of_blues_1.jpg'}
+venue_images = {"Thalia Hall" => 'thalia_1.jpg', "Schubas" => 'schubas_1.jpg', "Empty Bottle" => 'empty_bottle_1.jpg', "Double Door" => 'double_door_1.jpg', "Lincoln Hall" => 'lincoln_hall_1.jpg', "House of Blues" => 'house_of_blues_1.jpg', 'Beat Kitchen' => 'beat_kitchen_1.jpg'}
 
 names = ['Joe', 'Sam', 'Bobby', 'Trevor', 'Jake', 'John', 'Steve', 'Ryan', 'Isaac']
 prof_pics = {'Joe' => 'prof1.jpg', 'Sam' => 'prof2.jpg', 'Bobby' => 'prof3.jpg', 'Trevor' => 'prof4.png', 'Jake' => 'prof5.png', 'John' => 'prof6.png', 'Steve' => 'prof7.png', 'Isaac' => 'prof8.jpg', 'Ryan' => 'prof9.jpg'}
@@ -18,7 +18,7 @@ end
 
 
 
-sites = ['Schubas', 'Lincoln Hall', 'Thalia Hall', 'Empty Bottle', 'Double Door', 'House of Blues']
+sites = ['Schubas', 'Lincoln Hall', 'Thalia Hall', 'Empty Bottle', 'Double Door', 'House of Blues', 'Beat Kitchen']
 will_call = ['show copy of Ticket holders ID at door', 'ticket holder must be present at door to transfer', 'no verification required', 'show ID and the last 4 digits of credit card used to purchased', 'Original ticket holder must call venue and give them name of the new party picking up the ticket']
 sites.each do |site|
   venue = Venue.new(
@@ -63,10 +63,10 @@ end
 
 
 
-doc = Nokogiri::HTML(open('http://www.emptybottle.com/full/'))
+empty_bottle_doc = Nokogiri::HTML(open('http://www.emptybottle.com/full/'))
 
-show_html = doc.css('div.tw-plugin-full-event-list ul li div.show_full')
-show_details = show_html.map do |link|
+empty_bottle_show_html = empty_bottle_doc.css('div.tw-plugin-full-event-list ul li div.show_full')
+empty_bottle_show_details = empty_bottle_show_html.map do |link|
   {
     date: link.css('span.show_details span.show_date span.tw-event-date-complete span.tw-event-date').text.strip,
     time: link.css('span.show_details span.show_date span.tw-event-time-complete span.tw-event-time').text.strip,
@@ -76,8 +76,7 @@ show_details = show_html.map do |link|
   }
 end
 
-
-show_details.each do |show|
+empty_bottle_show_details.each do |show|
   concert = Concert.new(
     date: Date.parse(show[:date]).to_s,
     show: show[:time],
@@ -87,6 +86,33 @@ show_details.each do |show|
     description: show[:description])
   concert.save
 end
+
+beat_kitchen_doc = Nokogiri::HTML(open('http://www.beatkitchen.com/'))
+
+beat_kitchen_html = beat_kitchen_doc.css('div#event-listing div.list-view-item')
+beat_kitchen_show_details = beat_kitchen_html.map do |link|
+  {
+    date: link.css('div.list-view-details h2.dates').text.strip,
+    artists: link.css('div.list-view-details h1.headliners a, h2.supports a').children.map { |el| el.to_s.strip },
+    doors: link.css('div.list-view-details h2.times span.doors').text.strip.sub("Doors: ", ''),
+    show: link.css('div.list-view-details h2.times span.start').text.strip.sub("Show: ", ''),
+    picture: link.css('img @src').text.strip
+  }
+end
+
+beat_kitchen_show_details.each do |show|
+  concert = Concert.new(
+    date: Date.parse(show[:date]).to_s,
+    doors: show[:doors],
+    show: show[:show],
+    bands: show[:artists],
+    venue_id: Venue.find_by(name: "Beat Kitchen").id,
+    picture: show[:picture])
+  concert.save
+end
+
+
+
 @concerts = Concert.all
 
 compensate = ['a beer', 'free!', 'ticket to another show', 'Venmo me $5', 'A ride to the show', 'future considerations', 'Venmo $30', '$15 or best offer', 'offer something', 'A show poster', 'some merch']
