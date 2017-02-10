@@ -32,9 +32,9 @@
         <div class="row isotope-container" >  
           <div class="col-sm-4 col-lg-3 isotope-item category_1 courier" ng-repeat="concert in concerts|filter: myFilter|orderBy:orderAttribute:isOrderDescending" ng-enter ng-leave>
             <a href="/concerts/{{concert.id}}" class="thumbnail">
-            <img src="{{concert.bands[0].image }}" alt="..." class="img-rounded">
+            <img src="{{concert.picture }}" alt="..." class="img-rounded">
             <div class="caption">
-              <h5>{{ concert.bands[0].name }}</h5>
+              <h5>{{ concert.bands.first }}</h5>
               <p>Venue: {{ concert.venue.name }}</p>
               <p>{{ concert.friendlyDate }}</p>
               <p>Show: {{ concert.show }}</p>
