@@ -28,6 +28,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.7'
 
 gem 'unirest'
+gem 'nokogiri'
 
 
 gem 'faker'
@@ -59,7 +60,4 @@ gem 'twilio-ruby'
 gem 'google-api-client', require: 'google/apis/calendar_v3'
 
 gem 'omniauth'
-gem 'omniauth-google-oauth2'
 gem 'googleauth'
-gem 'bandsintown'
-gem 'omniauth-google-oauth2'
