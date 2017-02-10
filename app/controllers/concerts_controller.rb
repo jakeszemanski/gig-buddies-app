@@ -20,8 +20,11 @@ class ConcertsController < ApplicationController
       parameters: {
         q: @headliner,
         type: "artist"}).body
+    if @spotify['artists']['items'][0]
     @genres = @spotify['artists']['items'][0]['genres']
-    @uri = @spotify['artists']['items'][0]['uri']
+     @uri = @spotify['artists']['items'][0]['uri']
+  end
+   
     @weather_date = @concert.date.strftime("%e %b %Y")
     @weather = Unirest.get("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22chicago%2C%20il%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys").body
     if @weather['query']['results']
