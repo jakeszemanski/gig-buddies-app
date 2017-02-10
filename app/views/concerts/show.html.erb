@@ -3,8 +3,8 @@
         <div class="col-sm-7">
           
           <!-- Main image -->
-          <a href="/bands/<%= @concert.bands.first.id%>" data-lightbox="...">
-            <img src="<%= @concert.bands.first.image%>" alt="..." class="img-responsive">
+          <a href=".." data-lightbox="...">
+            <img src="<%= @concert.picture %>" alt="..." class="img-responsive">
           </a>
 
           <!-- Comments section -->
@@ -92,15 +92,17 @@
           </h1>
           <h3>Venue: <%= @concert.venue.name %> </h3>
           <h4><%= @concert.friendly_date %></h4>
+          <% if @concert.doors %>
           <h5>Doors: <%= @concert.doors %></h5>
+          <% end %>
           <h5>Show: <%= @concert.show %></h5>
           <h2>Lineup:</h2>
            <% @concert.bands.each do |band| %>
            <ul>
-           <li><h3><%= band.name %></h3></li>
+           <li><h3><%= band %></h3></li>
            </ul>
          <% end %>
-          <p><%= @concert.bands.first.description %></p>
+          <p><%= @concert.description %></p>
           
           
           
@@ -110,7 +112,7 @@
 
           <table class="table table-bordered">
             <tbody>
-            <% if @genres.first %>
+            <% if @genres %>
               <tr>
                 <td>Genres:</td>
                 <td> <%= @genres.join(', ') %></td>
@@ -136,7 +138,7 @@
               </tr>
             </tbody>
           </table>
-          <a type="button" class="btn btn-primary" href="https://www.google.com/calendar/render?action=TEMPLATE&text=<%=@concert.bands.first.name%>&dates=<%=@concert.date.to_s.gsub('-', '') %>T250000Z/<%=@concert.date.to_s.gsub('-', '') %>T270000Z&details=For+details,+link+here:+http://www.gig-buddies.com.com&location=<%=@concert.venue.name%>,Chicago,+IL&sf=true&output=xml">Add to Google Calendar</a>
+          <a type="button" class="btn btn-primary" href="https://www.google.com/calendar/render?action=TEMPLATE&text=<%=@concert.bands.first%>&dates=<%=@concert.date.to_s.gsub('-', '') %>T250000Z/<%=@concert.date.to_s.gsub('-', '') %>T270000Z&details=For+details,+link+here:+http://www.gig-buddies.com.com&location=<%=@concert.venue.name%>,Chicago,+IL&sf=true&output=xml">Add to Google Calendar</a>
           
           <% if current_user %>
             <%= form_tag '/user_concerts', method: :post do %>
@@ -149,13 +151,14 @@
             <% end %>  
             <% end %>
           <% end %>
-          
+          <% if @spotify['artists']['items'][0] %>
           <h1 class="block-header alt">
             <span>Listen</span>
           </h1>
           <iframe src="https://embed.spotify.com/?uri=<%=@uri%>" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
+          <% end %>
 
-
+  <div>
           <h1 class="block-header alt">
             <span>Maps</span>
           </h1>
@@ -165,6 +168,7 @@
             frameborder="0" style="border:0"
             src="https://www.google.com/maps/embed/v1/place?key=<%=ENV['GOOGLE_API_KEY']%>&q=<%= @concert.venue.name%>,Chicago+IL" allowfullscreen>
           </iframe>
+          </div>
 
 
           <h1 class="block-header alt">
