@@ -60,7 +60,29 @@ rating = [3, 5, 4, 2, 4, 5, 1, 3]
 end
 @reviews = Review.all
 
+thalia_hall_doc = Nokogiri::HTML(open('http://www.thaliahallchicago.com/#!/'))
 
+thalia_hall_show_html = thalia_hall_doc.css('div.event-list-item div.event-list-item-inner')
+thalia_hall_show_details = thalia_hall_show_html.map do |link|
+  {
+    date: link.css('span.tw-event-date').text.strip,
+    show: link.css('span.tw-event-time').text.strip,
+    artists: link.css('div.tw-event-name').text.strip,
+    picture: link.css('div.tw-event-image img @src').text.strip
+  } 
+end
+
+thalia_hall_show_details.each do |show|
+  artist = []
+  artist << show[:artists]
+  concert = Concert.new(
+    date: Date.parse(show[:date]).to_s,
+    show: show[:show],
+    bands: artist,
+    venue_id: Venue.find_by(name: "Thalia Hall").id,
+    picture: show[:picture])
+  concert.save
+end
 
 
 empty_bottle_doc = Nokogiri::HTML(open('http://www.emptybottle.com/full/'))
