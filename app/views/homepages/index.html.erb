@@ -183,7 +183,7 @@
                   <img src="<%= concert.picture %>" alt="" class="img-responsive img-article pull-right">
                 <% end %>
                 </a>
-                <% if concert.description %>
+                <% if concert.description && concert.description != '' %>
                 <p>
                  <%= concert.description %>
                 </p>

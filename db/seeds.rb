@@ -1,7 +1,7 @@
 require 'open-uri'
 
 
-venue_images = {"Thalia Hall" => 'thalia_1.jpg', "Schubas" => 'schubas_1.jpg', "Empty Bottle" => 'empty_bottle_1.jpg', "Double Door" => 'double_door_1.jpg', "Lincoln Hall" => 'lincoln_hall_1.jpg', "House of Blues" => 'house_of_blues_1.jpg', 'Beat Kitchen' => 'beat_kitchen_1.jpg'}
+venue_images = {"Thalia Hall" => 'thalia_1.jpg', "Schubas" => 'schubas_1.jpg', "Empty Bottle" => 'empty_bottle_1.jpg', "Double Door" => 'double_door_1.jpg', "Lincoln Hall" => 'lincoln_hall_1.jpg', "House of Blues" => 'house_of_blues_1.jpg', 'Beat Kitchen' => 'beat_kitchen_1.jpg', 'The Hideout' => 'the_hideout_1.jpg', 'The Metro' => 'the_metro_1.jpg'}
 
 names = ['Joe', 'Sam', 'Bobby', 'Trevor', 'Jake', 'John', 'Steve', 'Ryan', 'Isaac']
 prof_pics = {'Joe' => 'prof1.jpg', 'Sam' => 'prof2.jpg', 'Bobby' => 'prof3.jpg', 'Trevor' => 'prof4.png', 'Jake' => 'prof5.png', 'John' => 'prof6.png', 'Steve' => 'prof7.png', 'Isaac' => 'prof8.jpg', 'Ryan' => 'prof9.jpg'}
@@ -18,7 +18,7 @@ end
 
 
 
-sites = ['Schubas', 'Lincoln Hall', 'Thalia Hall', 'Empty Bottle', 'Double Door', 'House of Blues', 'Beat Kitchen']
+sites = ['Schubas', 'Lincoln Hall', 'Thalia Hall', 'Empty Bottle', 'Double Door', 'House of Blues', 'Beat Kitchen', 'The Hideout', 'The Metro']
 will_call = ['show copy of Ticket holders ID at door', 'ticket holder must be present at door to transfer', 'no verification required', 'show ID and the last 4 digits of credit card used to purchased', 'Original ticket holder must call venue and give them name of the new party picking up the ticket']
 sites.each do |site|
   venue = Venue.new(
@@ -132,6 +132,56 @@ beat_kitchen_show_details.each do |show|
     picture: show[:picture])
   concert.save
 end
+
+the_hideout_doc = Nokogiri::HTML(open('http://www.hideoutchicago.com'))
+
+the_hideout_show_html = the_hideout_doc.css('div.list-view-item')
+the_hideout_show_details = the_hideout_show_html.map do |link|
+  {
+    date: link.css('div.list-view-details h2.dates').text.strip,
+    doors: link.css('div.list-view-details h2.times span.doors').text.strip.sub("Doors: ", ''),
+    show: link.css('div.list-view-details h2.times span.start').text.strip.sub("Show: ", ''),
+    artists: link.css('div.list-view-details h1.headliners a, h2.supports a').children.map { |el| el.to_s.strip },
+    picture: link.css('img @src').text.strip
+  } 
+end
+
+the_hideout_show_details.each do |show|
+  concert = Concert.new(
+    date: Date.parse(show[:date]).to_s,
+    show: show[:show],
+    bands: show[:artists],
+    venue_id: Venue.find_by(name: "The Hideout").id,
+    picture: show[:picture])
+  concert.save
+end
+
+the_metro_doc = Nokogiri::HTML(open('http://www.metrochicago.com/shows/'))
+
+the_metro_show_html = the_metro_doc.css('div.showContainer')
+the_metro_show_details = the_metro_show_html.map do |link|
+  {
+    date: link.css('h2.date a').text.strip,
+    doors: link.css('h4.showinfo').text.strip.split("/")[2].sub(" Doors: ", ''),
+    show: link.css('h4.showinfo').text.strip.split("/")[3].sub(" Show: ", ""),
+    artists: link.css('div.headliner h1 h1, div.support h3 h3 strong').children.map { |el| el.to_s.strip },
+    picture: link.css('img @src').text.strip,
+    description: link.css('div.showsContent div.expandable p').text.strip
+  } 
+end
+
+the_metro_show_details.each do |show|
+  concert = Concert.new(
+    date: Date.parse(show[:date]).to_s,
+    doors: show[:doors],
+    show: show[:show],
+    bands: show[:artists],
+    venue_id: Venue.find_by(name: "The Metro").id,
+    picture: show[:picture],
+    description: show[:description])
+  concert.save
+end
+
 
 
 
