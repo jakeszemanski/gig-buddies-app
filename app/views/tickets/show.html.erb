@@ -2,7 +2,7 @@
   <div class="col-sm-7">
 
     <!-- Main image -->
-    <a href="assets/img/work_2_big.jpg" data-lightbox="...">
+    <a href=".." data-lightbox="...">
       <img src="<%= @picture %>" alt="..." class="img-responsive">
     </a>
 
@@ -56,7 +56,7 @@
       <h4>Bands</h4>
       <% @concert.bands.each do |band| %>
       <ul>
-       <li><%= band.name %></li>
+       <li><%= band %></li>
      </ul>
 
      <% end %>
@@ -96,7 +96,7 @@
         <tr>
         </tbody>
       </table>
-      <a type="button" class="btn btn-primary" href="https://www.google.com/calendar/render?action=TEMPLATE&text=<%=@concert.bands.first.name%>&dates=<%=@concert.date.to_s.gsub('-', '') %>T250000Z/<%=@concert.date.to_s.gsub('-', '') %>T270000Z&details=For+details,+link+here:+http://www.gig-buddies.com.com&location=<%=@concert.venue.name%>,Chicago,+IL&sf=true&output=xml">Add to Google Calendar</a>
+      <a type="button" class="btn btn-primary" href="https://www.google.com/calendar/render?action=TEMPLATE&text=<%=@concert.bands.first%>&dates=<%=@concert.date.to_s.gsub('-', '') %>T250000Z/<%=@concert.date.to_s.gsub('-', '') %>T270000Z&details=For+details,+link+here:+http://www.gig-buddies.com.com&location=<%=@concert.venue.name%>,Chicago,+IL&sf=true&output=xml">Add to Google Calendar</a>
       <% if current_user %>
       <% if @ticket.status == "available" %>
       <%= form_tag "/tickets/#{params[:id]}", method: :patch do %>

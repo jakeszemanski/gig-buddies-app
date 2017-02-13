@@ -19,7 +19,7 @@
             
             </div>
             <div class="pricing__price">
-            <%= Concert.find_by(id: ticket.concert_id).bands.first.name %>
+            <%= Concert.find_by(id: ticket.concert_id).bands.first %>
               
             </div>
             <div class="pricing__features">
@@ -28,8 +28,32 @@
                 <li><%= Concert.find_by(id: ticket.concert_id).friendly_date %></li>
                 <li>Seller: <%= User.find_by(id: ticket.seller_id).name %></li>
                 <li>Ask: <%= ticket.compensation %></li>
+
               </ul>
             </div>
+            <% if params[:sold_tickets] %>
+                 <%= form_tag '/tickets', method: :post do %>
+            <div class="form-group">
+              <%= label_tag :payment_status, 'Payment Status: ' %>
+              <%= select_tag :payment_status, options_for_select(['Awaiting Payment', 'Payment Recieved']), multipe: false, class: 'form-control' %>
+            </div>
+            <div>
+              <%= hidden_field_tag :id, ticket.id %>
+              <%= hidden_field_tag :seller_id, ticket.seller_id %>
+              <%= hidden_field_tag :buyer_id, ticket.buyer_id %>
+              <%= hidden_field_tag :compensation, ticket.compensation %>
+              <%= hidden_field_tag :status, ticket.status %>
+              <%= hidden_field_tag :ticket_fulfilled, ticket.ticket_fulfilled %>    
+              <%= hidden_field_tag :concert_id, ticket.concert_id %>
+            </div>
+            
+            <div>
+              <%= submit_tag "Update payment status", class: 'btn btn-default' %>
+            </div>
+          <% end %>
+
+
+                <% end %>
             <div class="pricing__btn">
               <a href="/tickets/<%=ticket.id%>" class="btn btn-primary">
                 Details
