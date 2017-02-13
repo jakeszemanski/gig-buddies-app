@@ -1,7 +1,7 @@
 require 'open-uri'
 
 
-venue_images = {"Thalia Hall" => 'thalia_1.jpg', "Schubas" => 'schubas_1.jpg', "Empty Bottle" => 'empty_bottle_1.jpg', "Double Door" => 'double_door_1.jpg', "Lincoln Hall" => 'lincoln_hall_1.jpg', "House of Blues" => 'house_of_blues_1.jpg', 'Beat Kitchen' => 'beat_kitchen_1.jpg', 'The Hideout' => 'the_hideout_1.jpg', 'The Metro' => 'the_metro_1.jpg'}
+venue_images = {"Thalia Hall" => 'thalia_1.jpg', "Schubas" => 'schubas_1.jpg', "Empty Bottle" => 'empty_bottle_1.jpg', "Double Door" => 'double_door_1.jpg', "Lincoln Hall" => 'lincoln_hall_1.jpg', "House of Blues" => 'house_of_blues_1.jpg', 'Beat Kitchen' => 'beat_kitchen_1.jpg', 'The Hideout' => 'the_hideout_1.jpg', 'The Metro' => 'the_metro_1.jpg', 'Vic Theatre' => 'the_vic_1.jpg', 'Aragon Ballroom' => 'aragon_1.jpg','The Riveria' => 'riviera_1.jpg'}
 
 names = ['Joe', 'Sam', 'Bobby', 'Trevor', 'Jake', 'John', 'Steve', 'Ryan', 'Isaac']
 prof_pics = {'Joe' => 'prof1.jpg', 'Sam' => 'prof2.jpg', 'Bobby' => 'prof3.jpg', 'Trevor' => 'prof4.png', 'Jake' => 'prof5.png', 'John' => 'prof6.png', 'Steve' => 'prof7.png', 'Isaac' => 'prof8.jpg', 'Ryan' => 'prof9.jpg'}
@@ -18,7 +18,8 @@ end
 
 
 
-sites = ['Schubas', 'Lincoln Hall', 'Thalia Hall', 'Empty Bottle', 'Double Door', 'House of Blues', 'Beat Kitchen', 'The Hideout', 'The Metro']
+sites = ['Schubas', 'Lincoln Hall', 'Thalia Hall', 'Empty Bottle', 'Double Door', 'House of Blues', 'Beat Kitchen', 'The Hideout', 'The Metro', 'Vic Theatre', 'Aragon Ballroom', 'Riviera', 'The Riveria']
+
 will_call = ['show copy of Ticket holders ID at door', 'ticket holder must be present at door to transfer', 'no verification required', 'show ID and the last 4 digits of credit card used to purchased', 'Original ticket holder must call venue and give them name of the new party picking up the ticket']
 sites.each do |site|
   venue = Venue.new(
@@ -166,7 +167,8 @@ the_metro_show_details = the_metro_show_html.map do |link|
     show: link.css('h4.showinfo').text.strip.split("/")[3].sub(" Show: ", ""),
     artists: link.css('div.headliner h1 h1, div.support h3 h3 strong').children.map { |el| el.to_s.strip },
     picture: link.css('img @src').text.strip,
-    description: link.css('div.showsContent div.expandable p').text.strip
+    description: link.css('div.showsContent div.expandable p').text.strip,
+    venue: link.css('div.picCTA').text.strip.split('/').to_s
   } 
 end
 
@@ -176,13 +178,91 @@ the_metro_show_details.each do |show|
     doors: show[:doors],
     show: show[:show],
     bands: show[:artists],
-    venue_id: Venue.find_by(name: "The Metro").id,
     picture: show[:picture],
     description: show[:description])
+ 
+  if show[:venue].include?('riviera')
+    venue = Venue.find_by(name: 'The Riveria')
+    concert.venue_id = venue.id
+  elsif show[:venue].include?('vic theatre')
+    venue = Venue.find_by(name: 'Vic Theatre')
+    concert.venue_id = venue.id
+  else
+    venue = Venue.find_by(name: "The Metro")
+    concert.venue_id = venue.id
+  end
+  
+  concert.save
+end
+
+lincoln_hall_doc = Nokogiri::HTML(open('http://www.do312.com/venues/lincoln-hall/'))
+
+lincoln_hall_show_html = lincoln_hall_doc.css('div.ds-events-group')
+lincoln_hall_show_details = lincoln_hall_show_html.map do |link|
+  {
+    date: link.css('span.ds-list-break-date').text.strip,
+    show: link.css('div.ds-event-time').text.strip,
+    artists: link.css('span.ds-listing-event-title-text').text.strip.split(", ")
+  } 
+end
+
+
+
+lincoln_hall_show_details.each do |show|
+  concert = Concert.new(
+    date: Date.parse(show[:date]).to_s,
+    show: show[:show],
+    bands: show[:artists],
+    venue_id: Venue.find_by(name: "Lincoln Hall").id)
+    
+  if show[:artists][0] && show[:artists][0] != ''
+    @spotify = Unirest.get("https://api.spotify.com/v1/search",
+        parameters: {
+          q: show[:artists][0],
+          type: "artist"}).body
+  end
+  if @spotify['artists']['total'] == 0
+    concert.picture = 'assets/img/gig_buddies_logo_1.png'
+  else
+    concert.picture = @spotify['artists']['items'][0]['images'][0]['url']
+  end
   concert.save
 end
 
 
+schubas_doc = Nokogiri::HTML(open('http://www.do312.com/venues/schubas/'))
+
+schubas_show_html = schubas_doc.css('div.ds-events-group')
+schubas_show_details = schubas_show_html.map do |link|
+  {
+    date: link.css('span.ds-list-break-date').text.strip,
+    show: link.css('div.ds-event-time').text.strip,
+    artists: link.css('span.ds-listing-event-title-text').text.strip.split(", ")
+  } 
+end
+
+
+
+schubas_show_details.each do |show|
+  concert = Concert.new(
+    date: Date.parse(show[:date]).to_s,
+    show: show[:show],
+    bands: show[:artists],
+    venue_id: Venue.find_by(name: "Schubas").id)
+    
+  if show[:artists][0] && show[:artists][0] != ''
+    @spotify = Unirest.get("https://api.spotify.com/v1/search",
+        parameters: {
+          q: show[:artists][0],
+          type: "artist"}).body
+  end
+  if @spotify['artists']['total'] == 0
+    concert.picture = 'assets/img/gig_buddies_logo_1.png'
+  else
+    concert.picture = @spotify['artists']['items'][0]['images'][0]['url']
+  end
+  concert.save
+end
 
 
 @concerts = Concert.all

@@ -46,7 +46,7 @@ class TicketsController < ApplicationController
   def show
     @ticket = Ticket.find_by(id: params[:id])
     @concert = Concert.find_by(id: @ticket.concert_id)
-    @headliner = @concert.bands.first.name
+    @headliner = @concert.bands.first
     @spotify = Unirest.get("https://api.spotify.com/v1/search",
       parameters: {
         q: @headliner,
@@ -67,6 +67,13 @@ class TicketsController < ApplicationController
     @ticket.compensation = params[:compensation]
     @ticket.buyer_id = params[:buyer_id]
     @ticket.status = params[:status]
+    @ticket.concert_id = params[:concert_id]
+    if params[:payment_status] == 'Payment Recieved'
+      @ticket.seller_paid = true
+    else
+      #may have to update if we allow users to update tickets so the status doesnt revert back to false
+      @ticket.seller_paid = false
+    end
     @ticket.save
     
     @seller = User.find_by(id: params[:seller_id])
