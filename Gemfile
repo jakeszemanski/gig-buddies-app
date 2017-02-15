@@ -29,6 +29,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'unirest'
 gem 'nokogiri'
+gem 'whenever', :require => false
 
 gem 'faker'
 
