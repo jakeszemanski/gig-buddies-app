@@ -29,10 +29,10 @@
 
         </div>
       </div> <!-- / .row -->
-        <div class="row isotope-container" >  
-          <div class="col-sm-4 col-lg-3 isotope-item category_1 courier" ng-repeat="concert in concerts|filter: myFilter|orderBy:orderAttribute:isOrderDescending" ng-enter ng-leave>
+        <div class="row isotope-container">  
+          <div class="col-sm-4 col-lg-3 isotope-item category_1 courier" ng-repeat="concert in concerts|filter: myFilter|orderBy:orderAttribute:isOrderDescending" style="height: 450px" ng-enter ng-leave>
             <a href="/concerts/{{concert.id}}" class="thumbnail">
-            <img src="{{concert.picture }}" alt="..." class="img-rounded">
+            <img src="{{concert.picture }}" alt="..." class="img-rounded" style="height: 250px; width: 250px">
             <div class="caption">
               <h5>{{ concert.bands[0] }}</h5> 
               <p>Venue: {{ concert.venue.name }}</p>
