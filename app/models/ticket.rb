@@ -10,4 +10,12 @@ class Ticket < ApplicationRecord
       ticket_fulfilled = true
     end
   end
+
+  def friendly_payment_status
+    if seller_paid == true
+      return 'Payment Recieved'
+    else
+      return 'Awaiting Payment'
+    end
+  end
 end

@@ -14,12 +14,13 @@
       <div class="row">
         <% @tickets.each do |ticket| %>
         <div class="col-sm-6 col-md-3">
-          <div class="pricing__item">
+          <div class="pricing__item" style="height:650px; width:250px">
             <div class="pricing__header">
             
             </div>
-            <div class="pricing__price">
-            <%= Concert.find_by(id: ticket.concert_id).bands.first %>
+            <div>
+            <img src="<%= ticket.concert.picture %>" height=220 width=220 />
+            <h3 style="height:100px"><%= Concert.find_by(id: ticket.concert_id).bands.first %></h3>
               
             </div>
             <div class="pricing__features">
@@ -28,22 +29,40 @@
                 <li><%= Concert.find_by(id: ticket.concert_id).friendly_date %></li>
                 <li>Seller: <%= User.find_by(id: ticket.seller_id).name %></li>
                 <li>Ask: <%= ticket.compensation %></li>
+                <% if params[:bought_tickets] %>
+                  <li><b><%= ticket.friendly_payment_status%></b></li>
+                <% end %>
+                <% if params[:sold_tickets] %>
+                  <li><b><%= ticket.ticket_fulfilled %></b></li>
+                <% end %>
 
               </ul>
             </div>
             <% if params[:sold_tickets] %>
-                 <%= form_tag '/tickets', method: :post do %>
+                 <%= form_tag "/tickets/#{ticket.id}", method: :patch do %>
             <div class="form-group">
-              <%= label_tag :payment_status, 'Payment Status: ' %>
-              <%= select_tag :payment_status, options_for_select(['Awaiting Payment', 'Payment Recieved']), multipe: false, class: 'form-control' %>
+              <%= label_tag :payment_status, 'Update Payment Status: ' %>
+              <%= select_tag :payment_status,options_for_select(['Awaiting Payment', 'Payment Recieved'], ticket.friendly_payment_status), multiple: false, class: 'form-control' %>
             </div>
             <div>
               <%= hidden_field_tag :id, ticket.id %>
+            </div>
+            <div>
               <%= hidden_field_tag :seller_id, ticket.seller_id %>
+            </div>
+            <div>
               <%= hidden_field_tag :buyer_id, ticket.buyer_id %>
+            </div>
+            <div>
               <%= hidden_field_tag :compensation, ticket.compensation %>
+            </div>
+            <div>
               <%= hidden_field_tag :status, ticket.status %>
-              <%= hidden_field_tag :ticket_fulfilled, ticket.ticket_fulfilled %>    
+            </div>
+            <div>
+              <%= hidden_field_tag :ticket_fulfilled, ticket.ticket_fulfilled %>  
+            </div>
+            <div>
               <%= hidden_field_tag :concert_id, ticket.concert_id %>
             </div>
             
@@ -51,9 +70,44 @@
               <%= submit_tag "Update payment status", class: 'btn btn-default' %>
             </div>
           <% end %>
+        <% end %>
+        <% if params[:bought_tickets] %>
+          <%= form_tag "/tickets/#{ticket.id}", method: :patch do %>
+            <div class="form-group">
+              <%= label_tag :ticket_fulfilled, 'Update fullfilment Status: ' %>
+              <%= select_tag :ticket_fulfilled,options_for_select(["Seller sent ticket info", 'Seller has not sent ticket info yet', 'I got the ticket from will call', "WTF, I didn't get the ticket at will call"], ticket.ticket_fulfilled), multiple: false, class: 'form-control' %>
+            </div>
+            <div>
+              <%= hidden_field_tag :id, ticket.id %>
+            </div>
+            <div>
+              <%= hidden_field_tag :seller_id, ticket.seller_id %>
+            </div>
+            <div>
+              <%= hidden_field_tag :buyer_id, ticket.buyer_id %>
+            </div>
+            <div>
+              <%= hidden_field_tag :compensation, ticket.compensation %>
+            </div>
+            <div>
+              <%= hidden_field_tag :status, ticket.status %>
+            </div>
+            <div>
+              <%= hidden_field_tag :payment_status, ticket.seller_paid %>  
+            </div>
+            <div>
+              <%= hidden_field_tag :concert_id, ticket.concert_id %>
+            </div>
+            
+            <div>
+              <%= submit_tag "Update fullfilment status", class: 'btn btn-default' %>
+            </div>
+          <% end %>
+        <% end %>
 
 
-                <% end %>
+
+
             <div class="pricing__btn">
               <a href="/tickets/<%=ticket.id%>" class="btn btn-primary">
                 Details

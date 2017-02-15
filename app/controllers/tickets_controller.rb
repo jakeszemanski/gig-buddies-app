@@ -75,15 +75,17 @@ class TicketsController < ApplicationController
       @ticket.seller_paid = false
     end
     @ticket.save
-    
-    @seller = User.find_by(id: params[:seller_id])
-    @concert = Concert.find_by(id: @ticket.concert_id)
-    @event = UserConcert.new(user_id: current_user.id, concert_id: @concert.id)
-    @event.save
-    flash[:success] = 'Ticket bought!'
 
-    send_message(@seller.phone, "A user has bought your ticket to the #{@concert.bands.first.name} show")
-    redirect_to '/tickets'
+    if params[:buyer_id] == current_user.id
+      @seller = User.find_by(id: params[:seller_id])
+      @concert = Concert.find_by(id: @ticket.concert_id)
+      @event = UserConcert.new(user_id: current_user.id, concert_id: @concert.id)
+      @event.save
+      flash[:success] = 'Ticket bought!'
+
+      send_message(@seller.phone, "A user has bought your ticket to the #{@concert.bands.first} show")
+      redirect_to '/tickets'
+    end
 
   end
 
