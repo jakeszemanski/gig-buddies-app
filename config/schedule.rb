@@ -19,4 +19,24 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every :hour do
+# every :hour do
+#   empty_bottle_doc = Nokogiri::HTML(open('http://www.emptybottle.com/full/'))
+
+#   empty_bottle_show_html = empty_bottle_doc.css('div.tw-plugin-full-event-list ul li div.show_full')
+#   empty_bottle_show_details = empty_bottle_show_html.map do |link|
+#     {
+#       date: link.css('span.show_details span.show_date span.tw-event-date-complete span.tw-event-date').text.strip,
+#       time: link.css('span.show_details span.show_date span.tw-event-time-complete span.tw-event-time').text.strip,
+#       artists: link.css('span.show_details span.show_artists ul li').children.map { |el| el.to_s.strip },
+#       picture: link.css('span.show_image img @src').text.strip,
+#       description: link.css('span.show_description p').text.strip
+#     }
+#   end
+  
+#   empty_bottle_show_details.each do |show|
+#     show.bands[0]
+#     if Concert.find_by(bands: show)
+
+# end
+# @sql_concert = Concert.find_by_sql(SELECT * FROM concerts WHERE bands @> ARRAY['Birdcloud']::varchar[];)
+# SQL = SELECT * FROM concerts WHERE bands @> ARRAY['Birdcloud']::varchar[];

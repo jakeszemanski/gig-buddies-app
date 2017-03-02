@@ -5,6 +5,8 @@ class Concert < ApplicationRecord
   belongs_to :calendar
   has_many :user_concerts
   has_many :users, through: :user_concerts
+  has_many :band_concerts
+  has_many :bands, through: :band_concerts
 
 
   def friendly_date

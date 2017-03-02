@@ -18,13 +18,26 @@ end
 
 
 
-sites = ['Schubas', 'Lincoln Hall', 'Thalia Hall', 'Empty Bottle', 'Double Door', 'House of Blues', 'Beat Kitchen', 'The Hideout', 'The Metro', 'Vic Theatre', 'Aragon Ballroom', 'Riviera', 'The Riveria']
+sites = ['Schubas', 'Lincoln Hall', 'Thalia Hall', 'Empty Bottle', 'House of Blues', 'Beat Kitchen', 'The Hideout', 'The Metro', 'Vic Theatre', 'Aragon Ballroom', 'The Riveria']
 
-will_call = ['show copy of Ticket holders ID at door', 'ticket holder must be present at door to transfer', 'no verification required', 'show ID and the last 4 digits of credit card used to purchased', 'Original ticket holder must call venue and give them name of the new party picking up the ticket']
+will_call = {
+  "Lincoln Hall" => "the only way you can make a ticket transfer is to have your friend or friends show up at the doors on the night of the show with your email confirmation and an original/physical state issued form of the ticket buyers ID. No photocopies of the forms of ID will be accepted. They must be the original copies. If these guidelines cannot be followed, no transfer will be allowed. Acceptable forms of ID include drivers license, state ID, or passport.",
+  "Schubas" => "the only way you can make a ticket transfer is to have your friend or friends show up at the doors on the night of the show with your email confirmation and an original/physical state issued form of the ticket buyers ID. No photocopies of the forms of ID will be accepted. They must be the original copies. If these guidelines cannot be followed, no transfer will be allowed. Acceptable forms of ID include drivers license, state ID, or passport.",
+  "Thalia Hall" => "Please contact TicketWeb to change the name on your order at 866-468-3401.",
+  "The Beat Kitchen" => "show copy of Ticket holders ID at door.",
+  "Aragon Ballroom" => "Tickets held at Will Call can only be retrieved by the cardholder with original credit card of purchase and a valid photo ID with signature such as a state ID, driver's license or passport.",
+  "House of Blues" => "If you bought your tickets through Live Nation or Ticketmaster, you can pick up those tickets at the Box Office any time its open (10AM – 5PM). You will need a valid photo ID and the credit card used for purchase.",
+  "The Metro" => "show Ticket holders ID at box office inside of doors. They will give you a physical ticket that you can give to anyone you choose to.",
+  "The Hideout" => "show copy of Ticket holders ID at door.",
+  "The Vic Theatre" => "Pick up at box office. You will need a valid photo ID and the credit card used for purchase.",
+  "The Riveria" => "Pick up at box office. You will need a valid photo ID and the credit card used for purchase."
+}
+
+
 sites.each do |site|
   venue = Venue.new(
     name: site,
-    will_call_policy: will_call.sample.to_s,
+    will_call_policy: will_call[site],
     address: 'Chicago',
     image: venue_images[site]
     )
@@ -74,15 +87,25 @@ thalia_hall_show_details = thalia_hall_show_html.map do |link|
 end
 
 thalia_hall_show_details.each do |show|
-  artist = []
-  artist << show[:artists]
+  if Band.find_by(name: show[:artists]) == nil
+    new_band = Band.new(name: show[:artists])
+    new_band.save
+  end
   concert = Concert.new(
     date: Date.parse(show[:date]).to_s,
     show: show[:show],
-    bands: artist,
     venue_id: Venue.find_by(name: "Thalia Hall").id,
     picture: show[:picture])
   concert.save
+  band_id = Band.find_by(name: show[:artists])
+  concert_id = Concert.find_by(
+    date: Date.parse(show[:date]).to_s,
+    venue_id: Venue.find_by(name: "Thalia Hall").id,
+    show: show[:show])
+  bc = BandConcert.new(
+    band_id: band_id.id,
+    concert_id: concert_id.id)
+  bc.save
 end
 
 
@@ -100,14 +123,33 @@ empty_bottle_show_details = empty_bottle_show_html.map do |link|
 end
 
 empty_bottle_show_details.each do |show|
+  show[:artists].each do |band|
+    if Band.find_by(name: band) == nil
+      new_band = Band.new(name: band)
+      new_band.save 
+    end
+  end  
   concert = Concert.new(
     date: Date.parse(show[:date]).to_s,
     show: show[:time],
-    bands: show[:artists],
     venue_id: Venue.find_by(name: "Empty Bottle").id,
     picture: show[:picture],
     description: show[:description])
   concert.save
+  
+  show[:artists].each do |band|
+    band_id = Band.find_by(name: band)
+
+  
+    concert_id = Concert.find_by(
+      date: Date.parse(show[:date]).to_s,
+      venue_id: Venue.find_by(name: "Empty Bottle").id,
+      show: show[:time])
+    bc = BandConcert.new(
+      band_id: band_id.id,
+      concert_id: concert_id.id)
+    bc.save
+  end
 end
 
 beat_kitchen_doc = Nokogiri::HTML(open('http://www.beatkitchen.com/'))
@@ -124,14 +166,32 @@ beat_kitchen_show_details = beat_kitchen_html.map do |link|
 end
 
 beat_kitchen_show_details.each do |show|
+  show[:artists].each do |band|
+    if Band.find_by(name: band) == nil
+      new_band = Band.new(name: band)
+      new_band.save 
+    end
+  end  
   concert = Concert.new(
     date: Date.parse(show[:date]).to_s,
     doors: show[:doors],
     show: show[:show],
-    bands: show[:artists],
     venue_id: Venue.find_by(name: "Beat Kitchen").id,
     picture: show[:picture])
   concert.save
+
+  show[:artists].each do |band|
+    band_id = Band.find_by(name: band)
+
+    concert_id = Concert.find_by(
+      date: Date.parse(show[:date]).to_s,
+      venue_id: Venue.find_by(name: "Beat Kitchen").id,
+      show: show[:show])
+    bc = BandConcert.new(
+      band_id: band_id.id,
+      concert_id: concert_id.id)
+    bc.save
+  end
 end
 
 the_hideout_doc = Nokogiri::HTML(open('http://www.hideoutchicago.com'))
@@ -148,13 +208,31 @@ the_hideout_show_details = the_hideout_show_html.map do |link|
 end
 
 the_hideout_show_details.each do |show|
+  show[:artists].each do |band|
+    if Band.find_by(name: band) == nil
+      new_band = Band.new(name: band)
+      new_band.save 
+    end
+  end  
   concert = Concert.new(
     date: Date.parse(show[:date]).to_s,
     show: show[:show],
-    bands: show[:artists],
     venue_id: Venue.find_by(name: "The Hideout").id,
     picture: show[:picture])
   concert.save
+
+  show[:artists].each do |band|
+    band_id = Band.find_by(name: band)
+
+    concert_id = Concert.find_by(
+      date: Date.parse(show[:date]).to_s,
+      venue_id: Venue.find_by(name: "The Hideout").id,
+      show: show[:show])
+    bc = BandConcert.new(
+      band_id: band_id.id,
+      concert_id: concert_id.id)
+    bc.save
+  end
 end
 
 the_metro_doc = Nokogiri::HTML(open('http://www.metrochicago.com/shows/'))
@@ -173,11 +251,16 @@ the_metro_show_details = the_metro_show_html.map do |link|
 end
 
 the_metro_show_details.each do |show|
+  show[:artists].each do |band|
+    if Band.find_by(name: band) == nil
+      new_band = Band.new(name: band)
+      new_band.save 
+    end
+  end  
   concert = Concert.new(
     date: Date.parse(show[:date]).to_s,
     doors: show[:doors],
     show: show[:show],
-    bands: show[:artists],
     picture: show[:picture],
     description: show[:description])
  
@@ -193,26 +276,44 @@ the_metro_show_details.each do |show|
   end
   
   concert.save
+  show[:artists].each do |band|
+    band_id = Band.find_by(name: band)
+
+    concert_id = Concert.find_by(
+      date: Date.parse(show[:date]).to_s,
+      description: show[:description],
+      show: show[:show])
+    bc = BandConcert.new(
+      band_id: band_id.id,
+      concert_id: concert_id.id)
+    bc.save
+  end
+  
 end
 
-lincoln_hall_doc = Nokogiri::HTML(open('http://www.do312.com/venues/lincoln-hall/'))
 
-lincoln_hall_show_html = lincoln_hall_doc.css('div.ds-events-group')
+lincoln_hall_doc = Nokogiri::HTML(open('http://do312.com/venues/lincoln-hall'))
+
+lincoln_hall_show_html = lincoln_hall_doc.css('div.ds-listings-groups div.ds-events-group')
 lincoln_hall_show_details = lincoln_hall_show_html.map do |link|
-  {
-    date: link.css('span.ds-list-break-date').text.strip,
+  { 
     show: link.css('div.ds-event-time').text.strip,
-    artists: link.css('span.ds-listing-event-title-text').text.strip.split(", ")
+    date: link.css('span.ds-list-break-date').text.strip,
+    artists: link.css('span.ds-listing-event-title-text').text.strip.split(",")
   } 
 end
 
 
-
 lincoln_hall_show_details.each do |show|
+  show[:artists].each do |band|
+    if Band.find_by(name: band) == nil
+      new_band = Band.new(name: band)
+      new_band.save 
+    end
+  end
   concert = Concert.new(
     date: Date.parse(show[:date]).to_s,
     show: show[:show],
-    bands: show[:artists],
     venue_id: Venue.find_by(name: "Lincoln Hall").id)
     
   if show[:artists][0] && show[:artists][0] != ''
@@ -221,12 +322,25 @@ lincoln_hall_show_details.each do |show|
           q: show[:artists][0],
           type: "artist"}).body
   end
-  if @spotify['artists']['total'] == 0
+  if @spotify != nil
     concert.picture = 'assets/img/gig_buddies_logo_1.png'
   else
     concert.picture = @spotify['artists']['items'][0]['images'][0]['url']
   end
   concert.save
+
+  show[:artists].each do |band|
+    band_id = Band.find_by(name: band)
+
+    concert_id = Concert.find_by(
+      date: Date.parse(show[:date]).to_s,
+      venue_id: Venue.find_by(name: "Lincoln Hall").id,
+      show: show[:show])
+    bc = BandConcert.new(
+      band_id: band_id.id,
+      concert_id: concert_id.id)
+    bc.save
+  end
 end
 
 
@@ -241,27 +355,43 @@ schubas_show_details = schubas_show_html.map do |link|
   } 
 end
 
-
-
 schubas_show_details.each do |show|
+  show[:artists].each do |band|
+    if Band.find_by(name: band) == nil
+      new_band = Band.new(name: band)
+      new_band.save 
+    end
+  end
   concert = Concert.new(
     date: Date.parse(show[:date]).to_s,
     show: show[:show],
-    bands: show[:artists],
     venue_id: Venue.find_by(name: "Schubas").id)
     
   if show[:artists][0] && show[:artists][0] != ''
-    @spotify = Unirest.get("https://api.spotify.com/v1/search",
+    spotify = Unirest.get("https://api.spotify.com/v1/search",
         parameters: {
           q: show[:artists][0],
           type: "artist"}).body
   end
-  if @spotify['artists']['total'] == 0
+  if spotify != nil
     concert.picture = 'assets/img/gig_buddies_logo_1.png'
   else
-    concert.picture = @spotify['artists']['items'][0]['images'][0]['url']
+    concert.picture = spotify['artists']['items'][0]['images'][0]['url']
   end
   concert.save
+
+  show[:artists].each do |band|
+    band_id = Band.find_by(name: band)
+
+    concert_id = Concert.find_by(
+      date: Date.parse(show[:date]).to_s,
+      venue_id: Venue.find_by(name: "Schubas").id,
+      show: show[:show])
+    bc = BandConcert.new(
+      band_id: band_id.id,
+      concert_id: concert_id.id)
+    bc.save
+  end
 end
 
 
