@@ -1,3 +1,4 @@
+
 <div class="showcase">
   <div id="showcase-carousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
@@ -20,7 +21,7 @@
                    
                     <h1 class="animateDown" data-animation="animateDown">
                       <% @concert1.bands.each do |band| %>
-                        <p><%= band %></p>
+                        <p><%= band.name %></p>
                       <% end %>
                     </h1>
                     <p class="lead delay_1 animateUp" data-animation="animateUp">
@@ -50,7 +51,7 @@
                       <h1 data-animation="animateDown">
                         <% @concert2.bands.each do |band| %>
                         <ul>
-                          <p><%= band %></p>
+                          <p><%= band.name %></p>
                           <% end %>
                         </ul>
                       
@@ -83,7 +84,7 @@
                       <h1 data-animation="animateDown">
                       <% @concert3.bands.each do |band| %>
                         <ul>
-                          <p><%= band %></p>
+                          <p><%= band.name %></p>
                           <% end %>
                         </ul>
                       </h1>
@@ -157,10 +158,10 @@
               <div class="blog__header">
                 <h1 class="blog__title">
                   <a href="/concerts/<%=concert.id%>">
-                    <%= concert.bands.first %>
+                    <%= concert.bands.first.name %>
                   </a>
                   <% concert.bands.drop(1).each do |band| %>
-                  <h4> <%= band %></h4>
+                  <h4> <%= band.name %></h4>
                   <% end %>
                   <h5><%= concert.venue.name %></h5>
                 </h1>
