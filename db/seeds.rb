@@ -87,25 +87,46 @@ thalia_hall_show_details = thalia_hall_show_html.map do |link|
 end
 
 thalia_hall_show_details.each do |show|
-  if Band.find_by(name: show[:artists]) == nil
-    new_band = Band.new(name: show[:artists])
-    new_band.save
-  end
   concert = Concert.new(
     date: Date.parse(show[:date]).to_s,
     show: show[:show],
     venue_id: Venue.find_by(name: "Thalia Hall").id,
     picture: show[:picture])
   concert.save
-  band_id = Band.find_by(name: show[:artists])
-  concert_id = Concert.find_by(
-    date: Date.parse(show[:date]).to_s,
-    venue_id: Venue.find_by(name: "Thalia Hall").id,
-    show: show[:show])
-  bc = BandConcert.new(
-    band_id: band_id.id,
-    concert_id: concert_id.id)
-  bc.save
+  
+  if show[:artists].is_a?(String)
+    if Band.find_by(name: show[:artists]) == nil
+      new_band = Band.new(name: show[:artists])
+      new_band.save
+      bc = BandConcert.new(
+          band_id: new_band.id,
+          concert_id: concert.id)
+      bc.save
+    else
+      existing_band = Band.find_by(name: show[:artists])
+      bc = BandConcert.new(
+          band_id: existing_band.id,
+          concert_id: concert.id)
+      bc.save
+    end
+  else
+    show[:artists].each do |band_name|
+      if Band.find_by(name: band_name) == nil
+        new_band = Band.new(name: band_name)
+        new_band.save
+        bc = BandConcert.new(
+            band_id: new_band.id,
+            concert_id: concert.id)
+        bc.save
+      else
+        existing_band = Band.find_by(name: band_name)
+        bc = BandConcert.new(
+            band_id: existing_band.id,
+            concert_id: concert.id)
+        bc.save
+      end
+    end
+  end
 end
 
 
@@ -123,12 +144,6 @@ empty_bottle_show_details = empty_bottle_show_html.map do |link|
 end
 
 empty_bottle_show_details.each do |show|
-  show[:artists].each do |band|
-    if Band.find_by(name: band) == nil
-      new_band = Band.new(name: band)
-      new_band.save 
-    end
-  end  
   concert = Concert.new(
     date: Date.parse(show[:date]).to_s,
     show: show[:time],
@@ -137,18 +152,38 @@ empty_bottle_show_details.each do |show|
     description: show[:description])
   concert.save
   
-  show[:artists].each do |band|
-    band_id = Band.find_by(name: band)
-
-  
-    concert_id = Concert.find_by(
-      date: Date.parse(show[:date]).to_s,
-      venue_id: Venue.find_by(name: "Empty Bottle").id,
-      show: show[:time])
-    bc = BandConcert.new(
-      band_id: band_id.id,
-      concert_id: concert_id.id)
-    bc.save
+  if show[:artists].is_a?(String)
+    if Band.find_by(name: show[:artists]) == nil
+      new_band = Band.new(name: show[:artists])
+      new_band.save
+      bc = BandConcert.new(
+          band_id: new_band.id,
+          concert_id: concert.id)
+      bc.save
+    else
+      existing_band = Band.find_by(name: show[:artists])
+      bc = BandConcert.new(
+          band_id: existing_band.id,
+          concert_id: concert.id)
+      bc.save
+    end
+  else
+    show[:artists].each do |band_name|
+      if Band.find_by(name: band_name) == nil
+        new_band = Band.new(name: band_name)
+        new_band.save
+        bc = BandConcert.new(
+            band_id: new_band.id,
+            concert_id: concert.id)
+        bc.save
+      else
+        existing_band = Band.find_by(name: band_name)
+        bc = BandConcert.new(
+            band_id: existing_band.id,
+            concert_id: concert.id)
+        bc.save
+      end
+    end
   end
 end
 
@@ -166,12 +201,6 @@ beat_kitchen_show_details = beat_kitchen_html.map do |link|
 end
 
 beat_kitchen_show_details.each do |show|
-  show[:artists].each do |band|
-    if Band.find_by(name: band) == nil
-      new_band = Band.new(name: band)
-      new_band.save 
-    end
-  end  
   concert = Concert.new(
     date: Date.parse(show[:date]).to_s,
     doors: show[:doors],
@@ -180,17 +209,38 @@ beat_kitchen_show_details.each do |show|
     picture: show[:picture])
   concert.save
 
-  show[:artists].each do |band|
-    band_id = Band.find_by(name: band)
-
-    concert_id = Concert.find_by(
-      date: Date.parse(show[:date]).to_s,
-      venue_id: Venue.find_by(name: "Beat Kitchen").id,
-      show: show[:show])
-    bc = BandConcert.new(
-      band_id: band_id.id,
-      concert_id: concert_id.id)
-    bc.save
+  if show[:artists].is_a?(String)
+    if Band.find_by(name: show[:artists]) == nil
+      new_band = Band.new(name: show[:artists])
+      new_band.save
+      bc = BandConcert.new(
+          band_id: new_band.id,
+          concert_id: concert.id)
+      bc.save
+    else
+      existing_band = Band.find_by(name: show[:artists])
+      bc = BandConcert.new(
+          band_id: existing_band.id,
+          concert_id: concert.id)
+      bc.save
+    end
+  else
+    show[:artists].each do |band_name|
+      if Band.find_by(name: band_name) == nil
+        new_band = Band.new(name: band_name)
+        new_band.save
+        bc = BandConcert.new(
+            band_id: new_band.id,
+            concert_id: concert.id)
+        bc.save
+      else
+        existing_band = Band.find_by(name: band_name)
+        bc = BandConcert.new(
+            band_id: existing_band.id,
+            concert_id: concert.id)
+        bc.save
+      end
+    end
   end
 end
 
@@ -207,13 +257,7 @@ the_hideout_show_details = the_hideout_show_html.map do |link|
   } 
 end
 
-the_hideout_show_details.each do |show|
-  show[:artists].each do |band|
-    if Band.find_by(name: band) == nil
-      new_band = Band.new(name: band)
-      new_band.save 
-    end
-  end  
+the_hideout_show_details.each do |show|  
   concert = Concert.new(
     date: Date.parse(show[:date]).to_s,
     show: show[:show],
@@ -221,17 +265,38 @@ the_hideout_show_details.each do |show|
     picture: show[:picture])
   concert.save
 
-  show[:artists].each do |band|
-    band_id = Band.find_by(name: band)
-
-    concert_id = Concert.find_by(
-      date: Date.parse(show[:date]).to_s,
-      venue_id: Venue.find_by(name: "The Hideout").id,
-      show: show[:show])
-    bc = BandConcert.new(
-      band_id: band_id.id,
-      concert_id: concert_id.id)
-    bc.save
+  if show[:artists].is_a?(String)
+    if Band.find_by(name: show[:artists]) == nil
+      new_band = Band.new(name: show[:artists])
+      new_band.save
+      bc = BandConcert.new(
+          band_id: new_band.id,
+          concert_id: concert.id)
+      bc.save
+    else
+      existing_band = Band.find_by(name: show[:artists])
+      bc = BandConcert.new(
+          band_id: existing_band.id,
+          concert_id: concert.id)
+      bc.save
+    end
+  else
+    show[:artists].each do |band_name|
+      if Band.find_by(name: band_name) == nil
+        new_band = Band.new(name: band_name)
+        new_band.save
+        bc = BandConcert.new(
+            band_id: new_band.id,
+            concert_id: concert.id)
+        bc.save
+      else
+        existing_band = Band.find_by(name: band_name)
+        bc = BandConcert.new(
+            band_id: existing_band.id,
+            concert_id: concert.id)
+        bc.save
+      end
+    end
   end
 end
 
@@ -251,12 +316,6 @@ the_metro_show_details = the_metro_show_html.map do |link|
 end
 
 the_metro_show_details.each do |show|
-  show[:artists].each do |band|
-    if Band.find_by(name: band) == nil
-      new_band = Band.new(name: band)
-      new_band.save 
-    end
-  end  
   concert = Concert.new(
     date: Date.parse(show[:date]).to_s,
     doors: show[:doors],
@@ -274,21 +333,41 @@ the_metro_show_details.each do |show|
     venue = Venue.find_by(name: "The Metro")
     concert.venue_id = venue.id
   end
-  
   concert.save
-  show[:artists].each do |band|
-    band_id = Band.find_by(name: band)
 
-    concert_id = Concert.find_by(
-      date: Date.parse(show[:date]).to_s,
-      description: show[:description],
-      show: show[:show])
-    bc = BandConcert.new(
-      band_id: band_id.id,
-      concert_id: concert_id.id)
-    bc.save
+  if show[:artists].is_a?(String)
+    if Band.find_by(name: show[:artists]) == nil
+      new_band = Band.new(name: show[:artists])
+      new_band.save
+      bc = BandConcert.new(
+          band_id: new_band.id,
+          concert_id: concert.id)
+      bc.save
+    else
+      existing_band = Band.find_by(name: show[:artists])
+      bc = BandConcert.new(
+          band_id: existing_band.id,
+          concert_id: concert.id)
+      bc.save
+    end
+  else
+    show[:artists].each do |band_name|
+      if Band.find_by(name: band_name) == nil
+        new_band = Band.new(name: band_name)
+        new_band.save
+        bc = BandConcert.new(
+            band_id: new_band.id,
+            concert_id: concert.id)
+        bc.save
+      else
+        existing_band = Band.find_by(name: band_name)
+        bc = BandConcert.new(
+            band_id: existing_band.id,
+            concert_id: concert.id)
+        bc.save
+      end
+    end
   end
-  
 end
 
 
@@ -305,12 +384,6 @@ end
 
 
 lincoln_hall_show_details.each do |show|
-  show[:artists].each do |band|
-    if Band.find_by(name: band) == nil
-      new_band = Band.new(name: band)
-      new_band.save 
-    end
-  end
   concert = Concert.new(
     date: Date.parse(show[:date]).to_s,
     show: show[:show],
@@ -329,17 +402,38 @@ lincoln_hall_show_details.each do |show|
   end
   concert.save
 
-  show[:artists].each do |band|
-    band_id = Band.find_by(name: band)
-
-    concert_id = Concert.find_by(
-      date: Date.parse(show[:date]).to_s,
-      venue_id: Venue.find_by(name: "Lincoln Hall").id,
-      show: show[:show])
-    bc = BandConcert.new(
-      band_id: band_id.id,
-      concert_id: concert_id.id)
-    bc.save
+  if show[:artists].is_a?(String)
+    if Band.find_by(name: show[:artists]) == nil
+      new_band = Band.new(name: show[:artists])
+      new_band.save
+      bc = BandConcert.new(
+          band_id: new_band.id,
+          concert_id: concert.id)
+      bc.save
+    else
+      existing_band = Band.find_by(name: show[:artists])
+      bc = BandConcert.new(
+          band_id: existing_band.id,
+          concert_id: concert.id)
+      bc.save
+    end
+  else
+    show[:artists].each do |band_name|
+      if Band.find_by(name: band_name) == nil
+        new_band = Band.new(name: band_name)
+        new_band.save
+        bc = BandConcert.new(
+            band_id: new_band.id,
+            concert_id: concert.id)
+        bc.save
+      else
+        existing_band = Band.find_by(name: band_name)
+        bc = BandConcert.new(
+            band_id: existing_band.id,
+            concert_id: concert.id)
+        bc.save
+      end
+    end
   end
 end
 
@@ -356,41 +450,62 @@ schubas_show_details = schubas_show_html.map do |link|
 end
 
 schubas_show_details.each do |show|
-  show[:artists].each do |band|
-    if Band.find_by(name: band) == nil
-      new_band = Band.new(name: band)
-      new_band.save 
-    end
-  end
   concert = Concert.new(
     date: Date.parse(show[:date]).to_s,
     show: show[:show],
     venue_id: Venue.find_by(name: "Schubas").id)
     
   if show[:artists][0] && show[:artists][0] != ''
-    spotify = Unirest.get("https://api.spotify.com/v1/search",
+    @spotify = Unirest.get("https://api.spotify.com/v1/search",
         parameters: {
           q: show[:artists][0],
           type: "artist"}).body
   end
-  if spotify != nil
+  if show[:artists][0] && show[:artists][0] != ''
+    @spotify = Unirest.get("https://api.spotify.com/v1/search",
+        parameters: {
+          q: show[:artists][0],
+          type: "artist"}).body
+  end
+  if @spotify != nil
     concert.picture = 'assets/img/gig_buddies_logo_1.png'
   else
-    concert.picture = spotify['artists']['items'][0]['images'][0]['url']
+    concert.picture = @spotify['artists']['items'][0]['images'][0]['url']
   end
   concert.save
 
-  show[:artists].each do |band|
-    band_id = Band.find_by(name: band)
-
-    concert_id = Concert.find_by(
-      date: Date.parse(show[:date]).to_s,
-      venue_id: Venue.find_by(name: "Schubas").id,
-      show: show[:show])
-    bc = BandConcert.new(
-      band_id: band_id.id,
-      concert_id: concert_id.id)
-    bc.save
+  if show[:artists].is_a?(String)
+    if Band.find_by(name: show[:artists]) == nil
+      new_band = Band.new(name: show[:artists])
+      new_band.save
+      bc = BandConcert.new(
+          band_id: new_band.id,
+          concert_id: concert.id)
+      bc.save
+    else
+      existing_band = Band.find_by(name: show[:artists])
+      bc = BandConcert.new(
+          band_id: existing_band.id,
+          concert_id: concert.id)
+      bc.save
+    end
+  else
+    show[:artists].each do |band_name|
+      if Band.find_by(name: band_name) == nil
+        new_band = Band.new(name: band_name)
+        new_band.save
+        bc = BandConcert.new(
+            band_id: new_band.id,
+            concert_id: concert.id)
+        bc.save
+      else
+        existing_band = Band.find_by(name: band_name)
+        bc = BandConcert.new(
+            band_id: existing_band.id,
+            concert_id: concert.id)
+        bc.save
+      end
+    end
   end
 end
 

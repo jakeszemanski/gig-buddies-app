@@ -99,7 +99,7 @@
           <h2>Lineup:</h2>
            <% @concert.bands.each do |band| %>
            <ul>
-           <li><h3><%= band %></h3></li>
+           <li><h3><%= band.name %></h3></li>
            </ul>
          <% end %>
           <p><%= @concert.description %></p>

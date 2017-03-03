@@ -34,7 +34,7 @@
             <a href="/concerts/{{concert.id}}" class="thumbnail">
             <img src="{{concert.picture }}" alt="..." class="img-rounded" style="height: 250px; width: 250px">
             <div class="caption">
-              <h5>{{ concert.band.name }}</h5> 
+              <h5>{{ concert.bands[0].name }}</h5> 
               <p>Venue: {{ concert.venue.name }}</p>
               <p>{{ concert.friendlyDate }}</p>
               <p>Show: {{ concert.show }}</p>
