@@ -17,10 +17,16 @@
 !/log/.keep
 !/tmp/.keep
 .env
+
 ../log/development.log
+
 
 /client_secret.json
 
 # Ignore Byebug command history file.
+
 .byebug_historylog
 log
+=======
+.byebug_history
+

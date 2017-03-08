@@ -16,7 +16,6 @@ will_call = {
   "Empty Bottle" => "show copy of Ticket holders ID at door."
 }
 
-
 sites.each do |site|
   venue = Venue.new(
     name: site,
@@ -26,5 +25,6 @@ sites.each do |site|
     )
   venue.save
 end
+
 
 puts 'done!'

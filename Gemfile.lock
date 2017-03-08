@@ -158,8 +158,11 @@ GEM
     rest-client (1.6.9)
       mime-types (~> 1.16)
     retriable (2.1.0)
+<<<<<<< HEAD
     rufus-scheduler (3.3.4)
       tzinfo
+=======
+>>>>>>> abd2c03478d4fd58e84fc12d22e66e9395023b9f
     sass (3.4.23)
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)

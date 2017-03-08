@@ -31,6 +31,10 @@ gem 'unirest'
 gem 'nokogiri'
 gem 'whenever', :require => false
 
+gem 'unirest'
+gem 'nokogiri'
+gem 'whenever', :require => false
+
 gem 'faker'
 
 # Use Capistrano for deployment
