@@ -15,12 +15,13 @@
             <img src="assets/img/<%= venue.image %>" alt="...">
             <div class="caption">
               <h5><%=venue.name %> </h5>
-
+            <% if venue.reviews.first %>
               <ul class="rating">
               <% venue.reviews.first.rating.times do %>
                 <li><i class="fa fa-star"></i></li>
                 <% end %>
               </ul>
+            <% end %>
               <p>
                 Will call exchange policy: <%= venue.will_call_policy %>
               </p>

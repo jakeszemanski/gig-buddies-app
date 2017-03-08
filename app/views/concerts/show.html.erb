@@ -4,7 +4,11 @@
           
           <!-- Main image -->
           <a href=".." data-lightbox="...">
-            <img src="<%= @concert.picture %>" alt="..." class="img-responsive">
+            <% if @concert.picture.include?('gig_buddies') %>
+              <img src="/<%= @concert.picture %>" alt="...">
+            <% else %>
+              <img src="<%= @concert.picture %>" alt="...">
+            <% end %>
           </a>
 
           <!-- Comments section -->
@@ -44,6 +48,7 @@
             <div class="comments__list">
               
               <!-- Comment item -->
+              <% if @concert.venue.reviews %>
               <% @concert.venue.reviews.each do |review| %>
               <div class="comments__item">
                 
@@ -79,6 +84,7 @@
                 </div>
 
               </div> <!-- / .comments__item -->
+              <% end %>
               <% end %>
             </div> <!-- / .comments__list -->
 
@@ -138,7 +144,7 @@
               </tr>
             </tbody>
           </table>
-          <a type="button" class="btn btn-primary" href="https://www.google.com/calendar/render?action=TEMPLATE&text=<%=@concert.bands.first%>&dates=<%=@concert.date.to_s.gsub('-', '') %>T250000Z/<%=@concert.date.to_s.gsub('-', '') %>T270000Z&details=For+details,+link+here:+http://www.gig-buddies.com.com&location=<%=@concert.venue.name%>,Chicago,+IL&sf=true&output=xml">Add to Google Calendar</a>
+          <a type="button" class="btn btn-primary" href="https://www.google.com/calendar/render?action=TEMPLATE&text=<%= @concert.bands.first.name %>&dates=<%= @concert.date.to_s.gsub('-', '') %>T250000Z/<%= @concert.date.to_s.gsub('-', '') %>T270000Z&details=For+details,+link+here:+http://www.gig-buddies.com&location=<%= @concert.venue.name %>,Chicago,+IL&sf=true&output=xml">Add to Google Calendar</a>
           
           <% if current_user %>
             <%= form_tag '/user_concerts', method: :post do %>

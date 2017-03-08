@@ -46,14 +46,16 @@ class TicketsController < ApplicationController
   def show
     @ticket = Ticket.find_by(id: params[:id])
     @concert = Concert.find_by(id: @ticket.concert_id)
-    @headliner = @concert.bands.first
+    @headliner = @concert.bands.first.name
     @spotify = Unirest.get("https://api.spotify.com/v1/search",
       parameters: {
         q: @headliner,
         type: "artist"}).body
-    @genres = @spotify['artists']['items'][0]['genres']
-    @uri = @spotify['artists']['items'][0]['uri']
-    @picture = @spotify['artists']['items'][0]['images'][0]['url']
+    if @spotify['artists']['items'][0]
+      @genres = @spotify['artists']['items'][0]['genres']
+      @uri = @spotify['artists']['items'][0]['uri']
+      @picture = @spotify['artists']['items'][0]['images'][0]['url']
+    end
   end
 
   def edit

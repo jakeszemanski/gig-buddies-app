@@ -101,9 +101,12 @@
             <% if @concerts.ids %>
               <% @concerts.each do |concert| %>
             <div class="col-sm-6">
-             
-              <a href="/concerts/<%=concert.id%>" class="thumbnail">
-                <img src="<%= concert.bands.first.image %>" alt="...">
+              <a href="/concerts/<%= concert.id %>" class="thumbnail">
+                <% if concert.picture.include?('gig_buddies') %>
+                  <img src="/<%= concert.picture %>" alt="...">
+                <% else %>
+                  <img src="<%= concert.picture %>" alt="...">
+                <% end %>
                 <div class="caption hidden">
                   <h5>Project Title</h5>
                   <ul class="rating">

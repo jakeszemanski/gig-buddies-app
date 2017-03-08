@@ -136,16 +136,21 @@
           <img src="assets/img/<%=venue.image%>" alt="...">
             <div class="caption">
               <h5><%= venue.name %></h5>
-                <ul class="rating">
-                <% venue.reviews.first.rating.times do %>
-                  <li><i class="fa fa-star"></i></li>
+                <% if venue.reviews.first %>
+                  <ul class="rating">
+                    <% venue.reviews.first.rating.times do %>
+                      <li><i class="fa fa-star"></i></li>
+                    <% end %>
+                  </ul>
                 <% end %>
-                </ul>
-                <p><%= venue.reviews.first.description %></p>
+                <% if venue.reviews.first %>
+                  <p><%= venue.reviews.first.description %></p>
+                <% end %>
             </div>
           </a>
         </div>
-               <% end %>
+        <% end %>
+             
       </div>
     </div> <!-- / .container -->
 
@@ -189,7 +194,7 @@
                  <%= concert.description %>
                 </p>
                 <% else %>
-                <p>.</p>
+                <p>No description available</p>
                 <p>.</p>
                 <p>.</p>
                 <p>.</p>

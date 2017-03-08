@@ -1,27 +1,23 @@
 <div class="container">
-      <div class="row">
-        <div class="col-sm-12">
-          
-          <h1 class="block-header alt">
-            <span>Will Call Tickets</span>
-          </h1>
-          <p>
-            While there are no actual transactions on this site you can trade for tickets that you want. Clicking the buy ticket button will take that ticket off the market and you will have 48 hours to get into contact with the seller exchange the agreed upon trade item or make a written confirmation of a future good (i.e. ticket to another show or beer at the show). We will not enforce these trades, but please let us know if a user is abusing the honor system!
-          </p>
-
-        </div>
-      </div>
-      <div class="row">
-        <% @tickets.each do |ticket| %>
+  <div class="row">
+    <div class="col-sm-12">
+      <h1 class="block-header alt">
+        <span>Will Call Tickets</span>
+      </h1>
+      <p>While there are no actual transactions on this site you can trade for tickets that you want. Clicking the buy ticket button will take that ticket off the market and you will have 48 hours to get into contact with the seller exchange the agreed upon trade item or make a written confirmation of a future good (i.e. ticket to another show or beer at the show). We will not enforce these trades, but please let us know if a user is abusing the honor system!
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <% if @tickets.first %> 
+      <% @tickets.each do |ticket| %>
         <div class="col-sm-6 col-md-3">
           <div class="pricing__item" style="height:650px; width:250px">
             <div class="pricing__header">
-            
             </div>
             <div>
-            <img src="<%= ticket.concert.picture %>" height=220 width=220 />
-            <h3 style="height:100px"><%= Concert.find_by(id: ticket.concert_id).bands.first %></h3>
-              
+              <img src="<%= ticket.concert.picture %>" height=220 width=220 />
+              <h3 style="height:100px"><%= Concert.find_by(id: ticket.concert_id).bands.first.name %></h3>
             </div>
             <div class="pricing__features">
               <ul>
@@ -35,11 +31,10 @@
                 <% if params[:sold_tickets] %>
                   <li><b><%= ticket.ticket_fulfilled %></b></li>
                 <% end %>
-
               </ul>
             </div>
             <% if params[:sold_tickets] %>
-                 <%= form_tag "/tickets/#{ticket.id}", method: :patch do %>
+              <%= form_tag "/tickets/#{ticket.id}", method: :patch do %>
             <div class="form-group">
               <%= label_tag :payment_status, 'Update Payment Status: ' %>
               <%= select_tag :payment_status,options_for_select(['Awaiting Payment', 'Payment Recieved'], ticket.friendly_payment_status), multiple: false, class: 'form-control' %>
@@ -65,14 +60,13 @@
             <div>
               <%= hidden_field_tag :concert_id, ticket.concert_id %>
             </div>
-            
             <div>
               <%= submit_tag "Update payment status", class: 'btn btn-default' %>
             </div>
-          <% end %>
-        <% end %>
-        <% if params[:bought_tickets] %>
-          <%= form_tag "/tickets/#{ticket.id}", method: :patch do %>
+              <% end %>
+            <% end %>
+            <% if params[:bought_tickets] %>
+              <%= form_tag "/tickets/#{ticket.id}", method: :patch do %>
             <div class="form-group">
               <%= label_tag :ticket_fulfilled, 'Update fullfilment Status: ' %>
               <%= select_tag :ticket_fulfilled,options_for_select(["Seller sent ticket info", 'Seller has not sent ticket info yet', 'I got the ticket from will call', "WTF, I didn't get the ticket at will call"], ticket.ticket_fulfilled), multiple: false, class: 'form-control' %>
@@ -98,15 +92,11 @@
             <div>
               <%= hidden_field_tag :concert_id, ticket.concert_id %>
             </div>
-            
             <div>
               <%= submit_tag "Update fullfilment status", class: 'btn btn-default' %>
             </div>
-          <% end %>
-        <% end %>
-
-
-
+              <% end %>
+            <% end %>
 
             <div class="pricing__btn">
               <a href="/tickets/<%=ticket.id%>" class="btn btn-primary">
@@ -115,7 +105,11 @@
             </div>
           </div>
         </div>
-        <% end %>
-        
-      </div> <!-- / .row -->
-    </div> <!-- / .container --> 
+      </div>
+    </div>
+      <% end %>
+    <% else %>
+    <p>no tickets available</p>
+    <% end %>
+  </div> <!-- / .row -->
+</div> <!-- / .container --> 
