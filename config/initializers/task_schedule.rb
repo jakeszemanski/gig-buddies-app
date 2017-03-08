@@ -453,3 +453,14 @@ scheduler.every("12h") do
     end
   end
 end
+
+
+scheduler.every("2h") do
+  @concerts = Concert.all 
+  @concerts.each do |concert|
+    if concert.date.to_date.past?
+      concert.active = false
+      concert.save
+    end
+  end 
+end

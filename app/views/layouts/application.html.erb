@@ -68,8 +68,8 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tickets <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="/tickets">Buy Tickets</a></li>
-                <li><a href="/tickets/new">Sell Tickets</a></li>
+                <li><a href="/tickets">Acquire Tickets</a></li>
+                <li><a href="/tickets/new">List a Ticket</a></li>
                 <% if current_user %>
                 <li><a href="/tickets?bought_tickets=<%=current_user.id%>">My Acquired Tickets</a></li>
                 <li><a href="/tickets?sold_tickets=<%=current_user.id%>">My Listed Tickets</a></li>

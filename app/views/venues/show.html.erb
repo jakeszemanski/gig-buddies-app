@@ -1,143 +1,121 @@
 <div class="container">
-      <div class="row">
-        <div class="col-sm-7">
-          
-          <!-- Main image -->
-          <a href="/" data-lightbox="...">
-            <img src="../assets/img/<%= @venue.image %>" alt="..." class="img-responsive">
-          </a>
+  <div class="row">
+    <div class="col-sm-7">
+      <!-- Main image -->
+      <a href="/" data-lightbox="...">
+        <img src="../assets/img/<%= @venue.image %>" alt="..." class="img-responsive">
+      </a>
+      <% if current_user %>
+        <h1 class="block-header alt">
+          <span>Reviews</span>
+        </h1>
+        <%= form_tag '/reviews', method: :post do %>
 
-
-<% if current_user %>
- <h1 class="block-header alt">
-            <span>Reviews</span>
-          </h1>
-
-  <%= form_tag '/reviews', method: :post do %>
-
-  <div class="form-group">
-    <%= hidden_field_tag :venue, @venue.id %>
-  </div>
-  <div class="form-group">
-  <%= label_tag :rating, 'Enter a rating: ' %>
-  <%= select_tag :rating, options_for_select(1..5), multipe: false, class: 'form-control' %>
-  </div>
-  <div class="form-group">
-    <%= label_tag :description, 'Enter  a description' %>
-    <%= text_field_tag :description, '', class: 'form-control' %>
-  </div>
-  <div>
-    <%= submit_tag 'Submit review!' %>
-  </div>
-    <% end %>
-  <% end %>
-
-          <div class="comments">
-            <div class="comments__heading">Reviews</div>
-            <!-- List of comments -->
-            <div class="comments__list">
-              
-              <!-- Comment item -->
-              <% @venue.reviews.each do |review| %>
+        <div class="form-group">
+          <%= hidden_field_tag :venue, @venue.id %>
+        </div>
+        <div class="form-group">
+        <%= label_tag :rating, 'Enter a rating: ' %>
+        <%= select_tag :rating, options_for_select(1..5), multipe: false, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= label_tag :description, 'Enter  a description' %>
+          <%= text_field_tag :description, '', class: 'form-control' %>
+        </div>
+        <div>
+          <%= submit_tag 'Submit review!' %>
+        </div>
+        <% end %>
+      <% end %>
+      <div class="comments">
+        <div class="comments__heading">Reviews</div>
+          <!-- List of comments -->
+          <div class="comments__list">
+            <!-- Comment item -->
+            <% @venue.reviews.each do |review| %>
               <div class="comments__item">
-                
                 <div class="comments-item__avatar">
                   <img src="../assets/img/<%= User.find_by(id: review.user_id).profile_pic %>" class="img-responsive" alt="..." />
                 </div>
-
                 <div class="comments-item__body">
-
                   <div class="comments-item__info">
-                    <div class="comments-item-info__author"><%= User.find_by(id: review.user_id).name %></div>
+                    <div class="comments-item-info__author"><%= User.find_by(id: review.user_id).name %>
+                    </div>
                     <div class="comments-item-info__divider">
                       <i class="fa fa-circle"></i>
                     </div>
-                      <ul class="rating">
-                    <% review.rating.times do %>
-                      <i class="fa fa-star"></i>
-                    <% end %>
+                    <ul class="rating">
+                      <% review.rating.times do %>
+                        <i class="fa fa-star"></i>
+                      <% end %>
                     </ul>
                   </div>
-
                   <div class="comments-item__content">
                     <%= review.description %>
                   </div>
-
                   <div class="comments-item__actions">
                     <a href="#" class="comment-item-actions__reply">
                       Reply
                     </a>
                   </div>
                 </div>
-
               </div> <!-- / .comments__item -->
-              <% end %>
-            </div> <!-- / .comments__list -->
-
-          </div> <!-- / .comments -->
-
-        </div>
-        <div class="col-sm-5">
-          
-          <h1 class="block-header alt">
-            <span><%= @venue.name%></span>
-          </h1>
-          
-          
-          <p>Will call policy: <%=@venue.will_call_policy%></p>
-          
-          <h1 class="block-header alt">
-            <span>Tickets</span>
-          </h1>
-            <a href="/tickets?venue=<%=@venue.id%>"><button>See Available</button></a>
-         
-          <h1 class="block-header alt">
-            <span>Upcoming shows</span>
-          </h1>
-          <div>
-            <a href="/concerts?venue_id=<%=@venue.id%>"><button>See All</button></a>
-          </div>
-          <div class="row">
-            <% if @concerts.ids %>
-              <% @concerts.each do |concert| %>
-            <div class="col-sm-6">
-              <a href="/concerts/<%= concert.id %>" class="thumbnail">
-                <% if concert.picture.include?('gig_buddies') %>
-                  <img src="/<%= concert.picture %>" alt="...">
-                <% else %>
-                  <img src="<%= concert.picture %>" alt="...">
-                <div class="caption hidden">
-                  <h5>Project Title</h5>
-                  <ul class="rating">
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                    <li><i class="fa fa-star"></i></li>
-                  </ul>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  </p>
-                </div>
-              </a>
-              
-            </div>
             <% end %>
-            <% else %>
-            <p>no upcoming shows</p>
-              <% end %>
-          </div> <!-- / .row -->
-
+          </div> <!-- / .comments__list -->
+        </div> <!-- / .comments -->
+      </div>
+      <div class="col-sm-5">
+        <h1 class="block-header alt">
+          <span><%= @venue.name%></span>
+        </h1>
+        <p>Will call policy: <%=@venue.will_call_policy%></p>
+        <h1 class="block-header alt">
+          <span>Tickets</span>
+        </h1>
+        <a href="/tickets?venue=<%=@venue.id%>"><button>See Available</button></a>    
+        <h1 class="block-header alt">
+          <span>Upcoming shows</span>
+        </h1>
+        <div>
+          <a href="/concerts?venue_id=<%=@venue.id%>"><button>See All</button></a>
         </div>
-        
-    <iframe
-  width="450"
-  height="450"
-  frameborder="0" style="border:0"
-  src="https://www.google.com/maps/embed/v1/place?key=<%=ENV['GOOGLE_API_KEY']%>
-    &q=<%= @venue.name%>,Chicago+IL" allowfullscreen>
-</iframe>
-      </div> <!-- / .row -->
-    </div> <!-- / .container -->
+        <div class="row">
+          <% if @concerts.first %>
+            <% @concerts.each do |concert| %>
+              <div class="col-sm-6">
+                <a href="/concerts/<%= concert.id %>" class="thumbnail">
+                  <% if concert.picture.include?('gig_buddies') %>
+                    <img src="/<%= concert.picture %>" alt="...">
+                  <% else %>
+                    <img src="<%= concert.picture %>" alt="...">
+                  <% end %>
+                  <div class="caption hidden">
+                    <h5>Project Title</h5>
+                    <ul class="rating">
+                      <li><i class="fa fa-star"></i></li>
+                      <li><i class="fa fa-star"></i></li>
+                      <li><i class="fa fa-star"></i></li>
+                      <li><i class="fa fa-star"></i></li>
+                      <li><i class="fa fa-star"></i></li>
+                    </ul>
+                    <p>
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    </p>
+                  </div>
+                </a> 
+              </div>
+            <% end %>
+          <% end %>
+        </div> <!-- / .row -->
+      </div>
+      <iframe
+      width="450"
+      height="450"
+      frameborder="0" style="border:0"
+      src="https://www.google.com/maps/embed/v1/place?key=<%=ENV['GOOGLE_API_KEY']%>
+        &q=<%= @venue.name%>,Chicago+IL" allowfullscreen>
+      </iframe>
+    </div> <!-- / .row -->
+  </div> <!-- / .container -->
 
 

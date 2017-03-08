@@ -31,10 +31,6 @@ gem 'unirest'
 gem 'nokogiri'
 gem 'whenever', :require => false
 
-gem 'unirest'
-gem 'nokogiri'
-gem 'whenever', :require => false
-
 gem 'faker'
 
 # Use Capistrano for deployment
@@ -63,5 +59,3 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'twilio-ruby'
 gem 'google-api-client', require: 'google/apis/calendar_v3'
 
-gem 'omniauth'
-gem 'googleauth'

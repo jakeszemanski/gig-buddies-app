@@ -16,14 +16,8 @@
             <div class="pricing__header">
             </div>
             <div>
-<<<<<<< HEAD
               <img src="<%= ticket.concert.picture %>" height=220 width=220 />
               <h3 style="height:100px"><%= Concert.find_by(id: ticket.concert_id).bands.first.name %></h3>
-=======
-            <img src="<%= ticket.concert.picture %>" height=220 width=220 />
-            <h3 style="height:100px"><%= Concert.find_by(id: ticket.concert_id).bands.first %></h3>
-              
->>>>>>> abd2c03478d4fd58e84fc12d22e66e9395023b9f
             </div>
             <div class="pricing__features">
               <ul>
@@ -37,18 +31,10 @@
                 <% if params[:sold_tickets] %>
                   <li><b><%= ticket.ticket_fulfilled %></b></li>
                 <% end %>
-<<<<<<< HEAD
               </ul>
             </div>
             <% if params[:sold_tickets] %>
               <%= form_tag "/tickets/#{ticket.id}", method: :patch do %>
-=======
-
-              </ul>
-            </div>
-            <% if params[:sold_tickets] %>
-                 <%= form_tag "/tickets/#{ticket.id}", method: :patch do %>
->>>>>>> abd2c03478d4fd58e84fc12d22e66e9395023b9f
             <div class="form-group">
               <%= label_tag :payment_status, 'Update Payment Status: ' %>
               <%= select_tag :payment_status,options_for_select(['Awaiting Payment', 'Payment Recieved'], ticket.friendly_payment_status), multiple: false, class: 'form-control' %>
