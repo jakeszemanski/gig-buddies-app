@@ -11,13 +11,12 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    @review = Review.new(
+    @review = Review.create(
       rating: params[:rating],
       description: params[:description],
       user_id: current_user.id,
       venue_id: params[:venue_id]
       )
-    @review.save
     redirect_to "/venues/#{params[:venue_id]}"
   end
 

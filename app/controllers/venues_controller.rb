@@ -15,6 +15,7 @@ class VenuesController < ApplicationController
       user_id: current_user.id
       )
     @venue.save
+
   end
 
   def show
