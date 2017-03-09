@@ -1,3 +1,4 @@
+require 'mail'
 class TicketsController < ApplicationController
   def index
 
@@ -80,9 +81,10 @@ class TicketsController < ApplicationController
       #may have to update if we allow users to update tickets so the status doesnt revert back to false
       @ticket.seller_paid = false
     end
+
+
     @ticket.save
 
-    if params[:buyer_id] == current_user.id
       @buyer = User.find_by(id: @ticket.buyer_id)
       @seller = User.find_by(id: params[:seller_id])
       @concert = Concert.find_by(id: @ticket.concert_id)
@@ -90,14 +92,24 @@ class TicketsController < ApplicationController
       @event.save
       flash[:success] = 'Ticket bought!'
 
-      send_message(@seller.phone_number, "A user has bought your ticket to the #{@concert.bands.first} show, please contact #{@buyer.name} at #{@buyer.phone_number}")
+     send_message(@seller.phone_number, "A user has bought your ticket to the #{@concert.bands.first.name} show, please contact #{@buyer.name} at #{@buyer.email}")
 
-      send_message(@buyer.phone_number, "Rats off to ya! You acquired a ticket, please get in contact with #{@seller.name} to arrange the exchange at #{@seller.phone_number}") 
-    end
+      send_message(@buyer.phone_number, "Rats off to ya! You acquired a ticket to #{@concert.bands.first.name}, please get in contact with #{@seller.name} to arrange the exchange at #{@seller.email}") 
+    
     redirect_to '/tickets'
   end
 
   def destroy
 
   end
+
+  private
+  def send_message(phone_number, alert_message)
+     @client = Twilio::REST::Client.new ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN']
+     @client.account.messages.create({
+       :from => ENV['TWILIO_NUMBER'],
+       :to => "+1#{phone_number}", 
+       :body => alert_message
+      })
+   end
 end
