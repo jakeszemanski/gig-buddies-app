@@ -22,10 +22,10 @@
 * Uses a Postgresql with the following database connections: https://docs.google.com/spreadsheets/d/1zbDtmKqf0RM-CZskwvr347BXm6XzWPO5VDVY6xlvr9I/edit?usp=sharing
 
 * Concert show page makes calls to the following APIs
-  *Google API for Google Maps location of venue
-  *Google API for the ability to add the concert to the users Google Calendar
-  *Spotify API for genres of the band, as well as the band's URI. The band's URI is used to create a playlist for the band on a widget on the band show page
-  *Yahoo Weather API for weather the day of the show. That data is then plugged into a card at the bottom of the concert show page
+  * Google API for Google Maps location of venue
+  * Google API for the ability to add the concert to the users Google Calendar
+  * Spotify API for genres of the band, as well as the band's URI. The band's URI is used to create a playlist for the band on a widget on the band show page
+  * Yahoo Weather API for weather the day of the show. That data is then plugged into a card at the bottom of the concert show page
 
 
 
