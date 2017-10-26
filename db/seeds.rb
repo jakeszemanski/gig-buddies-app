@@ -145,124 +145,124 @@ end
     end
   end
 
-  beat_kitchen_doc = Nokogiri::HTML(open('http://www.beatkitchen.com/'))
+  # beat_kitchen_doc = Nokogiri::HTML(open('http://www.beatkitchen.com/'))
 
-  beat_kitchen_html = beat_kitchen_doc.css('div#event-listing div.list-view-item')
-  beat_kitchen_show_details = beat_kitchen_html.map do |link|
-    {
-      date: link.css('div.list-view-details h2.dates').text.strip,
-      artists: link.css('div.list-view-details h1.headliners a, h2.supports a').children.map { |el| el.to_s.strip },
-      doors: link.css('div.list-view-details h2.times span.doors').text.strip.sub("Doors: ", ''),
-      show: link.css('div.list-view-details h2.times span.start').text.strip.sub("Show: ", ''),
-      picture: link.css('img @src').text.strip
-    }
-  end
+  # beat_kitchen_html = beat_kitchen_doc.css('div#event-listing div.list-view-item')
+  # beat_kitchen_show_details = beat_kitchen_html.map do |link|
+  #   {
+  #     date: link.css('div.list-view-details h2.dates').text.strip,
+  #     artists: link.css('div.list-view-details h1.headliners a, h2.supports a').children.map { |el| el.to_s.strip },
+  #     doors: link.css('div.list-view-details h2.times span.doors').text.strip.sub("Doors: ", ''),
+  #     show: link.css('div.list-view-details h2.times span.start').text.strip.sub("Show: ", ''),
+  #     picture: link.css('img @src').text.strip
+  #   }
+  # end
 
-  beat_kitchen = Venue.find_by(name: "Beat Kitchen")
-  beat_kitchen_show_details.each do |show|
-    if Concert.find_by(date: Date.parse(show[:date]).to_s, show: show[:show], venue_id: beat_kitchen.id) == nil
-      concert = Concert.new(
-        date: Date.parse(show[:date]).to_s,
-        doors: show[:doors],
-        show: show[:show],
-        venue_id: beat_kitchen.id,
-        picture: show[:picture])
-      concert.save
+  # beat_kitchen = Venue.find_by(name: "Beat Kitchen")
+  # beat_kitchen_show_details.each do |show|
+  #   if Concert.find_by(date: Date.parse(show[:date]).to_s, show: show[:show], venue_id: beat_kitchen.id) == nil
+  #     concert = Concert.new(
+  #       date: Date.parse(show[:date]).to_s,
+  #       doors: show[:doors],
+  #       show: show[:show],
+  #       venue_id: beat_kitchen.id,
+  #       picture: show[:picture])
+  #     concert.save
 
-      if show[:artists].is_a?(String)
-        if Band.find_by(name: show[:artists]) == nil
-          new_band = Band.new(name: show[:artists])
-          new_band.save
-          bc = BandConcert.new(
-              band_id: new_band.id,
-              concert_id: concert.id)
-          bc.save
-        else
-          existing_band = Band.find_by(name: show[:artists])
-          bc = BandConcert.new(
-              band_id: existing_band.id,
-              concert_id: concert.id)
-          bc.save
-        end
-      else
-        show[:artists].each do |band_name|
-          if Band.find_by(name: band_name) == nil
-            new_band = Band.new(name: band_name)
-            new_band.save
-            bc = BandConcert.new(
-                band_id: new_band.id,
-                concert_id: concert.id)
-            bc.save
-          else
-            existing_band = Band.find_by(name: band_name)
-            bc = BandConcert.new(
-                band_id: existing_band.id,
-                concert_id: concert.id)
-            bc.save
-          end
-        end
-      end
-    end
-  end
+  #     if show[:artists].is_a?(String)
+  #       if Band.find_by(name: show[:artists]) == nil
+  #         new_band = Band.new(name: show[:artists])
+  #         new_band.save
+  #         bc = BandConcert.new(
+  #             band_id: new_band.id,
+  #             concert_id: concert.id)
+  #         bc.save
+  #       else
+  #         existing_band = Band.find_by(name: show[:artists])
+  #         bc = BandConcert.new(
+  #             band_id: existing_band.id,
+  #             concert_id: concert.id)
+  #         bc.save
+  #       end
+  #     else
+  #       show[:artists].each do |band_name|
+  #         if Band.find_by(name: band_name) == nil
+  #           new_band = Band.new(name: band_name)
+  #           new_band.save
+  #           bc = BandConcert.new(
+  #               band_id: new_band.id,
+  #               concert_id: concert.id)
+  #           bc.save
+  #         else
+  #           existing_band = Band.find_by(name: band_name)
+  #           bc = BandConcert.new(
+  #               band_id: existing_band.id,
+  #               concert_id: concert.id)
+  #           bc.save
+  #         end
+  #       end
+  #     end
+  #   end
+  # end
 
-  the_hideout_doc = Nokogiri::HTML(open('http://www.hideoutchicago.com'))
-  the_hideout_show_html = the_hideout_doc.css('div.list-view-item')
-  the_hideout_show_details = the_hideout_show_html.map do |link|
-    {
-      date: link.css('div.list-view-details h2.dates').text.strip,
-      doors: link.css('div.list-view-details h2.times span.doors').text.strip.sub("Doors: ", ''),
-      show: link.css('div.list-view-details h2.times span.start').text.strip.sub("Show: ", ''),
-      artists: link.css('div.list-view-details h1.headliners a, h2.supports a').children.map { |el| el.to_s.strip },
-      picture: link.css('img @src').text.strip
-    } 
-  end
+  # the_hideout_doc = Nokogiri::HTML(open('http://www.hideoutchicago.com'))
+  # the_hideout_show_html = the_hideout_doc.css('div.list-view-item')
+  # the_hideout_show_details = the_hideout_show_html.map do |link|
+  #   {
+  #     date: link.css('div.list-view-details h2.dates').text.strip,
+  #     doors: link.css('div.list-view-details h2.times span.doors').text.strip.sub("Doors: ", ''),
+  #     show: link.css('div.list-view-details h2.times span.start').text.strip.sub("Show: ", ''),
+  #     artists: link.css('div.list-view-details h1.headliners a, h2.supports a').children.map { |el| el.to_s.strip },
+  #     picture: link.css('img @src').text.strip
+  #   } 
+  # end
 
-  the_hideout = Venue.find_by(name: "The Hideout")
-  the_hideout_show_details.each do |show|
-    if Concert.find_by(date: Date.parse(show[:date]).to_s, show: show[:show], venue_id: the_hideout.id) == nil  
-      concert = Concert.new(
-        date: Date.parse(show[:date]).to_s,
-        doors: show[:doors],
-        show: show[:show],
-        venue_id: the_hideout.id,
-        picture: show[:picture])
-      concert.save
+  # the_hideout = Venue.find_by(name: "The Hideout")
+  # the_hideout_show_details.each do |show|
+  #   if Concert.find_by(date: Date.parse(show[:date]).to_s, show: show[:show], venue_id: the_hideout.id) == nil  
+  #     concert = Concert.new(
+  #       date: Date.parse(show[:date]).to_s,
+  #       doors: show[:doors],
+  #       show: show[:show],
+  #       venue_id: the_hideout.id,
+  #       picture: show[:picture])
+  #     concert.save
 
-      if show[:artists].is_a?(String)
-        if Band.find_by(name: show[:artists]) == nil
-          new_band = Band.new(name: show[:artists])
-          new_band.save
-          bc = BandConcert.new(
-              band_id: new_band.id,
-              concert_id: concert.id)
-          bc.save
-        else
-          existing_band = Band.find_by(name: show[:artists])
-          bc = BandConcert.new(
-              band_id: existing_band.id,
-              concert_id: concert.id)
-          bc.save
-        end
-      else
-        show[:artists].each do |band_name|
-          if Band.find_by(name: band_name) == nil
-            new_band = Band.new(name: band_name)
-            new_band.save
-            bc = BandConcert.new(
-                band_id: new_band.id,
-                concert_id: concert.id)
-            bc.save
-          else
-            existing_band = Band.find_by(name: band_name)
-            bc = BandConcert.new(
-                band_id: existing_band.id,
-                concert_id: concert.id)
-            bc.save
-          end
-        end
-      end
-    end
-  end
+  #     if show[:artists].is_a?(String)
+  #       if Band.find_by(name: show[:artists]) == nil
+  #         new_band = Band.new(name: show[:artists])
+  #         new_band.save
+  #         bc = BandConcert.new(
+  #             band_id: new_band.id,
+  #             concert_id: concert.id)
+  #         bc.save
+  #       else
+  #         existing_band = Band.find_by(name: show[:artists])
+  #         bc = BandConcert.new(
+  #             band_id: existing_band.id,
+  #             concert_id: concert.id)
+  #         bc.save
+  #       end
+  #     else
+  #       show[:artists].each do |band_name|
+  #         if Band.find_by(name: band_name) == nil
+  #           new_band = Band.new(name: band_name)
+  #           new_band.save
+  #           bc = BandConcert.new(
+  #               band_id: new_band.id,
+  #               concert_id: concert.id)
+  #           bc.save
+  #         else
+  #           existing_band = Band.find_by(name: band_name)
+  #           bc = BandConcert.new(
+  #               band_id: existing_band.id,
+  #               concert_id: concert.id)
+  #           bc.save
+  #         end
+  #       end
+  #     end
+  #   end
+  # end
 
   the_metro_doc = Nokogiri::HTML(open('http://www.metrochicago.com/shows/'))
 
@@ -271,7 +271,6 @@ end
     {
       date: link.css('h2.date a').text.strip,
       doors: link.css('h4.showinfo').text.strip.split("/")[2].sub(" Doors: ", ''),
-      show: link.css('h4.showinfo').text.strip.split("/")[3].sub(" Show: ", ""),
       artists: link.css('div.headliner h1 h1, div.support h3 h3 strong').children.map { |el| el.to_s.strip },
       picture: link.css('img @src').text.strip,
       description: link.css('div.showsContent div.expandable p').text.strip,

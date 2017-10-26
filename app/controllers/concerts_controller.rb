@@ -16,14 +16,6 @@ class ConcertsController < ApplicationController
     @concert = Concert.find_by(id: params[:id])
     @ticket_count = Ticket.where(concert_id: @concert.id, status: 'available').count
     @headliner = @concert.bands.first.name
-    @spotify = Unirest.get("https://api.spotify.com/v1/search",
-      parameters: {
-        q: @headliner,
-        type: "artist"}).body
-    if @spotify['artists']['items'][0]
-    @genres = @spotify['artists']['items'][0]['genres']
-     @uri = @spotify['artists']['items'][0]['uri']
-  end
    
     @weather_date = @concert.date.strftime("%e %b %Y")
     @weather = Unirest.get("https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20weather.forecast%20where%20woeid%20in%20(select%20woeid%20from%20geo.places(1)%20where%20text%3D%22chicago%2C%20il%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys").body
@@ -89,25 +81,4 @@ class ConcertsController < ApplicationController
     @events = UserConcert.where(user_id: current_user.id)
     render 'calendar.html.erb'
   end
-
-
-    private
-
-      def add_to_google_calendar
-        event = Google::Apis::CalendarV3::Event.new(
-        summary: 'Google I/O 2015',
-        location: '800 Howard St., San Francisco, CA 94103',
-        description: 'A chance to hear more about Googles developer products.',
-        start: {
-          date_time: '2017-01-28T09:00:00-07:00',
-          time_zone: 'America/Los_Angeles',
-        },
-        end: {
-          date_time: '2015-05-28T17:00:00-07:00',
-          time_zone: 'America/Los_Angeles',
-        },
-      )
-       result = client.insert_event('primary', event)
-       puts "Event created: #{result.html_link}"
-     end
 end

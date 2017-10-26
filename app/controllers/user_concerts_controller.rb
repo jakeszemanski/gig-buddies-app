@@ -26,7 +26,7 @@ require 'fileutils'
   
 
 
-      def add_to_google_calendar
+  def add_to_google_calendar
 
         # def authorize
         puts "making directory"

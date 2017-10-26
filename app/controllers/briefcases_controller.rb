@@ -1,0 +1,2 @@
+class BriefcasesController < ApplicationController
+end

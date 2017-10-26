@@ -24,7 +24,7 @@
       }
       $scope.orderAttribute = inputAttribute;
     };
-  $scope.addReview = function(inputRating, inputDescription, inputUserId, inputVenueId) {
+    $scope.addReview = function(inputRating, inputDescription, inputUserId, inputVenueId) {
       var params = {
         rating: inputRating,
         description: inputDescription,

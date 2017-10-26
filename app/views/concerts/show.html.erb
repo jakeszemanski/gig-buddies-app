@@ -1,7 +1,6 @@
 <div class="container">
       <div class="row">
         <div class="col-sm-7">
-          
           <!-- Main image -->
           <a href=".." data-lightbox="...">
             <% if @concert.picture.include?('gig_buddies') %>
@@ -10,39 +9,34 @@
               <img src="<%= @concert.picture %>" alt="...">
             <% end %>
           </a>
-
           <!-- Comments section -->
-
           <div class="comments">
-
             <div class="comments__heading">Venue Reviews</div>
-
             <!-- New comment form -->
             <% if current_user %>
- <h1 class="block-header alt">
-            <span>Reviews</span>
-          </h1>
+              <h1 class="block-header alt">
+                <span>Reviews</span>
+              </h1>
 
-  <%= form_tag '/reviews', method: :post do %>
-
-  <div class="form-group">
-    <%= hidden_field_tag :venue_id, @concert.venue_id %>
-  </div>
-  <div class="form-group">
-  <%= label_tag :rating, 'Enter a rating: ' %>
-  <%= select_tag :rating, options_for_select(1..5), multipe: false, class: 'form-control' %>
-  </div>
-  <div class="form-group">
-    <%= label_tag :description, 'Enter  a description' %>
-    <%= text_field_tag :description, '', class: 'form-control' %>
-  </div>
-   <div>
-  <%= button_tag(type: "submit", class: "btn btn-primary") do %>
-    Submit Review
-  </div>
-  <% end %>  
-    <% end %>
-  <% end %>
+              <%= form_tag '/reviews', method: :post do %>
+                <div class="form-group">
+                  <%= hidden_field_tag :venue_id, @concert.venue_id %>
+                </div>
+                <div class="form-group">
+                  <%= label_tag :rating, 'Enter a rating: ' %>
+                  <%= select_tag :rating, options_for_select(1..5), multipe: false, class: 'form-control' %>
+                </div>
+                <div class="form-group">
+                  <%= label_tag :description, 'Enter  a description' %>
+                  <%= text_field_tag :description, '', class: 'form-control' %>
+                </div>
+                <div>
+                  <%= button_tag(type: "submit", class: "btn btn-primary") do %>
+                  Submit Review
+                </div>
+                  <% end %>  
+                <% end %>
+              <% end %>
 
             <!-- List of comments -->
             <div class="comments__list">
@@ -156,7 +150,7 @@
             <% end %>  
             <% end %>
           <% end %>
-          <% if @spotify['artists']['items'][0] %>
+          <% if @spotify && @spotify['artists']['items'][0] %>
           <h1 class="block-header alt">
             <span>Listen</span>
           </h1>

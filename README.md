@@ -26,6 +26,7 @@
   * Google API for the ability to add the concert to the users Google Calendar
   * Spotify API for genres of the band, as well as the band's URI. The band's URI is used to create a playlist for the band on a widget on the band show page
   * Yahoo Weather API for weather the day of the show. That data is then plugged into a card at the bottom of the concert show page
+  * Twilio API for sending text messages to users that buy or sell tickets
 
 
 
